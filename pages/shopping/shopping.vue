@@ -23,7 +23,7 @@
 			<Skeleton height="720upx" :loading="loading"></Skeleton>
 			<view class="mallTotal">
 				<span class="money">商城总额</span>
-				<span class="check">查看账单</span>
+				<span class="check" @click="goBills">查看账单</span>
 			</view>
 			<view class="stockbox">
 				<view class="totalMoney">
@@ -32,18 +32,23 @@
 						<span class="number">69798</span>
 					</span>
 					<view class="pic">
-						<image src="../../static/bg/eye.png"></image>
+						<image src="../../static/icons/eye.png"></image>
 					</view>
 				</view>
-				<view class="stock">
-					<view style="padding-right:132upx" @click="comeIn">
-						<image src="../../static/bg/zhuanrang.png"></image>
-						<span>转入</span>
-					</view>
-					<view class="goOut" @click="goOut">
-						<image src="../../static/bg/shoukuan.png"></image>
-						<span>转出</span>
-					</view>
+				<view class="button-group" style="padding:20upx 90upx;">
+					<fun-button 
+					type="text"
+					color="#fff" 
+					icon="/static/icons/zhuanru.png" 
+					value="转入" 
+					width="200upx"></fun-button>
+					<view style="font-size: 32upx;color:rgba(255,255,255,0.1);margin-top:10upx;">|</view>
+					<fun-button
+					type="text"
+					color="#fff" 
+					icon="/static/icons/zhuanchu.png" 
+					value="转出" 
+					width="200upx"></fun-button>
 				</view>
 			</view>
 			<view class="section-header">
@@ -84,12 +89,14 @@
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import Skeleton from '@/components/Skeleton.vue';
+	import FunButton from '@/components/fun-button.vue';
 	export default {
 		components:{
 			UniNavBar,
 			UniBackground,
 			WaterfallFlow,
-			Skeleton
+			Skeleton,
+			FunButton
 		},
 		data() {
 			return {
@@ -134,9 +141,9 @@
 					url:'../comein/comein'
 				})
 			},
-			goOut(){
+			goBills(){
 				uni.navigateTo({
-					url:'../goout/goout'
+					url:'../shoptrans/shoptrans'
 				})
 			}
 		}
@@ -173,28 +180,29 @@
 		.check{
 			color: #C7C7C7;
 			font-size:24upx;
+			line-height: 46upx;
 		}
 	}
 	.stockbox{
-		background:rgba(45, 31, 37,0.8);
+		background:rgba(45, 31, 37,0.7);
 		width:750upx;
 		.totalMoney{
 			display: flex;
 			justify-content: space-between;
 			margin-left:40upx;
 			width:670upx;
-			height:180upx;
-			align-items: center;
-			border-bottom:1px solid rgba(255,255,255,0.2);
+			padding:40upx 0px;
+			border-bottom:2upx solid rgba(255,255,255,0.1);
 			.money{
 				display: flex;
 				justify-content: space-between;
-				align-items: center;
+				align-items:flex-end;
 				.symbol{
-					font-size: 24upx;
+					font-size: 26upx;
 					color:#DA53A2;
 					font-family: Montserrat-Bold;
 					font-weight: 600;
+					margin-bottom:14upx;
 				}
 				.number{
 					font-size: 56upx;
@@ -206,19 +214,19 @@
 			}
 		}
 		.pic{
-			width:32upx;
-			height:24upx;
+			width:40upx;
+			height:40upx;
 			position:relative;
-			top:-15upx;
+			top:18upx;
 			image{
-				width:32upx;
-				height:24upx;
+				width:40upx;
+				height:40upx;
 			}
 		}
 		.stock{
 			display: flex;
 			justify-content: space-between;
-			padding:32upx 134upx;
+			padding:30upx 40upx;
 			view{
 				display: flex;
 				align-items: center;

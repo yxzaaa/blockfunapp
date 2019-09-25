@@ -248,6 +248,10 @@
             "path" : "pages/paybackbill/paybackbill",
             "style" : {}
         }
+        ,{
+            "path" : "pages/comein/comein",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

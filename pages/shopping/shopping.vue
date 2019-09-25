@@ -21,6 +21,31 @@
 				</swiper>
 			</view>
 			<Skeleton height="720upx" :loading="loading"></Skeleton>
+			<view class="mallTotal">
+				<span class="money">商城总额</span>
+				<span class="check">查看账单</span>
+			</view>
+			<view class="stockbox">
+				<view class="totalMoney">
+					<span class="money">
+						<span class="symbol">$</span>
+						<span class="number">69798</span>
+					</span>
+					<view class="pic">
+						<image src="../../static/bg/eye.png"></image>
+					</view>
+				</view>
+				<view class="stock">
+					<view style="padding-right:132upx" @click="comeIn">
+						<image src="../../static/bg/zhuanrang.png"></image>
+						<span>转入</span>
+					</view>
+					<view class="goOut" @click="goOut">
+						<image src="../../static/bg/shoukuan.png"></image>
+						<span>转出</span>
+					</view>
+				</view>
+			</view>
 			<view class="section-header">
 				<text class="section-title" style="color:#fff;font-size: 32upx;">商品类别</text>
 			</view>
@@ -103,6 +128,16 @@
 				uni.navigateTo({
 					url:"../detail/detail?id="+res
 				})
+			},
+			comeIn(){
+				uni.navigateTo({
+					url:'../comein/comein'
+				})
+			},
+			goOut(){
+				uni.navigateTo({
+					url:'../goout/goout'
+				})
 			}
 		}
 	}
@@ -127,5 +162,78 @@
 	.type-box :first-child{
 		margin-top:0 !important;
 	}
-
+	.mallTotal{
+		display: flex;
+		justify-content:space-between;
+		padding:60upx 40upx 40upx;
+		.money{
+			font-size: 32upx;
+			color:#fff;
+		}
+		.check{
+			color: #C7C7C7;
+			font-size:24upx;
+		}
+	}
+	.stockbox{
+		background:rgba(45, 31, 37,0.8);
+		width:750upx;
+		.totalMoney{
+			display: flex;
+			justify-content: space-between;
+			margin-left:40upx;
+			width:670upx;
+			height:180upx;
+			align-items: center;
+			border-bottom:1px solid rgba(255,255,255,0.2);
+			.money{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.symbol{
+					font-size: 24upx;
+					color:#DA53A2;
+					font-family: Montserrat-Bold;
+					font-weight: 600;
+				}
+				.number{
+					font-size: 56upx;
+					color:#DA53A2;
+					font-family: Montserrat-Bold;
+					font-weight: 600;
+					margin-left:12upx;
+				}
+			}
+		}
+		.pic{
+			width:32upx;
+			height:24upx;
+			position:relative;
+			top:-15upx;
+			image{
+				width:32upx;
+				height:24upx;
+			}
+		}
+		.stock{
+			display: flex;
+			justify-content: space-between;
+			padding:32upx 134upx;
+			view{
+				display: flex;
+				align-items: center;
+				border-right:1px solid rgba(255,255,255,0.1);
+				span{
+					font-size: 28upx;
+					width:60upx;
+					color: #FFFFFF;
+				}
+			}
+			image{
+				width:32upx;
+				height:32upx;
+				margin-right:20upx;
+			}
+		}
+	}
 </style>

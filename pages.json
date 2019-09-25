@@ -249,6 +249,10 @@
             "style" : {}
         }
         ,{
+            "path" : "pages/comein/comein",
+            "style" : {}
+        }
+        ,{
             "path" : "pages/shoptrans/shoptrans",
             "style" : {}
         }

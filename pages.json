@@ -248,6 +248,14 @@
             "path" : "pages/paybackbill/paybackbill",
             "style" : {}
         }
+        ,{
+            "path" : "pages/comein/comein",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/shoptrans/shoptrans",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

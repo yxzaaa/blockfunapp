@@ -13,7 +13,7 @@
 					</view>
 					<view class="modal-btns">
 						<view @click="showPwdModal = false">取消</view>
-						<view style="border-left:1px solid #eee;color:#0A61C9;" @click="acceptBill">发布</view>
+						<view style="border-left:1px solid #eee;color:#0A61C9;" @click="acceptBill">{{infos.type == 1?'抵押':'投资'}}</view>
 					</view>
 				</view>
 			</view>

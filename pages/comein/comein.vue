@@ -1,22 +1,8 @@
 <template>
 	<view class="container">
 		<uni-background />
-		<uni-nav-bar title="转入" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
+		<uni-nav-bar :title="currType == 3?'转入':'转出'" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<view class="app-container full">
-			<view class="modal-box" v-if="showPwdModal">
-				<view class="modal">
-					<view class="modal-top-item">
-						<view class="modal-title">请输入您的交易密码</view>
-						<view class="modal-content">
-							<password-inputer @input="setPassword" :value="password"></password-inputer>
-						</view>
-					</view>
-					<view class="modal-btns">
-						<view @click="showPwdModal = false">取消</view>
-						<view style="border-left:1px solid #eee;color:#0A61C9;" @click="submitTrans">转账</view>
-					</view>
-				</view>
-			</view>
 			<view class="fun-card" style="margin:30upx 40upx;width:670upx;">
 				<view class="fun-card-item">
 					<view class="status-box handler-status">
@@ -24,8 +10,8 @@
 							<text style="font-size:28upx;color:#fff;">钱包总额</text>
 						</view>
 						<view class="right-status">
-							<text style="color:#fff;font-size: 26upx;font-family:'Montserrat-Light';margin-right:20upx;">1000</text>
-							<text style="font-size: 26upx;color:#999;font-family:'Montserrat-Light';">forest</text>
+							<text style="color:#fff;font-size: 26upx;font-family:'Montserrat-Light';margin-right:20upx;">{{walletTotal}}</text>
+							<text style="font-size: 26upx;color:#999;font-family:'Montserrat-Light';">{{coin}}</text>
 						</view>
 					</view>
 					<view class="status-box handler-status">
@@ -33,17 +19,17 @@
 							<text style="font-size:28upx;color:#fff;">商城总额</text>
 						</view>
 						<view class="right-status">
-							<text style="color:#fff;font-size: 26upx;font-family:'Montserrat-Light';margin-right:20upx;">1000</text>
-							<text style="font-size: 26upx;color:#999;font-family:'Montserrat-Light';">forest</text>
+							<text style="color:#fff;font-size: 26upx;font-family:'Montserrat-Light';margin-right:20upx;">{{shopTotal}}</text>
+							<text style="font-size: 26upx;color:#999;font-family:'Montserrat-Light';">{{coin}}</text>
 						</view>
 					</view>
 					<view class="form-item">
 						<view class="form-label">转账金额</view>
 						<view class="form-value-box">
 							<view class="form-input-box">
-								<input v-model="amount" class="form-input-field" placeholder="请输入转入金额"/>
+								<input v-model="amount" class="form-input-field" :placeholder="'请输入'+(currType == 3?'转入':'转出')+'金额'"/>
 								<view class="form-input-btns">
-									<text @click="amount = total">转出全部</text>
+									<text @click="currType == 3?(amount= walletTotal):(amount = shopTotal)">转出全部</text>
 								</view>
 							</view>
 						</view>
@@ -51,11 +37,11 @@
 					<view class="form-item">
 						<view class="form-label" style="margin-bottom:20upx;">密码</view>
 						<view class="input-field" style="padding:20upx 30upx;">
-							<input v-model="remark" style="width:100%;font-size: 26upx;color:#c7c7c7;" placeholder="请输入钱包交易密码"/>
+							<input type="password" maxlength="8" v-model="remark" style="width:100%;font-size: 26upx;color:#c7c7c7;" placeholder="请输入钱包交易密码"/>
 						</view>
 					</view>
 				</view>
-				<view class="submit-btn" @click="showPwdModal = true">
+				<view class="submit-btn">
 					确认转入
 				</view>
 			</view>
@@ -91,30 +77,45 @@
 				},
 				erweima:'../../static/image.png',
 				coin:'USDT',//币种
-				total:'',
-				handlePay:'',
-				amount:'',
-				toAddr:'',
+				walletTotal:0,
+				shopTotal:0,
 				password:'',
-				remark:'',
-				minCount:0,
-				showPwdModal:false,
+				currType:3,
+				amount:''
 			};
 		},
 		onLoad(option){
 			console.log(option);
-			//请求当前币种转账信息
+			this.currType = option.type;
+			this.coin = option.coin;
+			//
 			this.$http({
-				url:'/v1/main/account/withdraw-preloading',
+				url:'/v1/main/users/account-info',
 				data:{
-					coin:option.coin
+					type:1
 				},
 				success:res=>{
 					if(res.code == 200){
-						this.coin = res.data.coin;
-						this.total = res.data.amount;
-						this.handlePay = res.data.rate;
-						this.minCount = res.data.min_transfer_amount;
+						res.data.map(item=>{
+							if(item.coin == this.coin){
+								this.walletTotal = item.unlock_balance
+							}
+						})
+					}
+				}
+			})
+			this.$http({
+				url:'/v1/main/users/account-info',
+				data:{
+					type:3
+				},
+				success:res=>{
+					if(res.code == 200){
+						res.data.map(item=>{
+							if(item.coin == this.coin){
+								this.shopTotal = item.unlock_balance
+							}
+						})
 					}
 				}
 			})
@@ -123,9 +124,6 @@
 			this.scroll = val.scrollTop;
 		},
 		methods:{
-			setPassword(val){
-				this.password = val;
-			},
 			getNum(num){
 				return (parseFloat(num)).toFixed(2);
 			},
@@ -137,36 +135,9 @@
 					}
 				})
 			},
-			//提交转账
+			//转入转出
 			submitTrans(){
-				this.$http({
-					url:'/v1/main/account/withdraw-request',
-					data:{
-						coin: this.coin,
-						amount: this.amount,
-						to_address: this.toAddr,
-						pay_password: this.password,
-						remark: this.remark
-					},
-					success:res=>{
-						if(res.code == 200){
-							uni.showToast({
-								title:'转账成功',
-								icon:'none'
-							})
-							setTimeout(()=>{
-								uni.navigateBack({
-									delta:1
-								})
-							},1500)
-						}else{
-							uni.showToast({
-								title:res.message,
-								icon:'none'
-							})
-						}
-					}
-				})
+				
 			}
 		}
 	}

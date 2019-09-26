@@ -114,7 +114,7 @@
 		padding:40upx;
 		padding-bottom:30upx;
 		display:flex;
-		justify-content:flex-start;
+		justify-content:space-between;
 		align-items:center;
 		.section-icon{
 			width:40upx;
@@ -124,6 +124,18 @@
 		.section-title{
 			font-size: 32upx;
 			color:#fff;
+		}
+		.toggle-box{
+			line-height: 48upx;
+			text{
+				color:rgba(255,255,255,0.5);
+				font-size: 28upx;
+				padding:0upx 14upx;
+				&.active{
+					color:#DA53A2;
+					font-weight: bold;
+				}
+			}
 		}
 	}
 	.section-subtitle{

@@ -23,6 +23,10 @@
 			</view>
 			<view class="section-header">
 				<text class="section-title">我的钱包</text>
+				<view class="toggle-box">
+					<text :class="{'active':currType == 1}" @click="toggleType(1)">币币</text>
+					<text :class="{'active':currType == 3}" @click="toggleType(3)">商城</text>
+				</view>
 			</view>
 			<view class="wallet-list">
 				<block v-for="(item,index) in walletList" :key="index">
@@ -46,10 +50,13 @@
 								<span class="label-box"><span class="label">价格</span>{{getNum(item.unit_price)}} USD</span> 
 							</view>
 							<view class="fun-card-buttons">
-								<fun-button type="text" value="查看账单" :url="'../xdogwallet/xdogwallet?coin='+item.coin" />
+								<fun-button v-if="currType == 3" type="text" value="查看账单" :url="'../shoptrans/shoptrans?coin='+item.coin" />
+								<fun-button v-if="currType == 1" type="text" value="查看账单" :url="'../xdogwallet/xdogwallet?coin='+item.coin" />
 								<view class="button-group" style="width:340upx;">
-									<fun-button @handle="goTransPay(item.coin,item.total_price)" type="light" value="转账" icon="/static/icons/zhuanrang-tiny.png" />
-									<fun-button @handle="goSavePay(item.coin)" value="收款" icon="/static/icons/shoukuan.png" />
+									<fun-button v-if="currType == 1" @handle="goTransPay(item.coin,item.total_price)" type="light" value="转账" icon="/static/icons/zhuanrang-tiny.png" />
+									<fun-button v-if="currType == 1" @handle="goSavePay(item.coin)" value="收款" icon="/static/icons/shoukuan.png" />
+									<fun-button v-if="currType == 3" @handle="goTransCoin(item.coin,3)" value="转入" icon="/static/icons/zhuanru.png" />
+									<fun-button v-if="currType == 3" @handle="goTransCoin(item.coin,4)" value="转出" icon="/static/icons/zhuanchu.png" />
 								</view>
 							</view>
 						</view>
@@ -112,35 +119,32 @@
 			}
 		},
 		onLoad(){
-			//获取钱包列表
-			uni.showLoading({
-				title:'钱包加载中...'
-			})
-			this.$http({
-				url:'/v1/main/users/account-info',
-				data:{
-					type:this.currType
-				},
-				success:res=>{
-					uni.hideLoading();
-					if(res.code == 200){
-						this.walletList = res.data;
-					}
-				}
-			})
+			this.updateList();
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
-		onPullDownRefresh(){
-			// console.log('aaa');
-			// uni.vibrateShort({
-			//     success: function () {
-			//         console.log('success');
-			//     }
-			// });
-		},
 		methods:{
+			//更新钱包
+			updateList(){
+				//获取钱包列表
+				uni.showLoading({
+					title:'钱包加载中...'
+				})
+				this.$http({
+					url:'/v1/main/users/account-info',
+					data:{
+						type:this.currType
+					},
+					success:res=>{
+						uni.hideLoading();
+						if(res.code == 200){
+							console.log(res);
+							this.walletList = res.data;
+						}
+					}
+				})
+			},
 			getNum(num){
 				return (parseFloat(num)).toFixed(2);
 			},
@@ -155,6 +159,17 @@
 			goSavePay(coin){
 				uni.navigateTo({
 					url:'../saveaccount/saveaccount?coin='+coin
+				})
+			},
+			//切换type
+			toggleType(type){
+				this.currType = type;
+				this.updateList();
+			},
+			//转入转出
+			goTransCoin(coin,type){
+				uni.navigateTo({
+					url:'../comein/comein?coin='+coin+'&type='+type
 				})
 			}
 		}

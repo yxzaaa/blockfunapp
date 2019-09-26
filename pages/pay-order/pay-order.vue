@@ -18,26 +18,48 @@
 			<view class="payStyle">
 				<view class="cash">
 					<span class="content">
-						现金支付
+						现金
 					</span>
 					<span class="number">
 						<span>
-							￥{{amountCount}}
+							￥100{{amountCount}}
 						</span>
 						<image src="../../static/bg/check.png" style="width:32upx;height:32upx;margin-left:16upx;"></image>
 					</span>
 				</view>
-				<!-- <view class="integral">
+				<view class="cash">
 					<span class="content">
-						积分支付
+						USDT
 					</span>
 					<span class="number">
-						<span style="font-size:28upx;color:#C7C7C7">
-							4000
+						<span>
+							100
 						</span>
 						<image src="../../static/bg/checkbox.png" style="width:32upx;height:32upx;margin-left:16upx;"></image>
 					</span>
-				</view> -->
+				</view>
+				<view class="cash">
+					<span class="content">
+						ETH
+					</span>
+					<span class="number">
+						<span>
+							100
+						</span>
+						<image src="../../static/bg/checkbox.png" style="width:32upx;height:32upx;margin-left:16upx;"></image>
+					</span>
+				</view>
+				<view class="cash">
+					<span class="content">
+						BTC
+					</span>
+					<span class="number">
+						<span>
+							100
+						</span>
+						<image src="../../static/bg/checkbox.png" style="width:32upx;height:32upx;margin-left:16upx;"></image>
+					</span>
+				</view>
 			</view>
 			<view class="fixed-buttons">
 				<view class="button-group">
@@ -87,6 +109,7 @@
 				orderId:'',
 				showModal:false,
 				payPassword:'',
+				walletList:[]
 			}
 		},
 		onPageScroll(val){
@@ -95,6 +118,20 @@
 		onLoad(option){
 			this.orderId = option.id;
 			this.amountCount = option.amount;
+			//获取币种列表
+			this.$http({
+				url:'/v1/main/users/account-info',
+				data:{
+					type:3
+				},
+				success:res=>{
+					uni.hideLoading();
+					if(res.code == 200){
+						console.log(res);
+						this.walletList = res.data;
+					}
+				}
+			})
 		},
 		methods: {
 			//设置密码
@@ -164,7 +201,7 @@
 	.payStyle{
 		width:670upx;
 		background:#2D1F25;
-		padding:40upx;
+		padding:20upx 40upx;
 		border-radius: 8upx;
 		margin:auto;
 		display: flex;
@@ -173,7 +210,7 @@
 		.cash{
 			display: flex;
 			justify-content: space-between;
-			
+			padding:15upx 0upx;
 		}
 		.number{
 			

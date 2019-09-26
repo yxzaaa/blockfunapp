@@ -118,7 +118,7 @@
 				walletList:[]
 			}
 		},
-		onLoad(){
+		onShow(){
 			this.updateList();
 		},
 		onPageScroll(val){
@@ -268,7 +268,7 @@
 					color:#DA53A2;
 					font-size: 32upx;
 					display: inline-block;
-					padding-right:10upx;
+					padding-right:4upx;
 					font-family:'Montserrat-Bold';
 				}
 			}

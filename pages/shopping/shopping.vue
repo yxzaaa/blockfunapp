@@ -21,7 +21,7 @@
 				</swiper>
 			</view>
 			<Skeleton height="720upx" :loading="loading"></Skeleton>
-			<view class="mallTotal">
+			<!-- <view class="mallTotal">
 				<span class="money">商城总额</span>
 				<span class="check" @click="goBills">查看账单</span>
 			</view>
@@ -50,7 +50,7 @@
 					value="转出" 
 					width="200upx"></fun-button>
 				</view>
-			</view>
+			</view> -->
 			<view class="section-header">
 				<text class="section-title" style="color:#fff;font-size: 32upx;">商品类别</text>
 			</view>

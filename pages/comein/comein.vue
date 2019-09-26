@@ -27,9 +27,9 @@
 						<view class="form-label">转账金额</view>
 						<view class="form-value-box">
 							<view class="form-input-box">
-								<input v-model="amount" class="form-input-field" :placeholder="'请输入'+(currType == 3?'转入':'转出')+'金额'"/>
+								<input v-model="amount" class="form-input-field" :placeholder="currType == 3?'请输入转入金额':'请输入转出金额'"/>
 								<view class="form-input-btns">
-									<text @click="currType == 3?(amount= walletTotal):(amount = shopTotal)">转出全部</text>
+									<text @click="currType == 3?(amount= walletTotal):(amount = shopTotal)">{{currType == 3?'转入全部':'转出全部'}}</text>
 								</view>
 							</view>
 						</view>
@@ -37,12 +37,12 @@
 					<view class="form-item">
 						<view class="form-label" style="margin-bottom:20upx;">密码</view>
 						<view class="input-field" style="padding:20upx 30upx;">
-							<input type="password" maxlength="8" v-model="remark" style="width:100%;font-size: 26upx;color:#c7c7c7;" placeholder="请输入钱包交易密码"/>
+							<input type="password" maxlength="8" v-model="password" style="width:100%;font-size: 26upx;color:#c7c7c7;" placeholder="请输入钱包交易密码"/>
 						</view>
 					</view>
 				</view>
-				<view class="submit-btn">
-					确认转入
+				<view class="submit-btn" @click="submitTrans">
+					{{currType == 3?'确认转入':'确认转出'}}
 				</view>
 			</view>
 		</view>
@@ -81,14 +81,12 @@
 				shopTotal:0,
 				password:'',
 				currType:3,
-				amount:''
+				amount:'',
 			};
 		},
 		onLoad(option){
-			console.log(option);
 			this.currType = option.type;
 			this.coin = option.coin;
-			//
 			this.$http({
 				url:'/v1/main/users/account-info',
 				data:{
@@ -137,7 +135,35 @@
 			},
 			//转入转出
 			submitTrans(){
-				
+				if(this.password.length == 8){
+					this.$http({
+						url:'/v1/main/account/account-move',
+						data:{
+							type:parseInt(this.currType),
+							coin:this.coin,
+							amount:this.amount,
+							pay_password:this.password
+						},
+						success:res=>{
+							if(res.code == 200){
+								uni.showToast({
+									title:this.currType == 3?'转入成功':'转出成功',
+									icon:'none'
+								})
+								setTimeout(()=>{
+									uni.navigateBack({
+										delta:1
+									})
+								},1500)
+							}
+						}
+					})
+				}else{
+					uni.showToast({
+						title:'密码长度必须为8位',
+						icon:'none'
+					})
+				}
 			}
 		}
 	}

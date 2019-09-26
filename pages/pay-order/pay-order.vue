@@ -11,59 +11,27 @@
 		<view class="app-container full">
 			<view class="payNumber">
 				<view class="symbolNumber">
-					<span class="symbol">￥</span>
 					<span class="price">{{amountCount}}</span>
+					<span class="symbol">{{currCoin}}</span>
 				</view>
 			</view>
 			<view class="payStyle">
-				<view class="cash">
+				<view class="cash" v-for="(item,index) in walletList" :key="index" @click="toggleCoin(index)">
 					<span class="content">
-						现金
+						{{item.coin}}
 					</span>
 					<span class="number">
 						<span>
-							￥100{{amountCount}}
+							{{item.amount}}
 						</span>
-						<image src="../../static/bg/check.png" style="width:32upx;height:32upx;margin-left:16upx;"></image>
-					</span>
-				</view>
-				<view class="cash">
-					<span class="content">
-						USDT
-					</span>
-					<span class="number">
-						<span>
-							100
-						</span>
-						<image src="../../static/bg/checkbox.png" style="width:32upx;height:32upx;margin-left:16upx;"></image>
-					</span>
-				</view>
-				<view class="cash">
-					<span class="content">
-						ETH
-					</span>
-					<span class="number">
-						<span>
-							100
-						</span>
-						<image src="../../static/bg/checkbox.png" style="width:32upx;height:32upx;margin-left:16upx;"></image>
-					</span>
-				</view>
-				<view class="cash">
-					<span class="content">
-						BTC
-					</span>
-					<span class="number">
-						<span>
-							100
-						</span>
-						<image src="../../static/bg/checkbox.png" style="width:32upx;height:32upx;margin-left:16upx;"></image>
+						<image v-if="currCoin != item.coin"  src="../../static/bg/checkbox.png" style="width:32upx;height:32upx;margin-left:16upx;"></image>
+						<image v-if="currCoin == item.coin"  src="../../static/bg/check.png" style="width:32upx;height:32upx;margin-left:16upx;"></image>
 					</span>
 				</view>
 			</view>
 			<view class="fixed-buttons">
 				<view class="button-group">
-					<fun-button :value="'现金支付 ￥'+amountCount" width="670upx" large @handle="showModal = true"></fun-button>
+					<fun-button :value="'支付 '+amountCount+' '+currCoin" width="670upx" large @handle="showModal = true"></fun-button>
 				</view>
 			</view>
 			<view class="modal-box" v-if="showModal">
@@ -109,31 +77,29 @@
 				orderId:'',
 				showModal:false,
 				payPassword:'',
-				walletList:[]
+				walletList:[],
+				currCoin:'USDT',
 			}
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
-		onLoad(option){
-			this.orderId = option.id;
-			this.amountCount = option.amount;
-			//获取币种列表
-			this.$http({
-				url:'/v1/main/users/account-info',
-				data:{
-					type:3
-				},
+		onLoad(){
+			uni.getStorage({
+				key:'submit_order_result',
 				success:res=>{
-					uni.hideLoading();
-					if(res.code == 200){
-						console.log(res);
-						this.walletList = res.data;
-					}
+					this.orderId = res.data.id;
+					this.amountCount = res.data.amount;
+					this.walletList = res.data.wallet;
 				}
 			})
 		},
 		methods: {
+			//切换币种
+			toggleCoin(index){
+				this.currCoin = this.walletList[index].coin;
+				this.amountCount = this.walletList[index].amount;
+			},
 			//设置密码
 			setPassword(val){
 				this.payPassword = val;
@@ -147,7 +113,8 @@
 						type:'application/x-www-form-urlencoded',
 						data:{
 							item:this.orderId,
-							password:this.payPassword
+							password:this.payPassword,
+							coin:this.currCoin
 						},
 						success:res=>{
 							if(res.code == 200){
@@ -185,11 +152,10 @@
 			width:264upx;
 		}
 		.symbol{
-			font-size:36upx;
-			font-family:'Montserrat-Bold';
-			color:#DA53A2;
+			font-size:32upx;
+			color:rgba(255,255,255,0.5);
 			font-weight: 600;
-			margin-right:10upx;
+			margin-left:20upx;
 		}
 		.price{
 			font-size:56upx;

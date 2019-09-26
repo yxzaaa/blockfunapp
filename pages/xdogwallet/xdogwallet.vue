@@ -6,23 +6,25 @@
 			<view class="horizon-tab">
 				<horizon-tab :tabs="navTabs" padding="40" @click="updateList"/>
 			</view>
-			<view class="horizon-list">
-				<block v-for="(item,index) in xdogList" :key="index">
-					<view class="horizon-list-item" @click="toDetail(item)">
-						<view class="left-item">
-							<text class="left-item-title">{{getTranId(item.tid)}}</text>
-							<text class="left-item-date">{{getDate(item.modified_on)}}</text>
+			<scroll-view class="order-box" scroll-y>
+				<view class="horizon-list">
+					<block v-for="(item,index) in xdogList" :key="index">
+						<view class="horizon-list-item" @click="toDetail(item)">
+							<view class="left-item">
+								<text class="left-item-title">{{getTranId(item.tid)}}</text>
+								<text class="left-item-date">{{getDate(item.modified_on)}}</text>
+							</view>
+							<view class="right-item">
+								<span class="right-item-text" :style="{color:item.type == 1?'#DA53A2':item.type == 2?'#56CCF2':'#F2C94C'}">
+									<span>{{item.type == 1?'!':item.type == 2?'+':'-'}}</span>
+									{{item.amount}}
+								</span>
+								<image :src="imageLib.more"></image>
+							</view>
 						</view>
-						<view class="right-item">
-							<span class="right-item-text" :style="{color:item.type == 1?'#DA53A2':item.type == 2?'#56CCF2':'#F2C94C'}">
-								<span>{{item.type == 1?'!':item.type == 2?'+':'-'}}</span>
-								{{item.amount}}
-							</span>
-							<image :src="imageLib.more"></image>
-						</view>
-					</view>
-				</block>
-			</view>
+					</block>
+				</view>
+			</scroll-view>
 		</view>
 	</view>
 </template>
@@ -96,6 +98,9 @@
 		methods:{
 			//更新转账记录
 			updateList(index){
+				uni.showLoading({
+					title:'账单加载中...'
+				})
 				this.$http({
 					url:'/v1/main/account/bill-history',
 					data:{
@@ -104,6 +109,7 @@
 					success:res=>{
 						console.log(res);
 						if(res.code == 200){
+							uni.hideLoading();
 							this.xdogList = [];
 							var data = res.data.bill_info;
 							if(data){
@@ -150,6 +156,10 @@
 </script>
 
 <style lang="scss" scoped>
+	.order-box{
+		width:750upx;
+		height:calc(100vh - 268upx);
+	}
 	.horizon-list{
 		padding:40upx 0upx;
 		.horizon-list-item{

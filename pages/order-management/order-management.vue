@@ -184,8 +184,14 @@
 						success:res=>{
 							console.log(res);
 							if(res.code == 200){
-								uni.navigateTo({
-									url:'../pay-order/pay-order?id='+res.data.id+'&amount='+res.data.amount
+								uni.setStorage({
+									key:'submit_order_result',
+									data:res.data,
+									success:res=>{
+										uni.navigateTo({
+											url:'../pay-order/pay-order'
+										})
+									}
 								})
 							}else{
 								uni.showToast({

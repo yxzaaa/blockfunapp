@@ -320,7 +320,7 @@
 				 var count = this.totalCount == ''?0:this.totalCount;
 				 var rate =  this.rate == ''?0:this.rate;
 				 var month = this.classLib[this.currClass].value;
-				 return ((parseFloat(price)*parseInt(count)/2)*parseFloat(rate)*month/100).toFixed(2);
+				 return ((parseFloat(price)*parseInt(count)/2)*parseFloat(rate)*parseFloat(this.publicLib[this.currCoin].unit_price)*month/100).toFixed(2);
 			},
 			pickerChange(e){
 				this.currClass = e.target.value;

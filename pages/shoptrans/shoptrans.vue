@@ -4,24 +4,25 @@
 		<uni-nav-bar title="账单" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<view class="app-container full">
 			<view class="horizon-tab">
-				<horizon-tab :tabs="navTabs" padding="46" @click="updateList"/>
+				<horizon-tab :tabs="navTabs" padding="50" @click="updateList"/>
 			</view>
-			<view class="horizon-list">
-				<block v-for="(item,index) in xdogList" :key="index">
-					<view class="horizon-list-item">
-						<view class="left-item">
-							<text class="left-item-title">{{getDate(item.modified_on)}}</text>
+			<scroll-view class="order-box" scroll-y>
+				<view class="horizon-list">
+					<block v-for="(item,index) in xdogList" :key="index">
+						<view class="horizon-list-item">
+							<view class="left-item">
+								<text class="left-item-title">{{getDate(item.created_on)}}</text>
+							</view>
+							<view class="right-item">
+								<span class="right-item-text" :style="{color:getColor(item.amount_unlock_balance)}">
+									{{item.amount_unlock_balance}}
+								</span>
+								<image :src="imageLib.more"></image>
+							</view>
 						</view>
-						<view class="right-item">
-							<span class="right-item-text" :style="{color:item.type == 1?'#DA53A2':item.type == 2?'#56CCF2':'#F2C94C'}">
-								<span>{{item.type == 1?'!':item.type == 2?'+':'-'}}</span>
-								{{item.amount}}
-							</span>
-							<image :src="imageLib.more"></image>
-						</view>
-					</view>
-				</block>
-			</view>
+					</block>
+				</view>
+			</scroll-view>
 		</view>
 	</view>
 </template>
@@ -50,35 +51,25 @@
 				},
 				navTabs:[
 					{
-						id:0,
+						id:'3,4',
 						text:'全部'
 					},
 					{
-						id:1,
+						id:'3',
 						text:'转入'
 					},
 					{
-						id:2,
+						id:'4',
 						text:'转出'
 					},
-					{
-						id:3,
-						text:'购物'
-					},
 				],
-				xdogList:[
-					{
-						tid:'o43fdksok4kf4o2342lk324fdskeo',
-						modified_on:'1568834690',
-						type:1,
-						amount:'50.34',
-					}
-				],
+				xdogList:[],
 				coin:'',
+				currPage:1
 			};
 		},
 		onLoad(option){
-			
+			this.updateList(0);
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
@@ -86,23 +77,21 @@
 		methods:{
 			//更新转账记录
 			updateList(index){
+				var type = this.navTabs[index].id;
+				uni.showLoading({
+					title:'账单加载中...'
+				})
 				this.$http({
-					url:'/v1/main/account/bill-history',
+					url:'/v1/main/account/account-move-record-mall',
 					data:{
-						coin:this.coin,
+						page:this.currPage,
+						type,
 					},
 					success:res=>{
 						console.log(res);
 						if(res.code == 200){
-							this.xdogList = [];
-							var data = res.data.bill_info;
-							if(data){
-								data.map(item=>{
-									if(item.status == this.navTabs[index].id){
-										this.xdogList.push(item);
-									}
-								})
-							}
+							uni.hideLoading();
+							this.xdogList = res.data;
 						}
 					}
 				})
@@ -135,11 +124,22 @@
 				min = min>=10?min:'0'+min;
 				return year+'/'+month+'/'+day+' '+hour+':'+min
 			},
+			getColor(val){
+				if(parseFloat(val)>0){
+					return '#56CCF2'
+				}else{
+					return '#F2C94C'
+				}
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
+	.order-box{
+		width:750upx;
+		height:calc(100vh - 268upx);
+	}
 	.horizon-list{
 		padding:40upx 0upx;
 		.horizon-list-item{

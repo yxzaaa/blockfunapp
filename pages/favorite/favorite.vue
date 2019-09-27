@@ -100,11 +100,15 @@
 		},
 		methods:{
 			updateList(){
+				uni.showLoading({
+					title:'收藏夹加载中...'
+				})
 				this.$http({
 					url:'/member/favorite',
 					success:res=>{
 						console.log(res);
 						if(res.code == 200){
+							uni.hideLoading();
 							this.favoriteList = res.data;
 							this.favoriteList.map(item=>{
 								item.isActive = false;

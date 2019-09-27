@@ -35,7 +35,7 @@
 				</view>
 			</view>
 			<view class="modal-box" v-if="showModal">
-				<view class="modal">
+				<view class="modal" v-if="!jump">
 					<view class="modal-top-item">
 						<view class="modal-title">请输入您的支付密码</view>
 						<view class="modal-content">
@@ -45,6 +45,11 @@
 					<view class="modal-btns">
 						<view @click="showModal = false">取消</view>
 						<view style="border-left:1px solid #eee;color:#0A61C9;" @click="payOrder">支付</view>
+					</view>
+				</view>
+				<view class="modal" v-if="jump">
+					<view class="modal-top-item">
+						<view class="modal-title" style="padding:0upx;color:#DA53A2;">账户余额不足&nbsp;&nbsp;{{timeOut}}秒后前往转入</view>
 					</view>
 				</view>
 			</view>
@@ -79,6 +84,9 @@
 				payPassword:'',
 				walletList:[],
 				currCoin:'USDT',
+				timeOut:3,
+				jump:false,
+				timer:null
 			}
 		},
 		onPageScroll(val){
@@ -123,10 +131,27 @@
 									url:'../pay-result/pay-result?id='+this.orderId
 								})
 							}else{
-								uni.showToast({
-									title:res.message,
-									icon:'none'
-								})
+								if(res.message == '账户余额不足' || res.code == '300004'){
+									this.jump = true;
+									this.timer = setInterval(()=>{
+										if(this.timeOut>1){
+											this.timeOut --;
+										}else{
+											clearInterval(this.timer);
+											this.jump = false;
+											this.timeOut = 3;
+											this.showModal = false;
+											uni.navigateTo({
+												url:'../comein/comein?coin='+this.currCoin+'&type=3'
+											})
+										}
+									},1000)
+								}else{
+									uni.showToast({
+										title:res.message,
+										icon:'none'
+									})
+								}
 							}
 						}
 					})
@@ -148,9 +173,6 @@
 		padding-top:60upx;
 		display:flex;
 		justify-content:center;
-		.symbolNumber{
-			width:264upx;
-		}
 		.symbol{
 			font-size:32upx;
 			color:rgba(255,255,255,0.5);

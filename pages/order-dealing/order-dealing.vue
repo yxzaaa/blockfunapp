@@ -49,13 +49,12 @@
 						<image :src="item.img" style="width:160upx;height:160upx;display: block;"></image>
 					</view>
 					<view class="text">
-						<span style="color:#fff;font-size:24upx;width:470upx;height:66upx;line-height: 34upx;display: block;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</span>
-						<span style="display: block;">
-							<span style="color: #999999;font-size:20upx;margin-right:20upx;">数量：{{item.number}}</span>
-							<span style="color: #999999;font-size:20upx;margin-right:20upx;">{{item.p1}}：{{item.s1}}</span>
-							<span style="color: #999999;font-size:20upx;" v-if="item.p2">{{item.p2}}：{{item.s2}}</span>
-						</span>
-						
+						<span style="color:#fff;font-size:26upx;width:470upx;height:66upx;line-height: 34upx;display: block;">{{item.title.length>40?item.title.substring(0,40)+' ...':item.title}}</span>
+						<scroll-view scroll-x="true" style="white-space: nowrap;width:470upx;">
+							<span style="color: #999999;font-size:24upx;margin-right:20upx;">数量：{{item.number}}</span>
+							<span style="color: #999999;font-size:24upx;margin-right:20upx;">{{item.p1}}：{{item.s1}}</span>
+							<span style="color: #999999;font-size:24upx;" v-if="item.p2">{{item.p2}}：{{item.s2}}</span>
+						</scroll-view>
 						<span>
 							<span style="color:#fff;font-size:28upx;font-family: Montserrat-Bold;margin-right: 6upx;">￥</span>
 							<span style="color:#fff;font-size:28upx;font-weight: bold;font-family: Montserrat-Bold;">{{item.price}}</span>

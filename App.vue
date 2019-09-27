@@ -465,8 +465,8 @@
 		}
 	}
 	@keyframes show{
-		from {opacity: 0;}
-		to {opacity: 1;}
+		from {opacity: 0;transform:scale(1.1);}
+		to {opacity: 1;transform:scale(1);}
 	}
 	.modal-box{
 		opacity: 1;
@@ -482,6 +482,7 @@
 		display:flex;
 		justify-content:center;
 		align-items:center;
+		transform:scale(1);
 		.modal{
 			width:560upx;
 			border-radius: 12upx;

@@ -38,10 +38,10 @@
 									<span 
 										v-for="(val,i) in elem.item" 
 										:key="i" 
-										v-if="i>0"
-										@click="setSkuActive(index,i,val.stock)" 
-										:class="[i==skuActive[index].active?'active':'',val.stock === 0?'nostock':'']"
-									>{{val.value}}</span>
+										v-if="i>0 && val !== ''"
+										@click="setSkuActive(index,i)"
+										:class="[i==skuActive[index].active?'active':'',getStock(index,i) === 0?'nostock':'']"
+									>{{val}}</span>
 								</view>
 							</view>
 						</block>
@@ -113,9 +113,9 @@
 						</view>
 						<!-- 图片描述 -->
 						<view class="guess-content" style="margin-left:20upx;margin-top:0;">
-							<view class='title clamp' style="height:106upx;font-size:28upx;color:#fff;white-space: normal;width:450upx;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</view>
-							<span class="clamp" style="font-size:24upx;color:#999999;margin-top:14upx;">消耗积分 {{item.credit}}</span>
-							<span class="clamp" style="margin-top:8upx;color:#DA53A2;font-family:'Montserrat-Bold';">
+							<view class='title clamp' style="height:100upx;font-size:28upx;line-height:50upx;color:#fff;white-space: normal;width:450upx;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</view>
+							<span class="clamp" style="font-size:24upx;color:#999999;margin-top:10upx;display: block;">消耗积分 {{item.credit}}</span>
+							<span class="clamp" style="margin-top:10upx;color:#DA53A2;font-family:'Montserrat-Bold';display: block;">
 								<span style="font-size:24upx;margin-right:8upx;font-family:'Montserrat-Bold';">￥</span>
 								<span style="font-family:'Montserrat-Bold';">{{item.price.split('.')[0]}}</span>
 								<span style="font-size:24upx;font-family:'Montserrat-Bold';">{{item.price.split('.')[1]?'.'+item.price.split('.')[1]:''}}</span>
@@ -205,7 +205,7 @@
 				currStock:0,
 				skuActive:[],
 				totalStock:0,
-				adding:false
+				adding:false,
 			};
 		},
 		onPageScroll(val){
@@ -234,12 +234,6 @@
 								title:elem.title,
 								active:null
 							})
-							elem.item.map((val,index)=>{
-								elem.item[index] = {
-									value:val,
-									stock:null
-								}
-							})
 						})
 						Object.keys(this.skuCodes).forEach(key => {
 						     this.totalStock += parseInt(this.skuCodes[key]);
@@ -254,96 +248,30 @@
 				this.modalType = type;
 				this.$refs.popup.open();
 			},
-			setSkuActive(index,i,stock){
-				if(stock !== 0){
-					if(this.skuActive[index].active == i){
-						this.skuActive[index].active = null;
-					}else{
-						this.skuActive[index].active = i;
-					}
-					var allSku = true;
+			setSkuActive(index,i){
+				if(this.getStock(index,i) !== 0){
+					var currActive = this.skuActive[index].active;
+					this.skuActive[index].active = currActive == i?null:i;
+					var key=this.productId;
 					this.skuActive.map(item=>{
-						if(item.active == null){
-							allSku = false;
-							return;
-						}
+						key = key+'-'+item.active;
 					})
-					if(allSku){
-						var code = this.productId;
-						this.skuActive.map(item=>{
-							code += '-'+item.active;
-						});
-						this.currStock = this.skuCodes[code];
-						this.buyCount = this.buyCount>this.currStock?this.currStock:this.buyCount;
-					}
-					if(this.skuNames.length == 2 && allSku){
-						if(index == 0){
-							this.skuNames[1].item.map((item,index1)=>{
-								if(index1>0){
-									var code = this.productId+'-'+i+'-'+index1;
-									item.stock = this.skuCodes[code];
-								}
-							})
-						}else if(index == 1){
-							this.skuNames[0].item.map((item,index1)=>{
-								if(index1>0){
-									var code = this.productId+'-'+i+'-'+index1;
-									item.stock = this.skuCodes[code];
-								}
-							})
-						}
-					}else if(this.skuNames.length == 2){
-						this.currStock = 0;
-						if(!this.skuActive[1].active && !this.skuActive[0].active){
-							this.currStock = this.totalStock;
-							this.skuNames[1].item.map((item,index1)=>{
-								if(index1>0){
-									var code = this.productId+'-'+i+'-'+index1;
-									item.stock = null;
-								}
-							})
-							this.skuNames[0].item.map((item,index1)=>{
-								if(index1>0){
-									var code = this.productId+'-'+i+'-'+index1;
-									item.stock = null;
-								}
-							})
-						}else if(index == 0 && this.skuActive[index].active){
-							console.log(index);
-							this.skuNames[1].item.map((item,index1)=>{
-								if(index1>0){
-									var code = this.productId+'-'+i+'-'+index1;
-									item.stock = this.skuCodes[code];
-									this.currStock += item.stock;
-								}
-							})
-						}else if(index == 1 && this.skuActive[index].active){
-							this.skuNames[0].item.map((item,index1)=>{
-								if(index1>0){
-									var code = this.productId+'-'+i+'-'+index1;
-									item.stock = this.skuCodes[code];
-									this.currStock += item.stock;
-								}
-							})
-						}else if(index == 0 && !this.skuActive[index].active){
-							this.skuNames[1].item.map((item,index1)=>{
-								if(index1>0){
-									var code = this.productId+'-'+i+'-'+index1;
-									item.stock = null;
-									this.currStock += this.skuCodes[code];
-								}
-							})
-						}else if(index == 1 && !this.skuActive[index].active){
-							this.skuNames[0].item.map((item,index1)=>{
-								if(index1>0){
-									var code = this.productId+'-'+i+'-'+index1;
-									item.stock = null;
-									this.currStock += this.skuCodes[code];
-								}
-							})
-						}
+					if(this.skuCodes[key] !== undefined){
+						this.currStock = this.skuCodes[key];
+					}else{
+						this.currStock = this.totalStock;
 					}
 				}
+			},
+			getStock(index,i){
+				var lib = JSON.parse(JSON.stringify(this.skuActive));
+				lib[index].active = i;
+				var key=this.productId;
+				lib.map(item=>{
+					key = key+'-'+item.active;
+				})
+				var stock = this.skuCodes[key];
+				return stock;
 			},
 			addCount(){
 				this.buyCount = this.buyCount<this.currStock?this.buyCount+1:this.currStock;

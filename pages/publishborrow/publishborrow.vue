@@ -4,7 +4,7 @@
 		<uni-nav-bar :title="currType == 1?'发布借贷挂单':'发布投资挂单'" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<div class="app-container full fixbutton" style="padding-bottom:190upx;">
 			<view class="modal-box" v-if="showPwdModal">
-				<view class="modal">
+				<view class="modal" v-if="!jump">
 					<view class="modal-top-item">
 						<view class="modal-title">请输入您的交易密码</view>
 						<view class="modal-content">
@@ -14,6 +14,11 @@
 					<view class="modal-btns">
 						<view @click="showPwdModal = false">取消</view>
 						<view style="border-left:1px solid #eee;color:#0A61C9;" @click="publish">发布</view>
+					</view>
+				</view>
+				<view class="modal" v-if="jump">
+					<view class="modal-top-item">
+						<view class="modal-title" style="padding:0upx;color:#DA53A2;">发布成功&nbsp;&nbsp;{{timeOut}}秒后返回</view>
 					</view>
 				</view>
 			</view>
@@ -142,7 +147,7 @@
 								<text class="left-item-label">预计利息</text>
 							</view>
 							<view class="right-item">
-								<text class="left-item-name">{{getPreRate()}} USDT</text>
+								<text class="left-item-name">{{getPreRate()}} {{coinLib[currCoin]}}</text>
 							</view>
 						</view>
 						<view class="horizon-list-item">
@@ -150,7 +155,7 @@
 								<text class="left-item-label">手续费</text>
 							</view>
 							<view class="right-item">
-								<text class="left-item-name">{{fee}} USDT</text>
+								<text class="left-item-name">{{getFee()}} {{coinLib[currCoin]}}</text>
 							</view>
 						</view>
 					</view>
@@ -217,7 +222,10 @@
 				preRate:0,
 				rate:'',
 				currType:1,
-				password:''
+				password:'',
+				timeOut:3,
+				jump:false,
+				timer:null
 			};
 		},
 		onPageScroll(val){
@@ -261,13 +269,17 @@
 						success:res=>{
 							console.log(res);
 							if(res.code == 200){
-								uni.showToast({
-									title:'发布成功',
-									icon:'none'
-								})
-								uni.navigateBack({
-									delta:1
-								})
+								this.jump = true;
+								this.timer = setInterval(()=>{
+									if(this.timeOut>1){
+										this.timeOut --;
+									}else{
+										clearInterval(this.timer);
+										uni.navigateBack({
+											delta:1
+										})
+									}
+								},1000)
 							}else{
 								uni.showToast({
 									title:res.message,
@@ -291,13 +303,17 @@
 						success:res=>{
 							console.log(res);
 							if(res.code == 200){
-								uni.showToast({
-									title:'发布成功',
-									icon:'none'
-								})
-								uni.navigateBack({
-									delta:1
-								})
+								this.jump = true;
+								this.timer = setInterval(()=>{
+									if(this.timeOut>1){
+										this.timeOut --;
+									}else{
+										clearInterval(this.timer);
+										uni.navigateBack({
+											delta:1
+										})
+									}
+								},1000)
 							}else{
 								uni.showToast({
 									title:res.message,
@@ -313,14 +329,18 @@
 				var count = this.totalCount == ''?0:this.totalCount;
 				var unit_price = this.publicLib[this.currCoin].unit_price;
 				this.totalPrice = (parseFloat(price)*parseInt(count)/2).toFixed(2);
-				return (parseFloat(price)*parseInt(count)*parseFloat(unit_price)/2).toFixed(2);
+				return (parseFloat(price)*parseInt(count)/2).toFixed(2);
 			},
 			getPreRate(){
 				 var price = this.price == ''?0:this.price;
 				 var count = this.totalCount == ''?0:this.totalCount;
 				 var rate =  this.rate == ''?0:this.rate;
 				 var month = this.classLib[this.currClass].value;
-				 return ((parseFloat(price)*parseInt(count)/2)*parseFloat(rate)*parseFloat(this.publicLib[this.currCoin].unit_price)*month/100).toFixed(2);
+				 return (parseInt(count)*(parseFloat(rate)/100)*month).toFixed(4);
+			},
+			getFee(){
+				var count = this.totalCount == ''?0:this.totalCount;
+				return (parseFloat(count)/1000).toFixed(4);
 			},
 			pickerChange(e){
 				this.currClass = e.target.value;

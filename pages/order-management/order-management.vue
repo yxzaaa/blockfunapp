@@ -50,7 +50,7 @@
 						</view>
 						<!-- 图片描述 -->
 						<view class="guess-content" style="margin-left:20upx;margin-top:0;">
-							<view style="font-size: 28upx;color:#fff;height:80upx;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</view>
+							<view style="font-size: 28upx;color:#fff;height:80upx;">{{item.title.length>40?item.title.substring(0,40)+' ...':item.title}}</view>
 							<view style="font-size:24upx;color:#999999;margin-top:8upx;">消耗积分 {{item.credit*item.num}}</view>
 							<view style="display: flex;justify-content: space-between;align-items: center;">
 								<span style="color:#DA53A2;">

@@ -11,7 +11,7 @@
 				<image class="image" mode="widthFix" :src="item.img" style="width: 100%; display: block;" ></image>
 			</view>
 			<view class="content">
-				<view class="item-title" style="color:#fff;font-size:14px; margin-bottom:5px;">{{item.title}}</view>
+				<view class="item-title" style="color:#fff;font-size:14px; margin-bottom:5px;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</view>
 				<view class="user">
 					<text class="item-content">消耗积分</text>
 					<text class="item-consume">{{item.credit}}</text>
@@ -143,7 +143,8 @@
 	.flow-box .content text {
 		width: 100%;
 		font-size: 24upx;
-		margin-bottom: 20upx;
+		margin-bottom: 5upx;
+		margin-top:5upx;
 	}
 	.flow-box .user {
 		display: flex;

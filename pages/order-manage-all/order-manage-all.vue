@@ -22,12 +22,12 @@
 								<image :src="val1.img" style="width:160upx;height:160upx;display: block;"></image>
 							</view>
 							<view class="text">
-								<span style="color:#fff;font-size:24upx;width:470upx;height:66upx;line-height: 34upx;display: block;">{{val1.title}}</span>
-								<span style="display: block;">
+								<span style="color:#fff;font-size:26upx;width:470upx;height:66upx;line-height: 34upx;display: block;">{{val1.title.length>40?val1.title.substring(0,40)+' ...':val1.title}}</span>
+								<scroll-view scroll-x="true" style="white-space: nowrap;width:470upx;">
 									<span style="color: #999999;font-size:24upx;margin-right:24upx;">数量：{{val1.number}}</span>
 									<span style="color: #999999;font-size:24upx;">{{val1.p1}}：{{val1.s1}}</span>
 									<span style="color: #999999;font-size:24upx;margin-left:24upx;" v-if="val1.p2">{{val1.p2}}：{{val1.s2}}</span>
-								</span>
+								</scroll-view>
 								<span>
 									<span style="color:#fff;font-size:28upx;font-family: Montserrat-Bold;margin-right: 6upx;">￥</span>
 									<span style="color:#fff;font-size:28upx;font-weight: bold;font-family: Montserrat-Bold;">{{setPrice(val1.price,val1.number)}}</span>

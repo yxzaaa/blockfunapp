@@ -43,7 +43,7 @@
 								</view>
 							</view>
 							<view class="item-horizen count-box">
-								<span class="label-box"><span>￥</span>{{getNum(item.total_price)}}</span>
+								<span class="label-box"><span>$</span>{{getNum(item.total_price)}}</span>
 							</view>
 							<view class="item-horizen label-line">
 								<span class="label-box"><span class="label">数量</span>{{getNum(item.balance)}}</span> 
@@ -268,7 +268,7 @@
 					color:#DA53A2;
 					font-size: 32upx;
 					display: inline-block;
-					padding-right:4upx;
+					padding-right:8upx;
 					font-family:'Montserrat-Bold';
 				}
 			}

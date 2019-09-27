@@ -15,7 +15,7 @@
 							</view>
 							<view class="right-item">
 								<span class="right-item-text" :style="{color:getColor(item.amount_unlock_balance)}">
-									{{item.amount_unlock_balance}}
+									{{item.amount_unlock_balance*-1}}
 								</span>
 								<!-- <image :src="imageLib.more"></image> -->
 							</view>

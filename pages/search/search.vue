@@ -36,9 +36,9 @@
 					</view>
 					<!-- 图片描述 -->
 					<view class="guess-content" style="margin-left:20upx;margin-top:0;">
-						<view class='title clamp' style="height:106upx;font-size:28upx;color:#fff;white-space: normal;width:450upx;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</view>
-						<span class="clamp" style="font-size:24upx;color:#999999;margin-top:14upx;">消耗积分 {{item.credit}}</span>
-						<span class="clamp" style="margin-top:8upx;color:#DA53A2;font-family:'Montserrat-Bold';">
+						<view class='title clamp' style="height:100upx;font-size:28upx;color:#fff;white-space: normal;width:450upx;line-height: 50upx;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</view>
+						<span class="clamp" style="font-size:24upx;color:#999999;margin-top:8upx;">消耗积分 {{item.credit}}</span>
+						<span class="clamp" style="margin-top:8upx;color:#DA53A2;font-family:'Montserrat-Bold';display: block;">
 							<span style="font-size:24upx;margin-right:8upx;font-family:'Montserrat-Bold';">￥</span>
 							<span style="font-family:'Montserrat-Bold';">{{item.price.split('.')[0]}}</span>
 							<span style="font-size:24upx;font-family:'Montserrat-Bold';">{{item.price.split('.')[1]?'.'+item.price.split('.')[1]:''}}</span>

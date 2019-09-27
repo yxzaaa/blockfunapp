@@ -118,7 +118,8 @@
         }
         ,{
             "path" : "pages/order-manage-all/order-manage-all",
-            "style" : {}
+            "style" : {
+			}
         }
         ,{
             "path" : "pages/order-dealing/order-dealing",
@@ -190,7 +191,8 @@
         }
         ,{
             "path" : "pages/pledge-debit/pledge-debit",
-            "style" : {}
+            "style" : {
+			}
         }
         ,{
             "path" : "pages/buyusdt/buyusdt",
@@ -238,7 +240,8 @@
         }
         ,{
             "path" : "pages/mytransbill/mytransbill",
-            "style" : {}
+            "style" : {
+			}
         }
         ,{
             "path" : "pages/billorders/billorders",
@@ -263,7 +266,7 @@
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#15040c",
 		"navigationStyle":"custom",
-		"enablePullDownRefresh":true,
+		// "enablePullDownRefresh":true,
 		"backgroundTextStyle":"light"
 	},
 	"tabBar": {

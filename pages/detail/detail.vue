@@ -13,7 +13,7 @@
 				<view class="choose">
 					<view class="goods">
 						<view class="goods-info">
-							<view class="img">
+							<view class="img image">
 								<image :src="imgList[0]"></image>
 							</view>
 							<view class="title">
@@ -63,7 +63,7 @@
 			</uni-popup>
 			<swiper v-if="!loading" class="carousel" indicator-dots=true circular=true interval="3000" duration="700" indicator-active-color="#DA53A2">
 				<swiper-item v-for="(item,index) in imgList" :key="index">
-					<view class="image-wrapper">
+					<view class="image-wrapper image">
 						<image
 							:src="item" 
 							mode="aspectFill"
@@ -105,7 +105,7 @@
 						 v-if="!loading"
 					>
 					<!-- 引入图片 -->
-						<view class="image-wrapper">
+						<view class="image-wrapper image">
 							<image 
 								:src="item.img" 
 								mode="aspectFill"

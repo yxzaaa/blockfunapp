@@ -4,6 +4,7 @@
 	 */
 	export default {
 		onLaunch: function() {
+			//判断登录状态
 			let userInfo = uni.getStorageSync('userInfo');
 			if(!userInfo || !userInfo.uid){
 				uni.reLaunch({
@@ -75,6 +76,12 @@
 	
 	text span{
 		font-family: inherit;
+	}
+	.image{
+		uni-image{
+			background-image: url(/static/errorImage.jpg);
+			background-size:100% 100%;
+		}
 	}
 	/* 骨架屏替代方案 */
 	.Skeleton {

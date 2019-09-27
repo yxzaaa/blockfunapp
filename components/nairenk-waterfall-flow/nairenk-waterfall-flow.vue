@@ -7,7 +7,7 @@
 			 @click="choose(item.id)"
 			 :style="{marginBottom:index==newList.length-1 || index==newList.length-2?'130upx':'',top:top[index]+'px'}"
 			 >
-			<view class="pic">
+			<view class="pic image">
 				<image class="image" mode="widthFix" :src="item.img" style="width: 100%; display: block;" ></image>
 			</view>
 			<view class="content">

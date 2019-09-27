@@ -24,7 +24,7 @@
 							></image>
 						</view>
 						<view @click="showDetail(item.id)" :style="{marginTop:'0',width:isManager?'610upx':'690upx',display:'flex',justifyContent:'flex-start'}">
-							<view class="image-wrapper">
+							<view class="image-wrapper image">
 								<image 
 									:src="item.img" 
 									mode="aspectFill"

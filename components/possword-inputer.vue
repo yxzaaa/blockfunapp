@@ -1,13 +1,13 @@
 <template>
 	<view class="password-box">
-		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[0]}}</text>
-		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[1]}}</text>
-		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[2]}}</text>
-		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[3]}}</text>
-		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[4]}}</text>
-		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[5]}}</text>
-		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[6]}}</text>
-		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[7]}}</text>
+		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[0]?'●':''}}</text>
+		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[1]?'●':''}}</text>
+		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[2]?'●':''}}</text>
+		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[3]?'●':''}}</text>
+		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[4]?'●':''}}</text>
+		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[5]?'●':''}}</text>
+		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[6]?'●':''}}</text>
+		<text class="item-text" :style="{width:size,height:size,lineHeight:size,fontSize:fontSize,background:background,borderBottom:'2upx solid '+borderColor}">{{password[7]?'●':''}}</text>
 		<input type="number" class="password-input" maxlength="8" v-model="password" @input="changeValue" :focus="true"/>
 	</view>
 </template>

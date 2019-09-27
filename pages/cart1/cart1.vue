@@ -19,7 +19,7 @@
 								style="width:40upx;height:40upx;"
 							></image>
 						</view>
-						<view class="image-wrapper">
+						<view class="image-wrapper image">
 							<image 
 								:src="item.img" 
 								mode="aspectFill"

@@ -17,7 +17,7 @@
 								<span class="right-item-text" :style="{color:getColor(item.amount_unlock_balance)}">
 									{{item.amount_unlock_balance}}
 								</span>
-								<image :src="imageLib.more"></image>
+								<!-- <image :src="imageLib.more"></image> -->
 							</view>
 						</view>
 					</block>

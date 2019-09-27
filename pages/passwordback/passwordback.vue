@@ -5,7 +5,7 @@
 		<view class="app-container full">
 			<view class="logo-box">
 				<image :src="imageLib.logo"></image>
-				<view>X-wallet</view>
+				<view>BlockFun</view>
 			</view>
 			<view class="login-form">
 				<view class="login-form-item">

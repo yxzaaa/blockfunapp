@@ -5,7 +5,7 @@
 		<view class="app-container full">
 			<view class="logo-box">
 				<image :src="imageLib.logo"></image>
-				<view>X-wallet</view>
+				<view>BlockFun</view>
 			</view>
 			<view class="login-form">
 				<view class="login-form-item" style="display: flex;justify-content: space-between;">
@@ -13,21 +13,21 @@
 						<image class="login-form-label" :src="imageLib.phone"></image>
 						<input type="number" class="login-form-input" style="width:420upx;" placeholder="手机号码" v-model="phone"/>
 					</view>
-					<picker @change="countryChange" :value="currCountry" :range="countryLib" mode="selector">
+					<picker @change="countryChange" :value="currCountry" :range="countryLib" :range-key="'name'" mode="selector">
 						<view 
 						style="padding:0upx 20upx;border-radius: 6upx;background: #2D1F25;line-height: 48upx;color:#fff;display: flex;justify-content: center;align-items: center;margin-right:20upx;">
-							<text style="#999;font-size: 24upx;">{{countryLib[currCountry]}}</text>
+							<text style="#999;font-size: 24upx;">{{countryLib[currCountry]?countryLib[currCountry].code:'CN'}}</text>
 							<image :src="imageLib.sanjiao" style="width:20upx;height:14upx;margin-left:6upx;"></image>
 						</view>
 					</picker>
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.password"></image>
-					<input type="password" class="login-form-input" style="width:420upx;"  placeholder="登录密码" password v-model="password"/>
+					<input type="password" class="login-form-input" style="width:420upx;" maxlength="8" placeholder="登录密码 (请填写8位数字)" password v-model="password"/>
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.password"></image>
-					<input type="password" class="login-form-input" style="width:420upx;" placeholder="确认密码" password v-model="confirmPassword"/>
+					<input type="password" class="login-form-input" style="width:420upx;" maxlength="8" placeholder="确认密码 (请填写8位数字)" password v-model="confirmPassword"/>
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.cert"></image>
@@ -90,24 +90,35 @@
 				visitCode:'',
 				codeDelay:0,
 				codeTimer:null,
-				currCountry:0,
-				countryLib:[
-					'中国','美国','欧洲','日本'
-				]
+				currCountry:46,
+				countryLib:[]
 			};
+		},
+		onLoad(){
+			//请求国家区号地址
+			uni.request({
+				url:'../../static/json/phone.json',
+				method:"GET",
+				dataType:'json',
+				success:res=>{
+					this.countryLib = res.data;
+				}
+			})
 		},
 		methods:{
 			countryChange(e){
 				this.currCountry = e.target.value;
 			},
+			getCallingCode(){
+				var str = this.countryLib[this.currCountry].callingCode;
+				return str.replace(/\s*/g,"");
+			},
 			getCode(){
-				if(this.codeDelay === 0 && this.phone.length === 11){
+				if(this.codeDelay === 0){
 					this.$http({
-						url:'/v1/users/register/send-code?login_name='+'86'+this.phone,
+						url:'/v1/users/register/send-code?login_name='+this.getCallingCode()+this.phone,
 						success:res=>{
-							console.log(res);
 							if(res.code == 200){
-								// this.registerSid = res.result.sid;
 								this.codeDelay = 60;
 								this.codeTimer = setInterval(()=>{
 									if(this.codeDelay>0){
@@ -125,11 +136,6 @@
 							}
 						}
 					})
-				}else if(this.phone.length !== 11){
-					uni.showToast({
-						title:"请输入正确的手机号码",
-						icon:'none'
-					})
 				}
 			},
 			register(){
@@ -137,14 +143,13 @@
 					this.$http({
 						url:'/v1/users/register',
 						data:{
-							login_name:'86'+this.phone,
+							login_name:this.getCallingCode()+this.phone,
 							password:this.password,
 							password_hash:this.$md5(this.password),
 							invite_code:this.visitCode,
 							validate_code:this.checkCode
 						},
 						success:res=>{
-							console.log(res);
 							if(res.code == 200){
 								//注册成功后,跳转设置交易密码页面,带pay_token，phone,password
 								uni.navigateTo({

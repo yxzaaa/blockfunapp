@@ -5,12 +5,21 @@
 		<view class="app-container full">
 			<view class="logo-box">
 				<image :src="imageLib.logo"></image>
-				<view>X-wallet</view>
+				<view>BlockFun</view>
 			</view>
 			<view class="login-form">
 				<view class="login-form-item">
-					<image class="login-form-label" :src="imageLib.phone"></image>
-					<input type="number" class="login-form-input" placeholder="手机号码" maxlength="11" v-model="mobile"/>
+					<view style="display: flex;justify-content: flex-start;">
+						<image class="login-form-label" :src="imageLib.phone"></image>
+						<input style="width:480upx;" type="number" class="login-form-input" placeholder="手机号码" maxlength="11" v-model="mobile"/>
+					</view>
+					<picker @change="countryChange" :value="currCountry" :range="countryLib" :range-key="'name'" mode="selector">
+						<view 
+						style="padding:0upx 20upx;border-radius: 6upx;background: #2D1F25;line-height: 48upx;color:#fff;display: flex;justify-content: center;align-items: center;margin-right:20upx;">
+							<text style="#999;font-size: 24upx;">{{countryLib[currCountry]?countryLib[currCountry].code:'CN'}}</text>
+							<image :src="imageLib.sanjiao" style="width:20upx;height:14upx;margin-left:6upx;"></image>
+						</view>
+					</picker>
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.password"></image>
@@ -56,22 +65,38 @@
 					password:'../../static/icons/icon_mima.png',
 					cert:'../../static/icons/icon_yanzhengma.png',
 					code:'../../static/icons/icon_yaoqingma.png',
+					sanjiao:'../../static/icons/sanjiao.png',
 				},
 				mobile:'',
-				password:''
+				password:'',
+				currCountry:46,
+				countryLib:[]
 			};
 		},
-		onLoad(option){
-			if(option.register === 'successs'){
-				
-			}
+		onLoad(){
+			//请求国家区号地址
+			uni.request({
+				url:'../../static/json/phone.json',
+				method:"GET",
+				dataType:'json',
+				success:res=>{
+					this.countryLib = res.data;
+				}
+			})
 		},
 		methods:{
+			countryChange(e){
+				this.currCountry = e.target.value;
+			},
+			getCallingCode(){
+				var str = this.countryLib[this.currCountry].callingCode;
+				return str.replace(/\s*/g,"");
+			},
 			login(){
 				this.$http({
 					url:'/v1/users/login',
 					data:{
-						login_name:'86'+this.mobile,
+						login_name:this.getCallingCode()+this.mobile,
 						password:this.password,
 						password_hash:this.$md5(this.password)
 					},
@@ -82,7 +107,7 @@
 								//检查本地pay_token设置
 								//跳转已登录状态设置交易密码
 								uni.navigateTo({
-									url:'../setpaypassword/setpaypassword?mobile=86'+this.mobile+'&auth='+res.data.token
+									url:'../setpaypassword/setpaypassword?mobile='+this.getCallingCode()+this.mobile+'&auth='+res.data.token
 								})
 							}else{
 								uni.setStorage({

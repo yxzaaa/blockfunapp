@@ -10,7 +10,7 @@
 		<view class="app-container full">
 			<!-- 顶部滑动 -->
 			<horizon-tab :tabs="statusTabs" padding="45" @click="toggleStatus" ></horizon-tab>
-			<scroll-view class="order-box" scroll-y>
+			<scroll-view class="order-box" scroll-y @scrolltolower="reachBottom">
 				<view class="managebox" v-for="(val,index) in orderList" :key="index"> <!-- 待办管理 -->
 					<view class="backlog" @click="goDetail(val.id)"> 
 						<span>{{val.id}}</span>
@@ -52,6 +52,7 @@
 						<fun-button @handle="confirmReceipt(val.id)" class="funbtn1" value="确认收货" width="200upx" v-if="val.status == 3"></fun-button>
 					</view>
 				</view>
+				<uni-load-more :status="loadStatus"></uni-load-more>
 			</scroll-view>
 		</view>
 	</view>
@@ -62,12 +63,14 @@
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import HorizonTab from '@/components/horizon-tab.vue';
 	import FunButton from '@/components/fun-button.vue';
+	import UniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	export default {
 		components:{
 			UniNavBar,
 			UniBackground,
 			HorizonTab,
-			FunButton
+			FunButton,
+			UniLoadMore
 		},
 		data() {
 			return {
@@ -87,7 +90,10 @@
 					{id:8,text:'已取消',color:'#999999'},
 				],
 				orderList:[],
-				currStatus:0
+				currStatus:0,
+				currPage:1,
+				totalPage:1,
+				loadStatus:'noMore'
 			}
 		},
 		onPageScroll(val){
@@ -97,17 +103,38 @@
 			this.toggleStatus(0);
 		},
 		methods: {
+			//上拉触底
+			reachBottom(){
+				if(this.currPage<this.totalPage){
+					this.currPage ++;
+					this.loadStatus = 'loading';
+					this.$http({
+						url:'/member/order?nav='+this.statusTabs[this.currStatus].id+'&page='+this.currPage,
+						success:res=>{
+							if(res.code == 200){
+								this.loadStatus = 'more';
+								this.orderList = this.orderList.concat(res.data.item);
+							}
+						}
+					})
+				}else{
+					this.loadStatus = 'noMore';
+				}
+			},
 			toggleStatus(index){
 				this.currStatus = index;
+				this.currPage = 1;
 				uni.showLoading({
 					title:'订单加载中...'
 				})
 				this.$http({
-					url:'/member/order?nav='+this.statusTabs[index].id+'&page=1',
+					url:'/member/order?nav='+this.statusTabs[index].id+'&page='+this.currPage,
 					success:res=>{
 						if(res.code == 200){
 							uni.hideLoading();
 							this.orderList = res.data.item;
+							this.totalPage = res.data.max;
+							this.loadStatus = 'noMore';
 						}
 					}
 				})

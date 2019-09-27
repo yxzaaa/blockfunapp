@@ -33,7 +33,7 @@
 					<view class="fun-card">
 						<view class="fun-card-item">
 							<view class="item-horizen">
-								<image class="wallet-list-avatar" :src="imageLib.avatar"></image>
+								<image class="wallet-list-avatar" :src="'/static/avatar/'+item.coin+'.png'"></image>
 								<view class="title-box">
 									<text style="font-size:32upx;color:#fff;font-family:'Montserrat-Bold';">{{item.coin}}</text>
 									<text style="font-size:24upx;color:#999;font-family:'Montserrat-Bold';overflow: hidden;width:300upx;text-overflow: ellipsis;white-space: nowrap;">{{item.address}}</text>
@@ -49,7 +49,7 @@
 								<span class="label-box"><span class="label">数量</span>{{getNum(item.balance)}}</span> 
 								<span class="label-box"><span class="label">价格</span>{{getNum(item.unit_price)}} USD</span> 
 							</view>
-							<view class="fun-card-buttons">
+							<view class="fun-card-buttons" style="padding-bottom:0px;">
 								<fun-button v-if="currType == 3" type="text" value="查看账单" :url="'../shoptrans/shoptrans?coin='+item.coin" />
 								<fun-button v-if="currType == 1" type="text" value="查看账单" :url="'../xdogwallet/xdogwallet?coin='+item.coin" />
 								<view class="button-group" style="width:340upx;">
@@ -89,7 +89,7 @@
 					message:'../../static/icons/message.png',
 					union:'../../static/icons/Union.png',
 					banner:'../../static/banner.jpg',
-					avatar:'../../static/avatar/fortoken.png'
+					avatar:'../../static/bg/logo.png'
 				},
 				message:"Forest 矿机即将上线，首批抢购名额1000名",
 				currType:1,

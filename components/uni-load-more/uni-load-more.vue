@@ -64,7 +64,7 @@
 	.uni-load-more {
 		display: flex;
 		flex-direction: row;
-		height: 80upx;
+		height: 160upx;
 		align-items: center;
 		justify-content: center
 	}

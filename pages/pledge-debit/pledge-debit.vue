@@ -33,7 +33,7 @@
 					<text :class="{active:activeTab == 2}" @click="toggleTab(2)">我要投资</text>
 				</view>
 			</view>
-			<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);">
+			<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom">
 				<view style="padding:40upx;padding-bottom:0px;">
 					<block v-for="(item,index) in borrowList" :key="index">
 						<view class="debitbox">
@@ -65,6 +65,7 @@
 						</view>
 					</block>
 				</view>
+				<uni-load-more :status="loadStatus"></uni-load-more>
 			</scroll-view>
 		</view>
 	</view>
@@ -73,11 +74,13 @@
 <script>
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
+	import UniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	
 	export default {
 		components:{
 			UniNavBar,
 			UniBackground,
+			UniLoadMore
 		},
 		data() {
 			return {
@@ -94,7 +97,8 @@
 					add:'../../static/icons/icon_add.png',
 				},
 				borrowList:[],
-				dropShow:false
+				dropShow:false,
+				loadStatus:'noMore'
 			}
 		},
 		onPageScroll(val){
@@ -104,11 +108,35 @@
 			this.updateList();
 		},
 		methods: {
+			//上拉加载
+			reachBottom(){
+				this.currPage++;
+				this.loadStatus = 'loading';
+				this.$http({
+					url:'/v1/main/debit/debit-list',
+					data:{
+						type:this.activeTab,
+						page:this.currPage
+					},
+					success:res=>{
+						console.log(res);
+						if(res.code == 200){
+							if(res.data.item.length>0){
+								this.loadStatus = 'more';
+								this.borrowList = this.borrowList.concat(res.data.item);
+							}else{
+								this.loadStatus = 'noMore';
+							}
+						}
+					}
+				})
+			},
 			//请求挂单列表
 			updateList(){
 				uni.showLoading({
 					title:"挂单加载中..."
 				})
+				this.currPage = 1;
 				this.$http({
 					url:'/v1/main/debit/debit-list',
 					data:{
@@ -120,6 +148,7 @@
 						if(res.code == 200){
 							uni.hideLoading();
 							this.borrowList = res.data.item;
+							this.loadStatus = 'noMore';
 						}
 					}
 				})

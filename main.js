@@ -61,7 +61,6 @@ const httpRequest = (options)=>{
 	})
 }
 
-
 Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;

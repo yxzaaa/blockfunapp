@@ -95,7 +95,7 @@
 								<text class="left-item-label">抵押单价</text>
 							</view>
 							<view class="right-item">
-								<input v-model="price" style="font-size: 26upx;color:#fff;text-align: right;" type="number" placeholder="请输入抵押单价" placeholder-style="font-size:24upx;"/>
+								<input v-model="price" style="width:300upx;font-size: 26upx;color:#fff;text-align: right;" type="number" placeholder="请输入抵押单价" placeholder-style="font-size:24upx;"/>
 							</view>
 						</view>
 						<view class="horizon-list-item">
@@ -103,7 +103,7 @@
 								<text class="left-item-label">抵押总量</text>
 							</view>
 							<view class="right-item">
-								<input v-model="totalCount" style="font-size: 26upx;color:#fff;text-align: right;" type="number" placeholder="请输入抵押总量" placeholder-style="font-size:24upx;"/>
+								<input v-model="totalCount" style="width:300upx;font-size: 26upx;color:#fff;text-align: right;" type="number" placeholder="请输入抵押总量" placeholder-style="font-size:24upx;"/>
 							</view>
 						</view>
 						<!-- <view style="width:100%;height:3upx;background:rgba(255,255,255,0.2);margin:20upx 0upx;"></view> -->
@@ -126,7 +126,7 @@
 								<text class="left-item-label">月利率</text>
 							</view>
 							<view class="right-item">
-								<input v-model="rate" style="font-size: 26upx;color:#fff;text-align: right;" type="number" placeholder="请输入月利率" placeholder-style="font-size:24upx;"/><span class="symble">%</span>
+								<input v-model="rate" style="width:300upx;font-size: 26upx;color:#fff;text-align: right;" type="number" placeholder="请输入月利率" placeholder-style="font-size:24upx;"/><span class="symble">%</span>
 							</view>
 						</view>
 						<view class="horizon-list-item">

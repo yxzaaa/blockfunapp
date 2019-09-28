@@ -61,7 +61,7 @@
 							<text style="font-size:28upx;color:#fff;">手续费</text>
 						</view>
 						<view class="right-status">
-							<text style="color:#fff;font-size: 26upx;font-family:'Montserrat-Light';">{{handlePay}}Xdog</text>
+							<text style="color:#fff;font-size: 26upx;font-family:'Montserrat-Light';">{{handlePay}} {{coin}}</text>
 							<text style="display: inline-block;font-size:26upx;padding:0upx 20upx;color:#999;font-family:'Montserrat-Light';">|</text>
 							<text style="font-size: 26upx;color:#999;font-family:'Montserrat-Light';">0.3%</text>
 						</view>
@@ -115,6 +115,8 @@
 		},
 		onLoad(option){
 			console.log(option);
+			// this.coin = option.coin;
+			// this.total = option.total;
 			//请求当前币种转账信息
 			this.$http({
 				url:'/v1/main/account/withdraw-preloading',

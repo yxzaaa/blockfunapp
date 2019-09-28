@@ -69,6 +69,7 @@
 			};
 		},
 		onLoad(option){
+			this.coin = option.coin;
 			this.updateList(0);
 		},
 		onPageScroll(val){

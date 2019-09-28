@@ -122,11 +122,12 @@
 					success:res=>{
 						console.log(res);
 						if(res.code == 200){
-							if(res.data.item.length>0){
+							if(res.data.item && res.data.item.length>0){
 								this.loadStatus = 'more';
 								this.borrowList = this.borrowList.concat(res.data.item);
 							}else{
 								this.loadStatus = 'noMore';
+								this.currPage --;
 							}
 						}
 					}

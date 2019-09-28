@@ -9,8 +9,7 @@
 		},{
             "path" : "pages/shopping/shopping",
             "style" : {
-				"navigationBarTitleText": "购物",
-				"enablePullDownRefresh":true
+				"navigationBarTitleText": "购物"
 			}
         },{
             "path" : "pages/games/games",

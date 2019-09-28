@@ -4,7 +4,7 @@
 		<uni-nav-bar :title="currType == 1?'发布借贷挂单':'发布投资挂单'" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<div class="app-container full fixbutton" style="padding-bottom:190upx;">
 			<view class="modal-box" v-if="showPwdModal">
-				<view class="modal" v-if="!jump">
+				<view class="modal">
 					<view class="modal-top-item">
 						<view class="modal-title">请输入您的交易密码</view>
 						<view class="modal-content">
@@ -14,11 +14,6 @@
 					<view class="modal-btns">
 						<view @click="showPwdModal = false">取消</view>
 						<view style="border-left:1px solid #eee;color:#0A61C9;" @click="publish">发布</view>
-					</view>
-				</view>
-				<view class="modal" v-if="jump">
-					<view class="modal-top-item">
-						<view class="modal-title" style="padding:0upx;color:#DA53A2;">发布成功&nbsp;&nbsp;{{timeOut}}秒后返回</view>
 					</view>
 				</view>
 			</view>
@@ -69,18 +64,10 @@
 							<view class="right-item" style="width:272upx;">
 								<view class="radio-box">
 									<text style="width:50%;" :class="{'active':currType == 1}" @click="currType = 1">借款</text>
-									<text style="width:50%;" :class="{'active':currType == 2}" @click="currType = 2">投资</text>
+									<text style="width:50%;" :class="{'active':currType == 2}" @click="openLater">投资</text>
 								</view>
 							</view>
 						</view>
-						<!-- <view class="horizon-list-item">
-							<view class="left-item">
-								<text class="left-item-label">投资总量</text>
-							</view>
-							<view class="right-item">
-								<text class="left-item-name">800 USDT</text>
-							</view>
-						</view> -->
 						<view class="horizon-list-item">
 							<view class="left-item">
 								<text class="left-item-label">抵押币种</text>
@@ -222,10 +209,7 @@
 				preRate:0,
 				rate:'',
 				currType:1,
-				password:'',
-				timeOut:3,
-				jump:false,
-				timer:null
+				password:''
 			};
 		},
 		onPageScroll(val){
@@ -269,17 +253,15 @@
 						success:res=>{
 							console.log(res);
 							if(res.code == 200){
-								this.jump = true;
-								this.timer = setInterval(()=>{
-									if(this.timeOut>1){
-										this.timeOut --;
-									}else{
-										clearInterval(this.timer);
-										uni.navigateBack({
-											delta:1
-										})
-									}
-								},1000)
+								uni.showToast({
+									title:'发布成功',
+									icon:'none'
+								})
+								setTimeout(()=>{
+									uni.navigateBack({
+										delta:1
+									})
+								},1500)
 							}else{
 								uni.showToast({
 									title:res.message,
@@ -303,17 +285,15 @@
 						success:res=>{
 							console.log(res);
 							if(res.code == 200){
-								this.jump = true;
-								this.timer = setInterval(()=>{
-									if(this.timeOut>1){
-										this.timeOut --;
-									}else{
-										clearInterval(this.timer);
-										uni.navigateBack({
-											delta:1
-										})
-									}
-								},1000)
+								uni.showToast({
+									title:'发布成功',
+									icon:'none'
+								})
+								setTimeout(()=>{
+									uni.navigateBack({
+										delta:1
+									})
+								},1500)
 							}else{
 								uni.showToast({
 									title:res.message,
@@ -324,10 +304,16 @@
 					})
 				}
 			},
+			openLater(){
+				uni.showToast({
+					title:'您好， 投资功能暂未上线，敬请期待',
+					icon:'none'
+				})
+			},
 			getTotalPrice(){
 				var price = this.price == ''?0:this.price;
 				var count = this.totalCount == ''?0:this.totalCount;
-				var unit_price = this.publicLib[this.currCoin].unit_price;
+				var unit_price = this.publicLib[this.currCoin]?this.publicLib[this.currCoin].unit_price:0;
 				this.totalPrice = (parseFloat(price)*parseInt(count)/2).toFixed(2);
 				return (parseFloat(price)*parseInt(count)/2).toFixed(2);
 			},

@@ -23,11 +23,11 @@
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.password"></image>
-					<input type="password" class="login-form-input" style="width:420upx;" maxlength="8" placeholder="登录密码 (请填写8位数字)" password v-model="password"/>
+					<input type="password" class="login-form-input" style="width:520upx;" maxlength="8" placeholder="登录密码 (请填写8~16位数字或字母)" password v-model="password"/>
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.password"></image>
-					<input type="password" class="login-form-input" style="width:420upx;" maxlength="8" placeholder="确认密码 (请填写8位数字)" password v-model="confirmPassword"/>
+					<input type="password" class="login-form-input" style="width:520upx;" maxlength="8" placeholder="确认密码 (请填写8~16位数字或字母)" password v-model="confirmPassword"/>
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.cert"></image>
@@ -60,6 +60,7 @@
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import FunButton from '@/components/fun-button.vue';
+	import PhoneLib from '@/static/json/phone.json';
 	export default {
 		components:{
 			UniNavBar,
@@ -96,14 +97,7 @@
 		},
 		onLoad(){
 			//请求国家区号地址
-			uni.request({
-				url:'../../static/json/phone.json',
-				method:"GET",
-				dataType:'json',
-				success:res=>{
-					this.countryLib = res.data;
-				}
-			})
+			this.countryLib = PhoneLib;
 		},
 		methods:{
 			countryChange(e){

@@ -51,12 +51,12 @@
 						<!-- 图片描述 -->
 						<view class="guess-content" style="margin-left:20upx;margin-top:0;">
 							<view style="font-size: 28upx;color:#fff;height:80upx;">{{item.title.length>40?item.title.substring(0,40)+' ...':item.title}}</view>
-							<view style="font-size:24upx;color:#999999;margin-top:8upx;">消耗积分 {{item.credit*item.num}}</view>
+							<view style="font-size:24upx;color:#999999;margin-top:4upx;">消耗积分 {{item.credit*item.num}}</view>
 							<view style="display: flex;justify-content: space-between;align-items: center;">
 								<span style="color:#DA53A2;">
-									<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';">￥</span>
 									<span style="display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,0)}}.</span>
 									<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,1)}}</span>
+									<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
 								</span>
 								<span class="cut" style="display: inline-block;color:rgba(255,255,255,0.5);font-size: 24upx;">
 									数量：{{item.num}}
@@ -71,10 +71,10 @@
 					<view class="finish">
 						<view class="price">
 							<span class="cash">
-								<span style="font-size: 24upx;color:#999999">现金：</span>
-								<span style="font-size: 24upx;color:#DA53A2;font-family:'Montserrat-Bold';">￥</span>
+								<span style="font-size: 24upx;color:#999999">总计：</span>
 								<span style="font-size: 32upx;color:#DA53A2;font-family:'Montserrat-Bold';">{{String(totalCount.toFixed(4)).split('.')[0]}}.</span>
 								<span style="font-size: 24upx;color:#DA53A2;font-family:'Montserrat-Bold';">{{String(totalCount.toFixed(4)).split('.')[1]}}</span>
+								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
 							</span>
 							<span>
 								<span style="font-size: 24upx;color:#999999;">积分：</span>
@@ -310,7 +310,7 @@
 		align-items: center;
 	}
 	.button-group{
-		width:500upx;
+		width:670upx;
 		display:flex;
 		justify-content:flex-end;
 		.finish{

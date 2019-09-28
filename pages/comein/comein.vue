@@ -3,13 +3,6 @@
 		<uni-background />
 		<uni-nav-bar :title="currType == 3?'转入':'转出'" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<view class="app-container full">
-			<view class="modal-box" v-if="jump">
-				<view class="modal">
-					<view class="modal-top-item">
-						<view class="modal-title" style="padding:0upx;color:#DA53A2;">{{currType == 3?'转入成功':'转出成功'}}&nbsp;&nbsp;{{timeOut}}秒后返回</view>
-					</view>
-				</view>
-			</view>
 			<view class="fun-card" style="margin:30upx 40upx;width:670upx;">
 				<view class="fun-card-item">
 					<view class="status-box handler-status">
@@ -88,10 +81,7 @@
 				shopTotal:0,
 				password:'',
 				currType:3,
-				amount:'',
-				timeOut:3,
-				jump:false,
-				timer:null
+				amount:''
 			};
 		},
 		onLoad(option){
@@ -156,17 +146,20 @@
 						},
 						success:res=>{
 							if(res.code == 200){
-								this.jump = true;
-								this.timer = setInterval(()=>{
-									if(this.timeOut>1){
-										this.timeOut --;
-									}else{
-										clearInterval(this.timer);
-										uni.navigateBack({
-											delta:1
-										})
-									}
-								},1000)
+								uni.showToast({
+									title:this.currType == 3?'转入成功':'转出成功',
+									icon:'none'
+								})
+								setTimeout(()=>{
+									uni.navigateBack({
+										delta:1
+									})
+								},1500)
+							}else{
+								uni.showToast({
+									title:res.message,
+									icon:'none'
+								})
 							}
 						}
 					})

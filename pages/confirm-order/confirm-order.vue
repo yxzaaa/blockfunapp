@@ -60,7 +60,7 @@
 					<view class="price">
 						<span class="cash">
 							<span style="font-size: 24upx;color:#999999">现金：</span>
-							<span style="font-size: 24upx;color:#DA53A2;font-family:'Montserrat-Bold';">￥</span>
+							<span style="font-size: 24upx;color:#DA53A2;font-family:'Montserrat-Bold';">USDT</span>
 							<span style="font-size: 28upx;color:#DA53A2;font-family:'Montserrat-Bold';">6444.</span>
 							<span style="font-size: 24upx;color:#DA53A2;font-family:'Montserrat-Bold';">12</span>
 						</span>
@@ -103,7 +103,7 @@
 						title: 'Apple iPhone X (A1865) 256GB 深空灰色 移动联通电信4G手机',
 						consume:'消耗积分',
 						amount:'4000',
-						symbol:"￥",
+						symbol:"USDT",
 						price:'6444.13',
 						number:'0'
 					},
@@ -113,7 +113,7 @@
 						title: '华为P30 (A1865) 256GB 深空灰色 移动联通电信4G手机',
 						consume:'消耗积分',
 						amount:'4000',
-						symbol:"￥",
+						symbol:"USDT",
 						price:'4999.21',
 						number:'0',
 					},
@@ -123,7 +123,7 @@
 						title: 'Apple iPhone X(A1865) 256GB 深空灰色 移动联通电信4G手机',
 						consume:'消耗积分',
 						amount:'4000',
-						symbol:"￥",
+						symbol:"USDT",
 						price:'4999.21',
 						number:'0',
 					},

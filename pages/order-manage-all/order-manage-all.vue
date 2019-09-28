@@ -28,9 +28,8 @@
 									<span style="color: #999999;font-size:24upx;">{{val1.p1}}：{{val1.s1}}</span>
 									<span style="color: #999999;font-size:24upx;margin-left:24upx;" v-if="val1.p2">{{val1.p2}}：{{val1.s2}}</span>
 								</scroll-view>
-								<span>
-									<span style="color:#fff;font-size:28upx;font-family: Montserrat-Bold;margin-right: 6upx;">￥</span>
 									<span style="color:#fff;font-size:28upx;font-weight: bold;font-family: Montserrat-Bold;">{{setPrice(val1.price,val1.number)}}</span>
+									<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
 								</span>
 							</view>
 						</view>
@@ -41,9 +40,9 @@
 						</span>
 						<span style="color:#fff;font-size: 28upx;">
 							合计<span style="color:#DA53A2;font-family: Montserrat-Bold;margin-left:12upx;font-size: 34upx;">
-								<span style="font-size: 26upx;">￥</span>
 								{{val.amount}}
-								</span>
+								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
+							</span>
 						</span>
 					</view>
 					<view class="button-group" v-if="val.status == 1 || val.status == 3">

@@ -18,9 +18,9 @@
 							</view>
 							<view class="title">
 								<span>
-									<span style="font-size:30upx;font-family:'Montserrat-Bold';">￥</span>
 									<span style="font-size:40upx;font-family:'Montserrat-Bold';">{{price.split('.')[0]}}</span>
 									<span style="font-size: 30upx;font-family:'Montserrat-Bold';">{{price.split('.')[1]?'.' + price.split('.')[1]:''}}</span>
+									<span style="font-size:24upx;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
 								</span>
 								<text style="color:#999999;font-size:24upx;margin-top:16upx;">库存 {{currStock}} 件</text>
 								<text style="color:#999999;font-size:24upx;margin-top:16upx;">消耗积分 {{credit}}</text>
@@ -76,9 +76,9 @@
 			<view class="info" v-if="!loading">
 				<view class="title">
 					<span style="margin-top:40upx;">
-						<span style="font-size:30upx;margin-right:4upx;font-family:'Montserrat-Bold';">￥</span>
 						<span style="font-size:40upx;font-family:'Montserrat-Bold';">{{price.split('.')[0]}}</span>
 						<span style="font-size: 30upx;font-family:'Montserrat-Bold';">{{price.split('.')[1]?'.' + price.split('.')[1]:''}}</span>
+						<span style="color:rgba(255,255,255,0.5);font-size:24upx;margin-left:10upx;font-family:'Montserrat-Bold';">USDT</span>
 					</span>
 					<text style="color:#999999;font-size:24upx;margin-top:16upx;">消耗积分 {{credit}}</text>
 					<text style="background:#DA53A2;height:32upx;width:64upx;text-align: center;font-size:24upx;color:#fff;margin-top:16upx;">{{catname}}</text>
@@ -116,9 +116,9 @@
 							<view class='title clamp' style="height:100upx;font-size:28upx;line-height:50upx;color:#fff;white-space: normal;width:450upx;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</view>
 							<span class="clamp" style="font-size:24upx;color:#999999;margin-top:10upx;display: block;">消耗积分 {{item.credit}}</span>
 							<span class="clamp" style="margin-top:10upx;color:#DA53A2;font-family:'Montserrat-Bold';display: block;">
-								<span style="font-size:24upx;margin-right:8upx;font-family:'Montserrat-Bold';">￥</span>
 								<span style="font-family:'Montserrat-Bold';">{{item.price.split('.')[0]}}</span>
 								<span style="font-size:24upx;font-family:'Montserrat-Bold';">{{item.price.split('.')[1]?'.'+item.price.split('.')[1]:''}}</span>
+								<span style="font-size:24upx;margin-left:10upx;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);">USDT</span>
 							</span>
 						</view>
 					</navigator>

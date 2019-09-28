@@ -29,7 +29,7 @@
 				:key="index"
 			>
 				<view class="symbolNumber">
-					<span class="symbol">￥</span>
+					<span class="symbol">USDT</span>
 					<span class="price">{{amount}}</span>
 				</view>
 			</view>
@@ -79,7 +79,7 @@
 				},				
 				paynumber:[
 					{
-						symbol:'￥',
+						symbol:'USDT',
 						price:'8398.58',
 					}
 				],

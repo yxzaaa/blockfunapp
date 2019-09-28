@@ -104,8 +104,9 @@
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
-		onLoad(){
+		onShow(){
 			this.updateList();
+			this.dropShow = false;
 		},
 		methods: {
 			//上拉加载

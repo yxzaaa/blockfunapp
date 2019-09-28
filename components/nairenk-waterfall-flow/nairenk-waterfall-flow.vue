@@ -17,11 +17,11 @@
 					<text class="item-consume">{{item.credit}}</text>
 				</view>
 				<view>
-					<text style="color:#DA53A2;font-size:28upx;margin-right:5upx;font-family:'Montserrat-Bold';">￥</text>
 					<span style="color:#DA53A2;font-size:36upx;font-family:'Montserrat-Bold';">
 						{{item.price.split('.')[0]}}
 						<span style="font-size: 24upx;font-family:'Montserrat-Bold';">{{item.price.split('.')[1]?'.'+item.price.split('.')[1]:''}}</span>
 					</span>
+					<text style="color:rgba(255,255,255,0.5);font-size:24upx;margin-left:10upx;font-family:'Montserrat-Bold';">USDT</text>
 				</view>
 			</view>
 		</view>

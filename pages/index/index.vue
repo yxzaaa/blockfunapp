@@ -47,7 +47,7 @@
 							</view>
 							<view class="item-horizen label-line">
 								<span class="label-box"><span class="label">数量</span>{{getNum(item.balance)}}</span> 
-								<span class="label-box"><span class="label">价格</span>{{getNum(item.unit_price)}} USD</span> 
+								<span class="label-box" style="width:340upx;"><span class="label">价格</span>{{getNum(item.unit_price)}} USD</span> 
 							</view>
 							<view class="fun-card-buttons" style="padding-bottom:0px;">
 								<fun-button v-if="currType == 3" type="text" value="查看账单" :url="'../shoptrans/shoptrans?coin='+item.coin" />
@@ -146,7 +146,7 @@
 				})
 			},
 			getNum(num){
-				return (parseFloat(num)).toFixed(2);
+				return (parseFloat(num)).toFixed(4);
 			},
 			//去转账
 			goTransPay(coin,total){

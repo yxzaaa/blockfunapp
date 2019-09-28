@@ -30,9 +30,9 @@
 							<span style="font-size: 28upx;color:#fff;height:80upx;">{{item.title.length>36?item.title.substring(0,36)+'...':item.title}}</span>
 							<text style="font-size:24upx;color:#999999;margin-top:8upx;">消耗积分 {{item.credit*item.num}}</text>
 							<span style="color:#DA53A2; position:relative;">
-								<span style="font-size:24upx;margin-right:8upx;display: inline-block;font-family:'Montserrat-Bold';">￥</span>
 								<span style="display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,0)}}.</span>
 								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,1)}}</span>
+								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
 								<span class="cut" style="position:absolute;right:10upx;display: inline-block;bottom:8upx;">
 									<span style="margin-right:20upx;font-size:30upx;color:#fff;font-weight: bold;display: inline-block;" @click="setNum(index,0)"> - </span>
 									<span style="display:inline-block;#99999;background:#280617;font-size:24upx;color:#fff;width:64upx;height:40upx;line-height: 40upx;text-align: center;">{{item.num}}</span>
@@ -53,17 +53,17 @@
 					<view class="finish">
 						<view class="price">
 							<span class="cash">
-								<span style="font-size: 24upx;color:#999999">现金：</span>
-								<span style="font-size: 24upx;color:#DA53A2;font-family:'Montserrat-Bold';">￥</span>
+								<span style="font-size: 24upx;color:#999999">总计：</span>
 								<span style="font-size: 28upx;color:#DA53A2;font-family:'Montserrat-Bold';">{{String(totalCount.toFixed(4)).split('.')[0]}}.</span>
 								<span style="font-size: 24upx;color:#DA53A2;font-family:'Montserrat-Bold';">{{String(totalCount.toFixed(4)).split('.')[1]}}</span>
+								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
 							</span>
 							<span>
 								<span style="font-size: 24upx;color:#999999;">积分：</span>
 								<span style="font-size: 24upx;color:#fff;">{{String(totalCredit)}}</span>
 							</span>
 						</view>
-						<fun-button value="去结算" large width="240upx" @handle="goOrderPage"></fun-button>
+						<fun-button value="去结算" large width="200upx" @handle="goOrderPage"></fun-button>
 					</view>
 				</view>
 			</view>
@@ -74,7 +74,7 @@
 						<image :src="isChooseAll?imageLib.checked:imageLib.check"></image>
 						<span>全选</span>
 					</view>
-					<fun-button value="删除" width="240upx" large @handle="deleteCart"></fun-button>
+					<fun-button value="删除" width="200upx" large @handle="deleteCart"></fun-button>
 				</view>
 			</view>
 		</view>

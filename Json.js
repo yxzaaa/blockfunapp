@@ -183,7 +183,7 @@ const cartList = [{
 ];
 //详情展示页面
 const detailData = {
-	symbol:"￥",
+	symbol:"USDT",
 	money: '6044.13',
 	consume: '消耗积分',
 	amount:'4000',
@@ -213,7 +213,7 @@ const detailData = {
 			title: 'Apple iPhone X (A1865) 256GB 深空灰色 移动联通电信4G手机',
 			consume:'消耗积分',
 			amount:'4000',
-			symbol:"￥",
+			symbol:"USDT",
 			price:'6444.13',
 			number:'0'
 		},
@@ -223,7 +223,7 @@ const detailData = {
 			title: '华为P30 (A1865) 256GB 深空灰色 移动联通电信4G手机',
 			consume:'消耗积分',
 			amount:'4000',
-			symbol:"￥",
+			symbol:"USDT",
 			price:'4999.21',
 			number:'0',
 		},
@@ -233,7 +233,7 @@ const detailData = {
 			title: 'Apple iPhone X(A1865) 256GB 深空灰色 移动联通电信4G手机',
 			consume:'消耗积分',
 			amount:'4000',
-			symbol:"￥",
+			symbol:"USDT",
 			price:'4999.21',
 			number:'0',
 		},

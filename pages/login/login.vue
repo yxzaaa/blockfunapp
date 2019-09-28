@@ -51,6 +51,7 @@
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import FunButton from '@/components/fun-button.vue';
+	import PhoneLib from '@/static/json/phone.json';
 	export default {
 		components:{
 			UniNavBar,
@@ -74,15 +75,7 @@
 			};
 		},
 		onLoad(){
-			//请求国家区号地址
-			uni.request({
-				url:'../../static/json/phone.json',
-				method:"GET",
-				dataType:'json',
-				success:res=>{
-					this.countryLib = res.data;
-				}
-			})
+			this.countryLib = PhoneLib;
 		},
 		methods:{
 			countryChange(e){

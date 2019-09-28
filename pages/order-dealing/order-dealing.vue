@@ -56,8 +56,8 @@
 							<span style="color: #999999;font-size:24upx;" v-if="item.p2">{{item.p2}}：{{item.s2}}</span>
 						</scroll-view>
 						<span>
-							<span style="color:#fff;font-size:28upx;font-family: Montserrat-Bold;margin-right: 6upx;">￥</span>
 							<span style="color:#fff;font-size:28upx;font-weight: bold;font-family: Montserrat-Bold;">{{item.price}}</span>
+							<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
 						</span>
 					</view>
 				</view>
@@ -78,7 +78,10 @@
 			</view>
 			<view class="money" v-if="!loading">
 				<span style="color:#fff;font-size: 28upx;margin-right: 20upx;">实付款</span>
-				<span style="color:#DA53A2;font-size:28upx;font-family: Montserrat-Bold;font-weight: 600;">￥ {{orderInfo.amount}}</span>
+				<span style="color:#DA53A2;font-size:28upx;font-family: Montserrat-Bold;font-weight: 600;">
+					{{orderInfo.amount}}
+					<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
+				</span>
 			</view>
 			<view style="padding:10upx 40upx;" v-if="loading">
 				<Skeleton height="200upx" :loading="loading"></Skeleton>

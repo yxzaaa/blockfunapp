@@ -50,7 +50,7 @@
 					</view>
 					<view class="text">
 						<span style="color:#fff;font-size:26upx;width:470upx;height:66upx;line-height: 34upx;display: block;">{{item.title.length>40?item.title.substring(0,40)+' ...':item.title}}</span>
-						<scroll-view scroll-x="true" style="white-space: nowrap;width:470upx;">
+						<scroll-view scroll-x="true" style="white-space: nowrap;width:470upx;height:46upx;">
 							<span style="color: #999999;font-size:24upx;margin-right:20upx;">数量：{{item.number}}</span>
 							<span style="color: #999999;font-size:24upx;margin-right:20upx;">{{item.p1}}：{{item.s1}}</span>
 							<span style="color: #999999;font-size:24upx;" v-if="item.p2">{{item.p2}}：{{item.s2}}</span>

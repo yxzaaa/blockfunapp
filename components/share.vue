@@ -117,7 +117,7 @@
 					type: obj.type,
 					summary: obj.summary,
 					success: function (res) {
-						console.log("success:" + JSON.stringify(res));
+						
 					},
 				})
 				this.toggleMask();

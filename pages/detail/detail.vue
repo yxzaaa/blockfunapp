@@ -280,7 +280,7 @@
 						this.currStock = this.totalStock;
 						//分享标题
 						this.shareList.map(item=>{
-							item.summary = this.title;
+							item.summary ='【'+this.title+'】'+'$$'+this.productId+'$$请复制这段文本到BlockFun应用';
 						})
 					}
 				}

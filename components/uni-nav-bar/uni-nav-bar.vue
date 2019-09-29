@@ -1,5 +1,5 @@
 <template>
-	<view class="nav-bar-box" :style="{justifyContent:layout=='left'?'flex-start':'center',position:opacity == 0?'absolute':'fixed'}">
+	<view class="nav-bar-box" :style="{justifyContent:layout=='left'?'flex-start':'center'}">
 		<!-- 左侧布局标题，副标题 -->
 		<view v-if="layout === 'left'" class="left-box">
 			<view class="left-title">{{title}}</view>

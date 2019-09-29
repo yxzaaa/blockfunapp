@@ -13,7 +13,17 @@
 			}
 		},
 		onShow: function() {
-			console.log('App Show')
+			console.log('App Show');
+			uni.getClipboardData({
+				success:res=>{
+					var id = res.split('$$')[1];
+					if(id){
+						uni.navigateTo({
+							url:"../detail/detail?id="+id
+						})
+					}
+				}
+			})
 		},
 		onHide: function() {
 			console.log('App Hide')

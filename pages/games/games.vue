@@ -9,13 +9,10 @@
 		/>
 		<view class="app-container full">
 			<swiper class="carousel" indicator-dots=true circular=true interval="3000" duration="700">
-				<swiper-item v-for="(item,index) in data.imgList" :key="index">
-					<view class="image-wrapper">
+				<swiper-item v-for="(item,index) in imgList" :key="index">
+					<view class="image-wrapper image">
 						<image
 							:src="item.src" 
-							:class="item.loaded" 
-							mode="aspectFill"
-							@load="imageOnLoad('imgList', index)" 
 							style="width:670upx;height:520upx;"
 						></image>
 					</view>
@@ -62,11 +59,6 @@
 					<span>Thor</span>
 				</view>	
 			</view>
-			<share 
-				ref="share" 
-				:contentHeight="580"
-				:shareList="shareList"
-			></share>
 		</view>
 	</view>
 </template>
@@ -74,64 +66,27 @@
 <script>
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
-	import share from '@/components/share';
 	export default {
 		components: {
-			share,
 			UniNavBar,
 			UniBackground,
 		},
 		data() {
 			return {
 				scroll:0,
-				loaded: false,
-				currentEpd: 1,
-				data: {
-					
-				},
-				shareList: [],
-				
+				imgList:[
+					{
+						src:"../../static/bg/banner.png"
+					}
+				]
 			};
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
-		async onLoad(){
-			let detailData = await this.$api.json('detailData');
-			let shareList = await this.$api.json('shareList');
-			this.loaded = true;
-			this.data = detailData;
-			this.shareList = shareList;
-			uni.setNavigationBarTitle({
-				title: detailData.title
-			})
+		onLoad(){
+			
 		},
-		methods:{
-			imageOnLoad(key,index){
-				this.$set(this.data[key][index], 'loaded', 'loaded');
-			},
-			changeEpd(index){
-				let list = this.data.episodeList;
-				let epd = list[index];
-				this.$api.msg(`切换到第${epd}项`);
-				this.currentEpd = epd;
-			},
-			//分享
-			share(){
-				this.$refs.share.toggleMask();	
-			},
-			//收藏
-			favorite(){
-				this.data.favorite = !this.data.favorite;
-			}
-		},
-		//处理遮罩层物理返回键
-		onBackPress(){
-			if(this.$refs.share.show){
-				this.$refs.share.toggleMask();
-				return true;
-			}
-		}
 	}
 </script>
 

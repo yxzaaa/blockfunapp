@@ -54,7 +54,7 @@
 								<fun-button v-if="currType == 1" type="text" value="查看账单" :url="'../xdogwallet/xdogwallet?coin='+item.coin" />
 								<view class="button-group" style="width:340upx;">
 									<fun-button v-if="currType == 1" @handle="goTransPay(item.coin,item.total_price)" type="light" value="转账" icon="/static/icons/zhuanrang-tiny.png" />
-									<fun-button v-if="currType == 1" @handle="goSavePay(item.coin)" value="收款" icon="/static/icons/shoukuan.png" />
+									<fun-button v-if="currType == 1" @handle="goSavePay(item.coin,item.address)" value="收款" icon="/static/icons/shoukuan.png" />
 									<fun-button v-if="currType == 3" @handle="goTransCoin(item.coin,3)" value="转入" icon="/static/icons/zhuanru.png" />
 									<fun-button v-if="currType == 3" @handle="goTransCoin(item.coin,4)" value="转出" icon="/static/icons/zhuanchu.png" />
 								</view>
@@ -156,9 +156,9 @@
 				})
 			},
 			//去收款
-			goSavePay(coin){
+			goSavePay(coin,address){
 				uni.navigateTo({
-					url:'../saveaccount/saveaccount?coin='+coin
+					url:'../saveaccount/saveaccount?coin='+coin+'&address='+address
 				})
 			},
 			//切换type

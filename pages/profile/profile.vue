@@ -15,7 +15,7 @@
 						<span class="user" style="margin-right:44upx;font-size:24upx;font-family: Montserrat-bold;color:#999999;">
 							UID：{{userInfo.uid.substring(0,16)+'...'}}
 						</span>
-						<span style="font-size:24upx;color:#999999;border:1px solid #999999;padding:4upx 24upx;border-radius:6upx;">一键复制</span>
+						<span @click="copy" style="font-size:24upx;color:#999999;border:1px solid #999999;padding:4upx 24upx;border-radius:6upx;">一键复制</span>
 					</span>
 				</view>
 			</view>
@@ -191,6 +191,13 @@
 			})
 		},
 		methods:{
+			copy(){
+				uni.setClipboardData({
+					data:this.userInfo.uid,
+					success:()=>{
+					}
+				})
+			},
 			logout(){
 				uni.removeStorage({
 					key:'userInfo',

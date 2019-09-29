@@ -16,7 +16,7 @@
 					<text :class="{active:activeTab == 1}" @click="toggleTab(1)">我的投资</text>
 				</view>
 			</view>
-			<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);">
+			<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom">
 				<view class="totalBox">
 					<view class="borrow">
 						<span class="content">投资总额（USDT）</span>
@@ -79,8 +79,8 @@
 						</view>
 					</block>
 				</view>
+				<uni-load-more :status="loadStatus"></uni-load-more>
 			</scroll-view>
-			</swiper>
 		</view>
 	</view>
 </template>
@@ -88,17 +88,19 @@
 <script>
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
-	
+	import UniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	export default {
 		components:{
 			UniNavBar,
 			UniBackground,
+			UniLoadMore
 		},
 		data() {
 			return {
 				scroll:0,
 				activeTab:2,
 				currPage:1,
+				totalPage:1,
 				navButtons:{
 					back:{
 						type:'normal',
@@ -117,6 +119,7 @@
 				investMent:0,
 				interest:0,
 				borrowList:[],
+				loadStatus:'noMore',
 				currClass:0,
 				classLib:[
 					{
@@ -141,6 +144,29 @@
 			this.updateList();
 		},
 		methods: {
+			//上拉加载
+			reachBottom(){
+				if(this.currPage<this.totalPage){
+					this.currPage++;
+					this.loadStatus = 'loading';
+					this.$http({
+						url:'/v1/main/debit/debit-order-list',
+						data:{
+							type:this.activeTab,
+							status:this.classLib[this.currClass].value,
+							page:this.currPage
+						},
+						success:res=>{
+							if(res.code == 200){
+								this.loadStatus = 'more';
+								this.borrowList = this.borrowList.concat(res.data.item);
+							}
+						}
+					})
+				}else{
+					this.loadStatus = 'noMore';
+				}
+			},
 			updateList(){
 				uni.showLoading({
 					title:'订单加载中...'
@@ -160,6 +186,7 @@
 							this.investMent = res.data.investment;
 							this.interest = res.data.interest;
 							this.borrowList = res.data.item;
+							this.totalPage = res.data.max;
 						}
 					}
 				})

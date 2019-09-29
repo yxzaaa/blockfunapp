@@ -6,7 +6,7 @@
 			<view class="status-box" style="padding:20upx 40upx;">
 				<view class="left-status">
 					<image :src="imageLib.logosmall" style="width:40upx;height:40upx;" />
-					<text style="font-size:30upx;font-family:'Montserrat-Light';color:#fff;">Forbidden {{coin}} Coin</text>
+					<!-- <text style="font-size:30upx;font-family:'Montserrat-Light';color:#fff;">Forbidden {{coin}} Coin</text> -->
 					<text style="font-size:26upx;color:#999;">{{coin}}</text>
 				</view>
 			</view>
@@ -24,7 +24,7 @@
 					<view 
 						style="color:#fff;font-family:'Montserrat-Bold';font-size:24upx;text-align: center;padding-bottom:20upx;"
 					>
-						1gmHhylYGlhyHLhlkgesLmncXWibFAWohJD
+						{{address}}
 					</view>
 					<view style="display:flex;justify-content: center;">
 						<fun-button 
@@ -34,6 +34,7 @@
 							value="复制地址" 
 							large
 							width="200upx"
+							@handle="copy"
 						/>
 					</view>
 				</view>
@@ -65,15 +66,26 @@
 					logosmall:'../../static/icons/logo_small.png'
 				},
 				erweima:'../../static/image.png',
-				coin:''
+				coin:'',
+				address:''
 			};
 		},
 		onLoad(option){
 			this.coin = option.coin;
+			this.address = option.address;
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
+		methods:{
+			copy(){
+				uni.setClipboardData({
+					data:this.address,
+					success:()=>{
+					}
+				})
+			}
+		}
 	}
 </script>
 

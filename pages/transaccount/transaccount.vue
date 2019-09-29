@@ -20,8 +20,8 @@
 			<view class="status-box" style="padding:20upx 40upx;">
 				<view class="left-status">
 					<image :src="imageLib.logosmall" style="width:40upx;height:40upx;" />
-					<text style="font-size:30upx;font-family:'Montserrat-Light';color:#fff;">Forbidden {{coin}} Coin</text>
-					<text style="font-size:26upx;color:#999;">{{coin}}</text>
+					<text style="font-size:30upx;font-family:'Montserrat-Light';color:#fff;">{{coin}}</text>
+					<!-- <text style="font-size:26upx;color:#999;">{{coin}}</text> -->
 				</view>
 			</view>
 			<view class="fun-card" style="margin:30upx 40upx;width:670upx;">
@@ -33,7 +33,7 @@
 								<input v-model="toAddr" class="form-input-field" placeholder="输入地址"/>
 								<view class="form-input-btns">
 									<image @click="scanCode" :src="imageLib.scan" />
-									<image :src="imageLib.contacts" />
+									<image @click="openLater" :src="imageLib.contacts" />
 								</view>
 							</view>
 						</view>
@@ -137,6 +137,12 @@
 			this.scroll = val.scrollTop;
 		},
 		methods:{
+			openLater(){
+				uni.showToast({
+					title:'您好， 该功能暂未上线，敬请期待',
+					icon:'none'
+				})
+			},
 			setPassword(val){
 				this.password = val;
 			},

@@ -16,9 +16,9 @@
 					<span style="font-size: 36upx;color:#fff;font-family: Montserrat-Bold;margin-right:10upx;">$</span>
 					<span style="font-size: 60upx;color:#fff;font-family: Montserrat-Bold">6888.68</span>
 				</span>
-				<span style="font-size:26upx;color:#fff;opacity: 0.5;">资产类型3种</span>
+				<span style="font-size:26upx;color:#fff;opacity: 0.5;">资产类型1种</span>
 			</view>
-			<view class="fortunetype">
+			<!-- <view class="fortunetype">
 				<view style="font-size:28upx;color:#fff;margin:100upx 40upx 0;">
 					资产类型：<span>矿机</span>
 				</view>
@@ -37,9 +37,9 @@
 						<span class="numb">16000</span>
 					</view>
 				</view>
-			</view>
+			</view> -->
 			<view class="fortunetype">
-				<view style="font-size:28upx;color:#fff;margin:0 40upx 0;">
+				<view  style="font-size:28upx;color:#fff;margin:100upx 40upx 0;">
 					资产类型：<span>USDT</span>
 				</view>
 				<view class="typeinfo">
@@ -48,7 +48,7 @@
 						<span class="numb">USDT</span>
 					</view>
 					<view>
-						<span class="type">矿机数量</span>
+						<span class="type">币种数量</span>
 						<span class="numb">10</span>
 					</view>
 					<view>
@@ -58,7 +58,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="fortunetype">
+			<!-- <view class="fortunetype">
 				<view style="font-size:28upx;color:#fff;margin:0 40upx 0;">
 					资产类型：<span>运算力</span>
 				</view>
@@ -77,7 +77,7 @@
 						<span class="numb">16000</span>
 					</view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>

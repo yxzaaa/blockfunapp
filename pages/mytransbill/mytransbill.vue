@@ -16,7 +16,7 @@
 					<text :class="{active:activeTab == 2}" @click="toggleTab(2)">投资挂单</text>
 				</view>
 			</view>
-				<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);">
+				<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom">
 					<view style="padding:40upx;padding-bottom:0px;">
 						<block v-for="(item,index) in borrowList" :key="index">
 							<view class="debitbox">
@@ -53,6 +53,7 @@
 							</view>
 						</block>
 					</view>
+					<uni-load-more :status="loadStatus"></uni-load-more>
 				</scroll-view>
 			</view>
 		</view>
@@ -62,17 +63,19 @@
 <script>
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
-	
+	import UniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	export default {
 		components:{
 			UniNavBar,
 			UniBackground,
+			UniLoadMore
 		},
 		data() {
 			return {
 				scroll:0,
 				activeTab:1,
 				currpage:1,
+				totalPage:1,
 				navButtons:{
 					back:{
 						type:'normal',
@@ -90,6 +93,7 @@
 					5:"已过期",
 				},
 				borrowList:[],
+				loadStatus:'noMore'
 			}
 		},
 		onPageScroll(val){
@@ -99,6 +103,28 @@
 			this.updateList();
 		},
 		methods: {
+			//上拉加载
+			reachBottom(){
+				if(this.currPage<this.totalPage){
+					this.currPage++;
+					this.loadStatus = 'loading';
+					this.$http({
+						url:'/v1/main/debit/debit-my',
+						data:{
+							type:this.activeTab,
+							page:this.currpage
+						},
+						success:res=>{
+							if(res.code == 200){
+								this.loadStatus = 'more';
+								this.borrowList = this.borrowList.concat(res.data.item);
+							}
+						}
+					})
+				}else{
+					this.loadStatus = 'noMore';
+				}
+			},
 			//获取我的挂单列表
 			updateList(){
 				uni.showLoading({
@@ -115,6 +141,7 @@
 						if(res.code == 200){
 							uni.hideLoading();
 							this.borrowList = res.data.item;
+							this.totalPage = res.data.max;
 						}
 					}
 				})

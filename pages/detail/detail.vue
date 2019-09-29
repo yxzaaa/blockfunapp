@@ -7,6 +7,11 @@
 			:buttons="navButtons"	
 			@handle="buttonHandler"
 		/>
+		<share
+			ref="share" 
+			:contentHeight="580"
+			:shareList="shareList"
+		></share>
 		<view class="addcart-item" v-if="adding"></view>
 		<view class="app-container fixbutton">
 			<uni-popup ref="popup" type="bottom">
@@ -206,6 +211,40 @@
 				skuActive:[],
 				totalStock:0,
 				adding:false,
+				shareList:[
+					{
+						icon:"/static/share/wx.png",
+						text:"微信好友",
+						provider:'weixin',
+						type:1,
+						summary:'',
+						scene:'WXSceneSession',
+					},
+					{
+						icon:"/static/share/pyq.png",
+						text:"朋友圈",
+						provider:'weixin',
+						type:1,
+						summary:'',
+						scene:'WXSenceTimeline',
+					},
+					{
+						icon:"/static/share/weibo.png",
+						text:"微博",
+						provider:'sinaweibo',
+						type:1,
+						summary:'',
+						scene:'WXSenceTimeline',
+					},
+					{
+						icon:"/static/share/qq.png",
+						text:"QQ",
+						provider:'qq',
+						type:1,
+						summary:'',
+						scene:'WXSenceTimeline',
+					}
+				]
 			};
 		},
 		onPageScroll(val){
@@ -239,6 +278,10 @@
 						     this.totalStock += parseInt(this.skuCodes[key]);
 						})
 						this.currStock = this.totalStock;
+						//分享标题
+						this.shareList.map(item=>{
+							item.summary = this.title;
+						})
 					}
 				}
 			})
@@ -374,8 +417,8 @@
 							url: '../favorite/favorite',
 						});
 					}
-				}else if(type == 'cart'){
-					
+				}else if(type == 'share'){
+					this.$refs.share.toggleMask();
 				}
 			}
 		},

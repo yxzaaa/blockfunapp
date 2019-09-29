@@ -18,7 +18,7 @@
 					<view 
 						v-for="(item, index) in shareList" :key="index"
 						class="share-item" 
-						@click="shareToFriend(item.text)"
+						@click="shareToFriend(item)"
 					>
 						<image :src="item.icon" mode=""></image>
 						<text>{{item.text}}</text>
@@ -109,8 +109,17 @@
 			//防止冒泡和滚动穿透
 			stopPrevent(){},
 			//分享操作
-			shareToFriend(type){
-				this.$api.msg(`分享给${type}`);
+			shareToFriend(obj){
+				//分享
+				uni.share({
+					provider:obj.provider,
+					scene: obj.scene,
+					type: obj.type,
+					summary: obj.summary,
+					success: function (res) {
+						console.log("success:" + JSON.stringify(res));
+					},
+				})
 				this.toggleMask();
 			},
 		}

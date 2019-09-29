@@ -87,6 +87,7 @@
 				scroll:0,
 				activeTab:1,
 				currPage:1,
+				totalPage:1,
 				navButtons:{
 					back:{
 						type:'normal',
@@ -111,27 +112,25 @@
 		methods: {
 			//上拉加载
 			reachBottom(){
-				this.currPage++;
-				this.loadStatus = 'loading';
-				this.$http({
-					url:'/v1/main/debit/debit-list',
-					data:{
-						type:this.activeTab,
-						page:this.currPage
-					},
-					success:res=>{
-						console.log(res);
-						if(res.code == 200){
-							if(res.data.item && res.data.item.length>0){
+				if(this.currPage<this.totalPage){
+					this.currPage++;
+					this.loadStatus = 'loading';
+					this.$http({
+						url:'/v1/main/debit/debit-list',
+						data:{
+							type:this.activeTab,
+							page:this.currPage
+						},
+						success:res=>{
+							if(res.code == 200){
 								this.loadStatus = 'more';
 								this.borrowList = this.borrowList.concat(res.data.item);
-							}else{
-								this.loadStatus = 'noMore';
-								this.currPage --;
 							}
 						}
-					}
-				})
+					})
+				}else{
+					this.loadStatus = 'noMore';
+				}
 			},
 			//请求挂单列表
 			updateList(){
@@ -151,6 +150,7 @@
 							uni.hideLoading();
 							this.borrowList = res.data.item;
 							this.loadStatus = 'noMore';
+							this.totalPage = res.data.max;
 						}
 					}
 				})

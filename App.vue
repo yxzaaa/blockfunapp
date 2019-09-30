@@ -88,10 +88,8 @@
 		font-family: inherit;
 	}
 	.image{
-		uni-image{
-			background-image: url(/static/errorImage.jpg);
-			background-size:100% 100%;
-		}
+		background-image: url(/static/errorImage.jpg);
+		background-size:100% 100%;
 	}
 	/* 骨架屏替代方案 */
 	.Skeleton {
@@ -118,6 +116,21 @@
 		}
 		&.fixbutton{
 			padding-bottom:120upx;
+		}
+		.empty-box{
+			width:750upx;
+			padding:80upx 120upx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+			image{
+				margin-bottom:80upx;
+			}
+			text{
+				font-size: 24upx;
+				color:rgba(255,255,255,0.5);
+			}
 		}
 	}
 	.main-title{

@@ -39,14 +39,14 @@
 			},
 			color: {
 				type: String,
-				default: "#777777"
+				default: "rgba(255,255,255,0.3)"
 			},
 			contentText: {
 				type: Object,
 				default () {
 					return {
 						contentdown: "上拉显示更多",
-						contentrefresh: "正在加载...",
+						contentrefresh: "正在加载 ...",
 						contentnomore: "没有更多数据了"
 					};
 				}

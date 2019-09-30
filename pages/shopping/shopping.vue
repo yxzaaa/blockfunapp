@@ -21,36 +21,6 @@
 				</swiper>
 			</view>
 			<Skeleton height="720upx" :loading="loading"></Skeleton>
-			<!-- <view class="mallTotal">
-				<span class="money">商城总额</span>
-				<span class="check" @click="goBills">查看账单</span>
-			</view>
-			<view class="stockbox">
-				<view class="totalMoney">
-					<span class="money">
-						<span class="symbol">$</span>
-						<span class="number">69798</span>
-					</span>
-					<view class="pic">
-						<image src="../../static/icons/eye.png"></image>
-					</view>
-				</view>
-				<view class="button-group" style="padding:20upx 90upx;">
-					<fun-button 
-					type="text"
-					color="#fff" 
-					icon="/static/icons/zhuanru.png" 
-					value="转入" 
-					width="200upx"></fun-button>
-					<view style="font-size: 32upx;color:rgba(255,255,255,0.1);margin-top:10upx;">|</view>
-					<fun-button
-					type="text"
-					color="#fff" 
-					icon="/static/icons/zhuanchu.png" 
-					value="转出" 
-					width="200upx"></fun-button>
-				</view>
-			</view> -->
 			<view class="section-header">
 				<text class="section-title" style="color:#fff;font-size: 32upx;">商品类别</text>
 			</view>

@@ -8,21 +8,18 @@
 			</view>
 			<scroll-view class="order-box" scroll-y style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom">
 				<view class="horizon-list">
-					<block v-for="(item,index) in xdogList" :key="index">
-						<view class="horizon-list-item">
-							<view class="left-item">
-								<text class="left-item-title">{{getDate(item.created_on)}}</text>
-							</view>
-							<view class="right-item">
-								<span class="right-item-text" :style="{color:getColor(item.amount_unlock_balance)}">
-									{{parseFloat(item.amount_unlock_balance).toFixed(4)}}
-								</span>
-								<!-- <image :src="imageLib.more"></image> -->
-							</view>
+					<view class="horizon-list-item" v-for="val in xdogList" :key="val.id">
+						<view class="left-item">
+							<text class="left-item-title">{{getDate(val.created_on)}}</text>
 						</view>
-					</block>
+						<view class="right-item">
+							<span class="right-item-text" :style="{color:getColor(val.amount_unlock_balance)}">
+								{{getNum(val.amount_unlock_balance)}}
+							</span>
+						</view>
+					</view>
+					<uni-load-more :status="loadStatus"></uni-load-more>
 				</view>
-				<uni-load-more :status="loadStatus"></uni-load-more>
 			</scroll-view>
 		</view>
 	</view>
@@ -118,17 +115,17 @@
 					url:'/v1/main/account/account-finance-record',
 					data:{
 						page:this.currPage,
-						status:this.navTabs[this.currStatus].id,
+						status:this.navTabs[index].id,
 						coin:this.coin,
 						type:3,
 						module:0
 					},
 					success:res=>{
-						console.log(res);
 						if(res.code == 200){
 							uni.hideLoading();
 							this.xdogList = res.data.item;
 							this.totalPage = res.data.max;
+							console.log(this.xdogList);
 						}
 					}
 				})
@@ -147,6 +144,9 @@
 			//获取交易号
 			getTranId(tid){
 				return tid.substr(0,5) + '***'+tid.substr(-9,9);
+			},
+			getNum(val){
+				return parseFloat(val).toFixed(4)
 			},
 			getDate(timestamp){
 				var date = new Date(timestamp*1000);

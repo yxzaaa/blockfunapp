@@ -5,7 +5,7 @@
 			v-for="(item, index) in newList" :key="item.id"
 			:data-index="index"
 			 @click="choose(item.id)"
-			 :style="{marginBottom:index==newList.length-1 || index==newList.length-2?'130upx':'',top:top[index]+'px'}"
+			 :style="{marginBottom:getMargin(index)?'130upx':'0upx',top:top[index]+'px'}"
 			 >
 			<view class="pic image">
 				<image class="image" mode="widthFix" :src="item.img" style="width: 100%; display: block;" ></image>
@@ -73,6 +73,18 @@
 			})
 		},
 		methods: {
+			//获取margin
+			getMargin(index){
+				var length = this.newList.length;
+				var type = length%2;
+				if(type == 0 && (index == length-1 || index == length-2)){
+					return true;
+				}else if(type != 0 && index == length -1){
+					return true;
+				}else{
+					return false;
+				}
+			},
 			// 瀑布流定位
 			waterFall() {
 				const query = uni.createSelectorQuery().in(this);
@@ -95,7 +107,7 @@
 								index = 1;
 							}
 							this.boxHeight[index] = minHeight + height + 10;
-							this.top.push(minHeight + 10);
+							this.top.push(minHeight + 14);
 							this.left.push(index);
 							this.$set(this.newList[i], 'top', minHeight + 10);
 							this.$set(this.newList[i], 'left', index);

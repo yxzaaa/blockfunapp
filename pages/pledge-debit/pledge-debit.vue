@@ -64,8 +64,8 @@
 							</view>
 						</view>
 					</block>
+					<uni-load-more :status="loadStatus"></uni-load-more>
 				</view>
-				<uni-load-more :status="loadStatus"></uni-load-more>
 			</scroll-view>
 		</view>
 	</view>

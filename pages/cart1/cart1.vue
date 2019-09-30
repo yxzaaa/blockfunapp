@@ -9,7 +9,8 @@
 			:buttons="navButtons"
 			@handle = "changeManage"
 		/>
-		<view class="app-container fixbutton full">
+		<!-- 购物车不为空 -->
+		<view class="app-container fixbutton full" v-if="cartList.length > 0">
 			<view class="guess">
 				<view class="guess-list">
 					<view class="guess-item" v-for="(item, index) in cartList" :key="index">
@@ -76,6 +77,19 @@
 					</view>
 					<fun-button value="删除" width="200upx" large @handle="deleteCart"></fun-button>
 				</view>
+			</view>
+		</view>
+		<!-- 购物车空状态 -->
+		<view class="app-container full" v-else>
+			<view class='empty-box'>
+				<image src="../../static/icons/empty_cart.png" style="width:420upx;height:200upx;"></image>
+				<text>购物车是空的</text>
+			</view>
+			<view class="section-header">
+				<text class="section-title">猜你喜欢</text>
+			</view>
+			<view v-if="!loading">
+				<waterfall-flow :list="hotList" :loading="loading" @click="toDetail"></waterfall-flow>
 			</view>
 		</view>
 	</view>

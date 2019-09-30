@@ -21,7 +21,7 @@
 			},
 			fontSize:{
 				type:String,
-				default:'32upx'
+				default:'24upx'
 			},
 			background:{
 				type:String,

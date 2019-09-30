@@ -13,13 +13,13 @@
 			</view>
 			<view class="fortune" style="display: flex;justify-content: space-between;width:750upx;padding:0 40upx;margin-top: 16upx;align-items: center;">
 				<span>
-					<span style="font-size: 36upx;color:#fff;font-weight: bold;margin-right:10upx;">$</span>
+					<span style="font-size: 36upx;color:#fff;font-weight: bold;margin-right:10upx;margin-bottom:4upx;">$</span>
 					<span style="font-size: 60upx;color:#fff;font-family: Montserrat-Bold">{{totalAmount}}</span>
 				</span>
 				<span style="font-size:26upx;color:#fff;opacity: 0.5;">资产类型1种</span>
 			</view>
 			<view class="fortunetype">
-				<view  style="font-size:28upx;color:#fff;margin:100upx 40upx 0;">
+				<view  style="font-size:28upx;color:#fff;margin:80upx 40upx 0;">
 					资产类型：<span>USDT</span>
 				</view>
 				<view class="typeinfo">
@@ -30,8 +30,8 @@
 					</view>
 					<view v-for="(item,index) in coins" :key="index">
 						<span class="numb" style="width:30%">{{item.unit}}</span>
-						<span class="numb" style="width:30%">{{parseFloat(item.balance).toFixed(4)}}</span>
-						<span class="numb" style="width:40%">{{parseFloat(item.total).toFixed(4)}}</span>
+						<span class="numb" style="width:30%">{{getNum(item.balance)}}</span>
+						<span class="numb" style="width:40%">{{getNum(item.total)}}</span>
 					</view>
 				</view>
 			</view>
@@ -87,7 +87,9 @@
 			this.scroll = val.scrollTop;
 		},
 		methods: {
-			
+			getNum(val){
+				return parseFloat(val).toFixed(4)
+			},
 		}
 	}
 </script>

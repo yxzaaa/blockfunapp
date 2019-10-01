@@ -34,7 +34,7 @@
 					<fun-button :value="'支付 '+amountCount+' '+currCoin" width="670upx" large @handle="showModal = true"></fun-button>
 				</view>
 			</view>
-			<view class="modal-box" v-if="showModal">
+			<view class="modal-box" v-if="showModal" @touchmove.stop.prevent="showModal">
 				<view class="modal" v-if="!jump">
 					<view class="modal-top-item">
 						<view class="modal-title">请输入您的支付密码</view>

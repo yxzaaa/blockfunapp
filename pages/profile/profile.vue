@@ -25,14 +25,14 @@
 						<image src="../../static/bg/task.png"></image>
 						<span>每日任务</span>
 					</view>
-					<view>
+					<navigator url="../friends/friends">
 						<image src="../../static/bg/friends.png"></image>
 						<span>我的好友</span>
-					</view>
-					<view>
+					</navigator>
+					<navigator  url="../infriend/infriend">
 						<image src="../../static/bg/invite.png"></image>
 						<span>邀请好友</span>
-					</view>
+					</navigator>
 				</view>
 			</view>
 			<view class="managebox">
@@ -246,7 +246,7 @@
 			display: flex;
 			justify-content:space-between;
 			
-			view{
+			view,navigator{
 				display: flex;
 				flex-direction: column;
 				justify-content:center;

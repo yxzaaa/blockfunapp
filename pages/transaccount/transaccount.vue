@@ -3,7 +3,7 @@
 		<uni-background />
 		<uni-nav-bar title="转账" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<view class="app-container full">
-			<view class="modal-box" v-if="showPwdModal">
+			<view class="modal-box" v-if="showPwdModal" @touchmove.stop.prevent="showPwdModal">
 				<view class="modal">
 					<view class="modal-top-item">
 						<view class="modal-title">请输入您的交易密码</view>

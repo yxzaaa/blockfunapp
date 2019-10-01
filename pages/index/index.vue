@@ -128,16 +128,16 @@
 			//更新钱包
 			updateList(){
 				//获取钱包列表
-				uni.showLoading({
-					title:'钱包加载中...'
-				})
+				// uni.showLoading({
+				// 	title:'钱包加载中...'
+				// })
 				this.$http({
 					url:'/v1/main/users/account-info',
 					data:{
 						type:this.currType
 					},
 					success:res=>{
-						uni.hideLoading();
+						// uni.hideLoading();
 						if(res.code == 200){
 							console.log(res);
 							this.walletList = res.data;

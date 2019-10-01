@@ -3,7 +3,7 @@
 		<uni-background src="../../static/bg1.jpg"/>
 		<uni-nav-bar :title="currType == 1?'发布借贷挂单':'发布投资挂单'" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<div class="app-container full fixbutton" style="padding-bottom:190upx;">
-			<view class="modal-box" v-if="showPwdModal">
+			<cover-view class="modal-box" v-if="showPwdModal" @touchmove.stop.prevent="showPwdModal">
 				<view class="modal">
 					<view class="modal-top-item">
 						<view class="modal-title">请输入您的交易密码</view>
@@ -16,7 +16,7 @@
 						<view style="border-left:1px solid #eee;color:#0A61C9;" @click="publish">发布</view>
 					</view>
 				</view>
-			</view>
+			</cover-view>
 			<view class="modal-box" v-if="showModal">
 				<view class="modal">
 					<view class="modal-top-item">

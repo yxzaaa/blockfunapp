@@ -258,6 +258,14 @@
             "path" : "pages/shoptrans/shoptrans",
             "style" : {}
         }
+        ,{
+            "path" : "pages/friends/friends",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/infriend/infriend",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

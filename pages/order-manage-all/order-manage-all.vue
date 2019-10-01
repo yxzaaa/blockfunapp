@@ -10,7 +10,11 @@
 		<view class="app-container full">
 			<!-- 顶部滑动 -->
 			<horizon-tab :tabs="statusTabs" padding="45" @click="toggleStatus" ></horizon-tab>
-			<scroll-view class="order-box" scroll-y @scrolltolower="reachBottom">
+			<view class='empty-box' v-if="orderList.length == 0">
+				<image src="../../static/icons/empty_order.png" style="width:420upx;height:200upx;"></image>
+				<text>您没有相关订单</text>
+			</view>
+			<scroll-view v-else class="order-box" scroll-y @scrolltolower="reachBottom">
 				<view class="managebox" v-for="(val,index) in orderList" :key="index"> <!-- 待办管理 -->
 					<view class="backlog" @click="goDetail(val.id)"> 
 						<span>{{val.id}}</span>

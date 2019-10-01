@@ -28,7 +28,7 @@
 			<view style="margin-top:120upx;">
 				<fun-button value="设置密码" large block @handle="showModal = true;"></fun-button>
 			</view>
-			<view class="modal-box" v-if="showModal">
+			<view class="modal-box" v-if="showModal" @touchmove.stop.prevent="showModal">
 				<view class="modal">
 					<view class="modal-top-item">
 						<view class="modal-title">设置您的支付密码</view>

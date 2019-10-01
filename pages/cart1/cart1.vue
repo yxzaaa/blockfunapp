@@ -99,11 +99,13 @@
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import FunButton from '@/components/fun-button.vue';
+	import WaterfallFlow from '@/components/nairenk-waterfall-flow/nairenk-waterfall-flow.vue';
 	export default {
 		components:{
 			UniNavBar,
 			UniBackground,
-			FunButton
+			FunButton,
+			WaterfallFlow
 		},
 		data() {
 			return {
@@ -127,6 +129,7 @@
 				isChooseAll:false,
 				cartList:[
 				],
+				hotList:[],
 				totalCount:0,
 				totalCredit:0,
 				
@@ -139,6 +142,11 @@
 			this.updateList();
 		},
 		methods:{
+			toDetail(res){
+				uni.navigateTo({
+					url:"../detail/detail?id="+res
+				})
+			},
 			updateList(){
 				uni.showLoading({
 					title:'购物车加载中...'
@@ -149,21 +157,18 @@
 						console.log(res);
 						if(res.code == 200){
 							uni.hideLoading();
-							if(res.data[0]){
-								this.cartList = [];
-								res.data.map(val=>{
-									var username = val.username;
-									val.item.map(val1=>{
-										val1.username = username;
-										this.cartList.push(val1);
-									})
+							this.cartList = [];
+							res.data.item.map(val=>{
+								var username = val.username;
+								val.item.map(val1=>{
+									val1.username = username;
+									this.cartList.push(val1);
 								})
-								this.cartList.map(item=>{
-									item.isActive = false;
-								});
-							}else{
-								this.cartList = [];
-							}
+							})
+							this.cartList.map(item=>{
+								item.isActive = false;
+							});
+							this.hotList = res.data.rec;
 						}
 					}
 				})

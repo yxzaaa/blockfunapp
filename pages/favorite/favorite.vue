@@ -11,6 +11,10 @@
 		/>
 		<view class="app-container fixbutton full">
 			<view class="guess">
+				<view class='empty-box' v-if="favoriteList.length == 0">
+					<image src="../../static/icons/empty_fav.png" style="width:420upx;height:200upx;"></image>
+					<text>您还没有收藏任何商品</text>
+				</view>
 				<view class="guess-list">
 					<view 
 						v-for="(item, index) in favoriteList" :key="index"

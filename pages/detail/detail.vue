@@ -7,13 +7,9 @@
 			:buttons="navButtons"	
 			@handle="buttonHandler"
 		/>
-		<share
-			ref="share" 
-			:contentHeight="580"
-			:shareList="shareList"
-		></share>
 		<view class="addcart-item" v-if="adding"></view>
 		<view class="app-container fixbutton">
+			<share-image ref="share"></share-image>
 			<uni-popup ref="popup" type="bottom">
 				<view class="choose">
 					<view class="goods">
@@ -144,7 +140,6 @@
 			</view>
 		</view>
 	</view>
-	</view>
 </template>
 
 <script>
@@ -152,6 +147,7 @@
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import FunButton from '@/components/fun-button.vue';
 	import share from '@/components/share';
+	import ShareImage from '@/components/share-image.vue';
 	import uniPopup from "@/components/uni-popup/uni-popup.vue";
 	import Skeleton from '@/components/Skeleton.vue';
 	export default {
@@ -161,7 +157,8 @@
 			UniBackground,
 			FunButton,
 			uniPopup,
-			Skeleton
+			Skeleton,
+			ShareImage
 		},
 		data() {
 			return {
@@ -418,7 +415,16 @@
 						});
 					}
 				}else if(type == 'share'){
-					this.$refs.share.toggleMask();
+					//生成二维码
+					this.$refs.share.share({
+						img:this.imgList[0],
+						erweima:'',
+						price:this.price,
+						credit:this.credit,
+						catname:this.catname,
+						title:this.title,
+						content:this.content
+					});
 				}
 			}
 		},

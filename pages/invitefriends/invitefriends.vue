@@ -74,7 +74,7 @@
 						分红比例</br>按照不同时长，不同数量进行阶梯分红。好友锁仓时间越久，数量越多，则你拿到的分红比例越大。具体说明详见下表：
 					</view>
 				</view>
-				<!-- <view class="fun-card" style="margin-top:30upx;">
+				<view class="fun-card" style="margin-top:30upx;">
 					<view class="fun-card-item">
 						<view class="fun-table">
 							<view class="fun-table-header trans">锁仓分红返佣说明</view>
@@ -106,8 +106,8 @@
 					<view class="fun-table-body">
 						<view class="fun-table-tr noborder">
 							<view class="trans five">日期</view>
-							<view class="trans five">被邀请人 UID</view>
-							<view class="trans five">是否填写 激活码</view>
+							<view class="trans five">被邀请人UID</view>
+							<view class="trans five">是否填写激活码</view>
 							<view class="trans five">分红币种</view>
 							<view class="trans five">分红收益</view>
 						</view>
@@ -119,7 +119,7 @@
 							<view class="trans five small">12.8998</view>
 						</view>
 					</view>
-				</view> -->
+				</view>
 			</view>
 		</view>
 	</view>

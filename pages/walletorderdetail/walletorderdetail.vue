@@ -3,7 +3,7 @@
 		<uni-background />
 		<uni-nav-bar title="订单详情" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<view class="app-container full fixbutton">
-			<view class="modal-box" v-if="showModal">
+			<view class="modal-box" v-if="showModal" @touchmove.stop.prevent="showPwdModal">
 				<view class="modal">
 					<view class="modal-top-item">
 						<view class="modal-title">请输入您的支付密码</view>

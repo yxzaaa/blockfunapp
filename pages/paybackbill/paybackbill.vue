@@ -3,7 +3,7 @@
 		<uni-background src="../../static/bg1.jpg"/>
 		<uni-nav-bar title="我要还款" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<div class="app-container full fixbutton">
-			<view class="modal-box" v-if="showPwdModal">
+			<view class="modal-box" v-if="showPwdModal" @touchmove.stop.prevent="showPwdModal">
 				<view class="modal">
 					<view class="modal-top-item">
 						<view class="modal-title">请输入您的交易密码</view>

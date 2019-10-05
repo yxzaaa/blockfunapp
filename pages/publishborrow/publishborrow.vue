@@ -220,7 +220,6 @@
 			this.$http({
 				url:'/v1/main/debit/debit-preloading',
 				success:res=>{
-					console.log(res);
 					if(res.code == 200){
 						res.data.coin.map(item=>{
 							this.coinLib.push(item.coin);
@@ -251,7 +250,6 @@
 							password: this.password
 						},
 						success:res=>{
-							console.log(res);
 							if(res.code == 200){
 								uni.showToast({
 									title:'发布成功',
@@ -283,7 +281,6 @@
 							password: this.password
 						},
 						success:res=>{
-							console.log(res);
 							if(res.code == 200){
 								uni.showToast({
 									title:'发布成功',

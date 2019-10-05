@@ -14,24 +14,6 @@
 				<view class="earning">
 					<view class="earn-text">
 						<view class="earn-img" style="width:36upx;height:36upx;margin-right: 24upx;">
-							<image src="../../static/icons/icon.png" style="width:36upx;height:36upx"></image>
-						</view>
-						<view class="earn-pro">
-							<span style="color:#fff;font-size: 28upx;">挖矿收益</span>
-							<span style="color:#fff;opacity: 0.5; font-size: 22upx;font-family: Montserrat-Bold">
-								<span style="margin-right: 6upx;">2019/01/24</span>
-								<span>01:22</span>
-							</span>
-						</view>
-					</view>
-					<view class="earn-price" >
-						<span style="color:#DA53A2;font-size: 32upx;font-weight: 600;font-family:Montserrat-Bold;margin-right:12upx;"> + 8.88</span>
-						<image src="../../static/bg/to.png" style="width:24upx;height:44upx;"></image>
-					</view>
-				</view>
-				<view class="earning">
-					<view class="earn-text">
-						<view class="earn-img" style="width:36upx;height:36upx;margin-right: 24upx;">
 							<image src="../../static/icons/icon-1.png" style="width:36upx;height:36upx"></image>
 						</view>
 						<view class="earn-pro">
@@ -43,98 +25,8 @@
 						</view>
 					</view>
 					<view class="earn-price" >
-						<span style="color:#DA53A2;font-size: 32upx;font-weight: 600;font-family:Montserrat-Bold;margin-right:12upx;"> + 8.88</span>
-						<image src="../../static/bg/to.png" style="width:24upx;height:44upx;"></image>
-					</view>
-				</view>
-				<view class="earning">
-					<view class="earn-text">
-						<view class="earn-img" style="width:36upx;height:36upx;margin-right: 24upx;">
-							<image src="../../static/icons/icon-2.png" style="width:36upx;height:36upx"></image>
-						</view>
-						<view class="earn-pro">
-							<span style="color:#fff;font-size: 28upx;">购买矿机</span>
-							<span style="color:#fff;opacity: 0.5; font-size: 22upx;font-family: Montserrat-Bold">
-								<span style="margin-right: 6upx;">2019/01/24</span>
-								<span>01:22</span>
-							</span>
-						</view>
-					</view>
-					<view class="earn-price" >
-						<span style="color:#DA53A2;font-size: 32upx;font-weight: 600;font-family:Montserrat-Bold;margin-right:12upx;"> + 8.88</span>
-						<image src="../../static/bg/to.png" style="width:24upx;height:44upx;"></image>
-					</view>
-				</view>
-				<view class="earning">
-					<view class="earn-text">
-						<view class="earn-img" style="width:36upx;height:36upx;margin-right: 24upx;">
-							<image src="../../static/icons/icon-3.png" style="width:36upx;height:36upx"></image>
-						</view>
-						<view class="earn-pro">
-							<span style="color:#fff;font-size: 28upx;">兑换资格</span>
-							<span style="color:#fff;opacity: 0.5; font-size: 22upx;font-family: Montserrat-Bold">
-								<span style="margin-right: 6upx;">2019/01/24</span>
-								<span>01:22</span>
-							</span>
-						</view>
-					</view>
-					<view class="earn-price" >
-						<span style="color:#DA53A2;font-size: 32upx;font-weight: 600;font-family:Montserrat-Bold;margin-right:12upx;"> + 8.88</span>
-						<image src="../../static/bg/to.png" style="width:24upx;height:44upx;"></image>
-					</view>
-				</view>
-				<view class="earning">
-					<view class="earn-text">
-						<view class="earn-img" style="width:36upx;height:36upx;margin-right: 24upx;">
-							<image src="../../static/icons/icon.png" style="width:36upx;height:36upx"></image>
-						</view>
-						<view class="earn-pro">
-							<span style="color:#fff;font-size: 28upx;">转入</span>
-							<span style="color:#fff;opacity: 0.5; font-size: 22upx;font-family: Montserrat-Bold">
-								<span style="margin-right: 6upx;">2019/01/24</span>
-								<span>01:22</span>
-							</span>
-						</view>
-					</view>
-					<view class="earn-price" >
-						<span style="color:#DA53A2;font-size: 32upx;font-weight: 600;font-family:Montserrat-Bold;margin-right:12upx;"> + 8.88</span>
-						<image src="../../static/bg/to.png" style="width:24upx;height:44upx;"></image>
-					</view>
-				</view>
-				<view class="earning">
-					<view class="earn-text">
-						<view class="earn-img" style="width:36upx;height:36upx;margin-right: 24upx;">
-							<image src="../../static/icons/icon.png" style="width:36upx;height:36upx"></image>
-						</view>
-						<view class="earn-pro">
-							<span style="color:#fff;font-size: 28upx;">转出</span>
-							<span style="color:#fff;opacity: 0.5; font-size: 22upx;font-family: Montserrat-Bold">
-								<span style="margin-right: 6upx;">2019/01/24</span>
-								<span>01:22</span>
-							</span>
-						</view>
-					</view>
-					<view class="earn-price" >
-						<span style="color:#DA53A2;font-size: 32upx;font-weight: 600;font-family:Montserrat-Bold;margin-right:12upx;"> + 8.88</span>
-						<image src="../../static/bg/to.png" style="width:24upx;height:44upx;"></image>
-					</view>
-				</view>
-				<view class="earning">
-					<view class="earn-text">
-						<view class="earn-img" style="width:36upx;height:36upx;margin-right: 24upx;">
-							<image src="../../static/icons/icon-1.png" style="width:36upx;height:36upx"></image>
-						</view>
-						<view class="earn-pro">
-							<span style="color:#fff;font-size: 28upx;">挖矿收益</span>
-							<span style="color:#fff;opacity: 0.5; font-size: 22upx;font-family: Montserrat-Bold">
-								<span style="margin-right: 6upx;">2019/01/24</span>
-								<span>01:22</span>
-							</span>
-						</view>
-					</view>
-					<view class="earn-price" >
-						<span style="color:#DA53A2;font-size: 32upx;font-weight: 600;font-family:Montserrat-Bold;margin-right:12upx;"> + 8.88</span>
-						<image src="../../static/bg/to.png" style="width:24upx;height:44upx;"></image>
+						<span style="color:#DA53A2;font-size: 36upx;font-weight: 600;font-family:Montserrat-Bold;margin-right:10upx;">+8.88</span>
+						<image src="../../static/icons/more.png" style="width:40upx;height:40upx;"></image>
 					</view>
 				</view>
 			</view>

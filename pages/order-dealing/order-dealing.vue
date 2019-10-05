@@ -132,7 +132,6 @@
 				this.$http({
 					url:'/order/show?id='+this.orderId,
 					success:res=>{
-						console.log(res);
 						if(res.code == 200){
 							this.orderInfo = res.data;
 							this.getDelay = res.data.limit;

@@ -11,8 +11,8 @@
 			<view style="width:124upx;height:124upx;margin:0upx 316upx 32upx;">
 				<image src="../../static/bg/logo.png" style="width:124upx;height:124upx;"></image>
 			</view>
-			<view style="margin:0 310upx 12upx;color:#fff;font-weight: 600;font-size: 28upx;">Blockfun</view>
-			<view style="margin:0 346upx 28upx;font-size: 24upx;color:#fff;width:60upx;height:24upx;">V1.0.1</view>
+			<view style="margin:auto;color:#fff;font-weight: 600;font-size: 28upx;text-align: center;padding-bottom:20upx;">Blockfun</view>
+			<view style="margin:auto;font-size: 24upx;color:#fff;width:100upx;text-align: center;padding-bottom:30upx;">V1.0.1</view>
 			<view style="width:670upx;height:240upx;color:#fff;font-size: 26upx;margin:0 40upx 90upx;line-height: 48upx;">Blockfun，是一款专门为Forest/Xdag这类优质创新资产而生的矿池全生态产品，产品涵盖移动轻钱包、矿池管理、矿机购买、云算力租赁、闪电挖矿、智能锁仓、场外交易、抵押借贷等，努力为矿工用户们提供更加全面高效的矿圈全场景服务。</view>
 			<view class="savebox">
 				<view class="design">
@@ -116,7 +116,6 @@
 				image{
 					width:36upx;
 					height:36upx;
-					border:1px dashed rgba(255,255,255,0.5);
 					margin-right: 40upx;					
 				}
 				span{

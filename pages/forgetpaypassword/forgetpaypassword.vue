@@ -6,19 +6,19 @@
 			:buttons="navButtons"
 		/>
 		<view class="app-container full"></view>
-		<view style="margin:0upx 40upx 0;color:#fff;font-family: PingFang SC;font-size: 48upx;">忘记支付密码</view>
+		<view style="margin:0upx 40upx 0;color:#fff;font-size: 48upx;">忘记支付密码</view>
 		<view class="textbox">
 			<view class="text">
 				<span class="number">手机号</span>
 				<view>
-					<input type="text" value="请输入手机号">
-					<span>发送验证码</span>
+					<input type="number" placeholder="请输入手机号">
 				</view>
 			</view>
-			<view class="text" style="margin-top:61upx;">
-				<span class="number" style="margin-top:61upx;">验证码</span>
+			<view class="text" style="margin-top:60upx;">
+				<span class="number" style="margin-top:60upx;">验证码</span>
 				<view>
-					<input type="text" value="请输入手机号">
+					<input type="number" placeholder="请输入验证码" maxlength="6">
+					<span>发送验证码</span>
 				</view>
 			</view>
 		</view>
@@ -58,19 +58,15 @@
 <style lang="scss" scoped>
 	.textbox{
 		width:670upx;
-		height:442upx;
 		margin:40upx;
-		padding:42upx 40upx 61upx;
+		padding:40upx 40upx 60upx;
 		background: #2D1F25;
-		opacity: 0.8;
-		box-shadow: 0px 8upx 20upx rgba(43, 114, 251, 0.05);
-		border-radius: 4px;
+		border-radius: 8upx;
 		.text{
 			width:590upx;
-			height:139upx;
+			padding-bottom:20upx;
 			border-bottom:1px solid rgba(255,255,255,0.1);
 			.number{
-				font-family: PingFang SC;
 				font-size: 28upx;
 				color:#fff;
 			}
@@ -83,12 +79,10 @@
 					width:300upx;
 					color: #FFFFFF;
 					opacity: 0.5;
-					font-family: PingFang SC;
 					font-size: 24upx;
 				}
 				span{	
 					color: #DA53A2;
-					font-family: PingFang SC;
 					font-size: 24upx;
 				}
 			}

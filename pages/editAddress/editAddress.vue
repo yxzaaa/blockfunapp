@@ -98,7 +98,6 @@
 			uni.getStorage({
 				key:'currEditAddress',
 				success:res=>{
-					console.log(res);
 					this.getterName = res.data.truename;
 					this.phone = res.data.mobile.slice(2);
 					this.address = res.data.address;
@@ -192,7 +191,6 @@
 					},
 					type:'application/x-www-form-urlencoded',
 					success:res=>{
-						console.log(res);
 						if(res.code == 200){
 							uni.navigateBack({
 								delta:1
@@ -221,7 +219,6 @@
 								},
 								type:'application/x-www-form-urlencoded',
 								success:res=>{
-									console.log(res);
 									if(res.code == 200){
 										uni.navigateBack({
 											delta:1

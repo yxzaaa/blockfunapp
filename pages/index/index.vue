@@ -21,7 +21,7 @@
 				</view>
 				<navigator class="more-detail" url="../publicnotice/publicnotice">更多</navigator>
 			</view>
-			<view class="section-header">
+			<view class="section-header" style="justify-content:space-between;">
 				<text class="section-title">我的钱包</text>
 				<view class="toggle-box">
 					<text :class="{'active':currType == 1}" @click="toggleType(1)">币币</text>
@@ -139,7 +139,6 @@
 					success:res=>{
 						// uni.hideLoading();
 						if(res.code == 200){
-							console.log(res);
 							this.walletList = res.data;
 						}
 					}
@@ -150,7 +149,6 @@
 			},
 			//去转账
 			goTransPay(coin,total){
-				console.log(total);
 				uni.navigateTo({
 					url:'../transaccount/transaccount?coin='+coin+'&total='+total
 				})

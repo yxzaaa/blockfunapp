@@ -62,7 +62,6 @@
 			this.$http({
 				url:'/member/address',
 				success:res=>{
-					console.log(res);
 					this.addressList = res.data;
 				}
 			})

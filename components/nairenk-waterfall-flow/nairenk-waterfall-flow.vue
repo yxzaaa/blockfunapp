@@ -54,7 +54,6 @@
 				this.mark = oldVal.length;
 				if (newVal != oldVal) {
 					this.newList = this.list;
-					console.log(this.newList)
 					this.$nextTick(function () {
 						setTimeout(() => {
 							this.waterFall();

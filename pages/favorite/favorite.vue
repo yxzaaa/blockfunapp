@@ -37,7 +37,7 @@
 							</view>
 							<!-- 图片描述 -->
 							<view class="guess-content" :style="{marginLeft:'20upx',marginTop:'0',width:isManager?'420upx':'490upx'}">
-								<span style="font-size: 28upx;color:#fff;height:80upx;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</span>
+								<span style="font-size: 28upx;color:#fff;height:72upx;line-height: 36upx;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</span>
 								<text style="font-size:24upx;color:#999999;margin-top:4upx;">消耗积分 {{item.credit}}</text>
 								<span style="color:#DA53A2;">
 									<span style="display: inline-block;font-family:'Montserrat-Bold';">{{item.price.split('.')[0]}}</span>
@@ -110,7 +110,6 @@
 				this.$http({
 					url:'/member/favorite',
 					success:res=>{
-						console.log(res);
 						if(res.code == 200){
 							uni.hideLoading();
 							this.favoriteList = res.data;
@@ -142,7 +141,6 @@
 				}
 			},
 			itemChoose(index,id){
-				console.log(index,id);
 				if(this.favoriteList[index].isActive === true){
 					// this.favoriteList[index].isActive = false;
 					this.$set(this.favoriteList[index],'isActive',false);
@@ -177,7 +175,6 @@
 				}
 			},
 			deleteFav(){
-				console.log(Array.from(this.ids));
 				var arr = Array.from(this.ids);
 				this.$http({
 					url:'/member/favorite',
@@ -187,7 +184,6 @@
 						id:arr.join(',')
 					},
 					success:res=>{
-						console.log(res);
 						if(res.code == 200){
 							this.updateList();
 						}

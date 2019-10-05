@@ -22,7 +22,7 @@
 			<view class="fun-card" v-if="needCode">
 				<view class="fun-card-item notify" style="display: block;">
 					<input v-model="checkCode" type="number" maxlength="6" placeholder="请输入验证码" style="width:100%;text-align:center;line-height: 64upx;font-size: 28upx;height:64upx;color:#fff;margin-bottom:30upx;">
-					<fun-button :value="codeDelay == 0?'获取验证码':codeDelay+' s'" width="240upx" style="margin:auto;" @handle="getCode()"></fun-button>
+					<fun-button type="text" :value="codeDelay == 0?'获取验证码':codeDelay+' s'" width="240upx" style="margin:auto;" @handle="getCode()"></fun-button>
 				</view>
 			</view>
 			<view style="margin-top:120upx;">
@@ -102,7 +102,6 @@
 					this.$http({
 						url:'/v1/users/login/forget-login-password/send-code?login_name='+this.phone,
 						success:res=>{
-							console.log(res);
 							if(res.code == 200){
 								this.codeDelay = 60;
 								this.codeTimer = setInterval(()=>{
@@ -139,7 +138,6 @@
 								pay_password_hash:this.$md5(this.initPassword)
 							},
 							success:res=>{
-								console.log(res);
 								if(res.code == 200){
 									uni.showToast({
 										title:'支付密码设置成功，请牢记！',
@@ -190,7 +188,6 @@
 								pay_password_hash:this.$md5(this.initPassword)
 							},
 							success:res=>{
-								console.log(res);
 								if(res.code == 200){
 									//设置成功后给出提示
 									uni.showToast({

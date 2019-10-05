@@ -180,7 +180,6 @@
 						page:this.currPage
 					},
 					success:res=>{
-						console.log(res);
 						if(res.code == 200){
 							uni.hideLoading();
 							this.investMent = res.data.investment;
@@ -248,7 +247,6 @@
 				})
 			},
 			pickerChange(e){
-				console.log(e);
 				this.currClass = e.target.value;
 				this.updateList();
 			}

@@ -107,7 +107,6 @@
 						coin:this.coin,
 					},
 					success:res=>{
-						console.log(res);
 						if(res.code == 200){
 							uni.hideLoading();
 							this.xdogList = [];

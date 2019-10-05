@@ -19,7 +19,7 @@
 			<view style="width:670upx;">
 				<possword-inputer @input="setPassword" v-if="currStep == 2" size="74upx" borderColor="rgba(255,255,255,0.4)" fontSize="48upx"></possword-inputer>
 			</view>
-			<view style="color:#DA53A2;font-size: 28upx;padding-top:30upx;padding-bottom:80upx;">忘记密码？</view>
+			<navigator style="color:#DA53A2;font-size: 28upx;padding-top:30upx;padding-bottom:80upx;" url="../forgetpaypassword/forgetpaypassword">忘记密码？</navigator>
 			<fun-button value="确认" block large width="670upx" @handle="confirmStep"></fun-button>
 		</view>
 	</view>

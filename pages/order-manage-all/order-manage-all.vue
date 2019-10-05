@@ -162,13 +162,11 @@
 				})
 			},
 			goPayOrder(id,amount){
-				console.log(id);
 				uni.navigateTo({
 					url:'../pay-order/pay-order?id='+id+'&amount='+amount
 				})
 			},
 			cancelOrder(id){
-				console.log(id);
 				uni.showModal({
 					title:'取消订单？',
 					content:'亲，确定要抛弃我吗！',

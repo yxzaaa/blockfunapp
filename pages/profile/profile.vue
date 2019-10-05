@@ -13,7 +13,7 @@
 					<span class="id">{{userInfo.login_name}}</span>
 					<span class="users" style="margin-top:20upx;">
 						<span class="user" style="margin-right:44upx;font-size:24upx;font-family: Montserrat-bold;color:#999999;">
-							UID：{{userInfo.uid.substring(0,16)+'...'}}
+							UID：{{userInfo.uid && userInfo.uid.substring(0,16)+'...'}}
 						</span>
 						<span @click="copy" style="font-size:24upx;color:#999999;border:1px solid #999999;padding:4upx 24upx;border-radius:6upx;">一键复制</span>
 					</span>
@@ -35,7 +35,7 @@
 					</navigator>
 				</view>
 			</view>
-			<view class="managebox">
+			<view class="managebox" style="margin-bottom:20upx;">
 				<!-- 点击跳转到订单管理页面 -->
 				<navigator url="../order-manage-all/order-manage-all">
 					<view class="manage">
@@ -63,7 +63,7 @@
 					</view>
 				</navigator>	
 			</view>
-			<view class="managebox">
+			<view class="managebox" style="margin-top:0upx;">
 				<navigator url="../favorite/favorite">
 					<view class="manage">
 						<span class="title">收藏夹</span>
@@ -199,12 +199,20 @@
 				})
 			},
 			logout(){
-				uni.removeStorage({
-					key:'userInfo',
+				uni.showModal({
+					title:'提示',
+					content:'确定要离开吗~',
 					success:res=>{
-						uni.reLaunch({
-							url:'../login/login'
-						})
+						if(res.confirm){
+							uni.removeStorage({
+								key:'userInfo',
+								success:res=>{
+									uni.reLaunch({
+										url:'../login/login'
+									})
+								}
+							})
+						}
 					}
 				})
 			}

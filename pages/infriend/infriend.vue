@@ -5,9 +5,9 @@
 		<view class="app-container full">
 			<view class="fixed-buttons">
 				<view class="button-group">
-					<fun-button value="复制链接" width="320upx" type="text" icon="../../static/icons/icon_lianjie.png"></fun-button>
+					<fun-button @handle="copy" value="复制链接" width="320upx" type="text" icon="../../static/icons/icon_lianjie.png"></fun-button>
 					<span>|</span>
-					<fun-button value="生成邀请卡" width="320upx" type="text" icon="../../static/icons/icon_yaoqinka.png"></fun-button>
+					<fun-button url="../initcard/initcard" value="生成邀请卡" width="320upx" type="text" icon="../../static/icons/icon_yaoqinka.png"></fun-button>
 				</view>
 			</view>
 			<view style="padding:0upx 40upx;padding-bottom:150upx;">
@@ -16,9 +16,9 @@
 						<view class="lock-item-box">
 							<view class="lock-item">
 								<text class="text-vertical-top">我的邀请码</text>
-								<text class="text-vertical-bottom">W6GRWQ</text>
+								<text class="text-vertical-bottom">{{friendCode}}</text>
 							</view>
-							<view class="lock-item-block">
+							<view class="lock-item-block" @click="copy">
 								复制
 							</view>
 						</view>
@@ -49,21 +49,40 @@
 					}
 				},
 				isVip:false,
+				friendCode:'',
 				imageLib:{
 					alerm:'../../static/icons/icon_notification.png'
 				}
 			};
 		},
+		onLoad(){
+			//获取邀请码
+			uni.getStorage({
+				key:'userInfo',
+				success:res=>{
+					this.friendCode = res.data.invite_code;
+				}
+			})
+		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
 		methods:{
+			copy(){
+				uni.setClipboardData({
+					data:this.friendCode,
+					success:()=>{
+						uni.showToast({
+							title:'邀请码已复制到剪贴板'
+						})
+					}
+				})
+			},
 			openVip(){
 				uni.showModal({
 					title:'购买 SVIP 会员',
 					content:'您即将购买SVIP会员，我们将从您的钱包中直接扣除199USDT，会员有效期一年。',
 					success:res=>{
-						console.log(res);
 						if(res.confirm){
 							
 						}else if(res.cancel){

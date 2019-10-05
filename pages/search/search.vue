@@ -107,7 +107,6 @@
 					this.$http({
 						url:'/mall/search?kw='+this.searchText,
 						success:res=>{
-							console.log(res);
 							if(res.code == 200){
 								//设置搜索结果
 								this.itemList = res.data.item;
@@ -119,7 +118,6 @@
 					this.$http({
 						url:'/mall/search?kw='+this.searchText,
 						success:res=>{
-							console.log(res);
 							if(res.code == 200){
 								if(uni.getStorageSync('search_history')){
 									uni.getStorage({
@@ -141,7 +139,6 @@
 								//设置搜索结果
 								this.itemList = res.data.item;
 								this.showItem = true;
-								console.log(this.itemList);
 							}
 						}
 					})

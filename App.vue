@@ -13,7 +13,6 @@
 			}
 		},
 		onShow: function() {
-			console.log('App Show');
 			uni.getClipboardData({
 				success:res=>{
 					var id = res.split('$$')[1];
@@ -26,7 +25,6 @@
 			})
 		},
 		onHide: function() {
-			console.log('App Hide')
 		},
 	}
 </script>
@@ -74,6 +72,7 @@
 	image,
 	video {
 		box-sizing: border-box;
+		word-break: break-all;
 	}
 	
 	*{
@@ -144,7 +143,7 @@
 		padding:40upx;
 		padding-bottom:30upx;
 		display:flex;
-		justify-content:space-between;
+		justify-content:flex-start;
 		align-items:center;
 		.section-icon{
 			width:40upx;

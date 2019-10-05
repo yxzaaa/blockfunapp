@@ -67,7 +67,6 @@ export default {
 			try{
 				const uploadUrl = await this.uploadImage(images[0]);
 			}catch(err){
-				console.log(err);
 				return;
 			}
 			

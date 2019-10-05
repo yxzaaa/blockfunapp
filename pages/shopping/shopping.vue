@@ -90,7 +90,6 @@
 			this.$http({
 				url:'/index/index',
 				success:res=>{
-					console.log(res);
 					if(res.code == 200){
 						this.bannerList = res.data.ad;
 						this.typeList = res.data.cat;

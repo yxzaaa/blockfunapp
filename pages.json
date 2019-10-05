@@ -266,6 +266,10 @@
             "path" : "pages/infriend/infriend",
             "style" : {}
         }
+        ,{
+            "path" : "pages/initcard/initcard",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

@@ -70,7 +70,6 @@
 					this.$http({
 						url:'/v1/users/login/forget-login-password/send-code?login_name=86'+this.phone,
 						success:res=>{
-							console.log(res);
 							if(res.code == 200){
 								this.codeDelay = 60;
 								this.codeTimer = setInterval(()=>{
@@ -106,7 +105,6 @@
 						validate_code:this.checkCode
 					},
 					success:res=>{
-						console.log(res)
 						if(res.code == 200){
 							uni.navigateTo({
 								url:'../login/login?passwordback=success',

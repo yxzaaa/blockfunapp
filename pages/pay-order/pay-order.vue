@@ -114,7 +114,6 @@
 			},
 			//订单支付
 			payOrder(){
-				console.log(this.payPassword);
 				if(this.payPassword.length === 8){
 					this.$http({
 						url:'/order/pay',

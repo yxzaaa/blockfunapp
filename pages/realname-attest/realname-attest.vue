@@ -11,30 +11,39 @@
 			<view class="idbox">
 				<view class="idcard">
 					<view class="cardbox">
-						<view>
+						<view v-if="upImage  == ''" @click="getUpImage()">
 							<image src="../../static/icons/credentials_icon.png"></image>
 							<span>身份证正面</span>
 						</view>
-						<view>
+						<view v-if="upImage != ''" @click="getUpImage()">
+							<image :src="upImage"></image>
+						</view>
+						<view v-if="downImage == ''" @click="getDownImage()">
 							<image src="../../static/icons/credentials_icon-1.png"></image>
 							<span>身份证反面</span>
 						</view>
+						<view v-if="downImage != ''" @click="getDownImage()">
+							<image :src="downImage"></image>
+						</view>
 					</view>
-					<view class="person-card">
+					<view class="person-card" v-if="totalImage == ''" @click="getTotalImage()">
 						<image src="../../static/icons/zhaoxiangji.png"></image>
 						<span>手持身份证拍照</span>
+					</view>
+					<view class="person-card" v-if="downImage != ''" @click="getTotalImage()">
+						<image :src="totalImage"></image>
 					</view>
 				</view>
 				<view class="idtext">
 					<span>身份证姓名</span>
 					<view class="input-field" style="padding:20upx 30upx;">
-						<input style="width:100%;font-size: 26upx;color:#c7c7c7;" placeholder="请填写真实姓名"/>
+						<input v-model="realName" style="width:100%;font-size: 26upx;color:#c7c7c7;" placeholder="请填写真实姓名"/>
 					</view>
 				</view>
 				<view class="idtext" style="margin-top:34upx;">
 					<span>身份证号码</span>
 					<view class="input-field" style="padding:20upx 30upx;">
-						<input style="width:100%;font-size: 26upx;color:#c7c7c7;" placeholder="请填写15位或18位身份证号"/>
+						<input v-model="realNum" type="number" style="width:100%;font-size: 26upx;color:#c7c7c7;" placeholder="请填写15位或18位身份证号"/>
 					</view>
 				</view>
 			</view>
@@ -61,16 +70,46 @@
 					back:{
 						type:'normal',
 						text:'取消'
-					},
-					
-				}
+					}
+				},
+				upImage:'',
+				downImage:'',
+				totalImage:'',
+				realName:'',
+				realNum:''
 			}
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
 		methods: {
-			
+			getUpImage(){
+				const ctx = uni.createCameraContext();
+				ctx.takePhoto({
+					quality: 'high',
+					success: (res) => {
+						this.upImage = res.tempImagePath
+					}
+				});
+			},
+			getDownImage(){
+				const ctx = uni.createCameraContext();
+				ctx.takePhoto({
+					quality: 'high',
+					success: (res) => {
+						this.downImage = res.tempImagePath
+					}
+				});
+			},
+			getTotalImage(){
+				const ctx = uni.createCameraContext();
+				ctx.takePhoto({
+					quality: 'high',
+					success: (res) => {
+						this.totalImage = res.tempImagePath
+					}
+				});
+			}
 		}
 	}
 </script>
@@ -101,6 +140,7 @@
 					flex-direction:column;
 					align-items:center;
 					justify-content:center;
+					overflow:hidden;
 					image{
 						width:40upx;
 						height:38upx;
@@ -123,6 +163,7 @@
 				flex-direction:column;
 				align-items:center;
 				justify-content:center;
+				overflow:hidden;
 				image{
 					width:48upx;
 					height:48upx;
@@ -139,6 +180,7 @@
 			span{
 				color:#fff;
 				font-size: 28upx;
+				padding-top: 10upx;
 				padding-bottom:20upx;
 				display: block;
 			}
@@ -152,6 +194,6 @@
 		}
 	}
 	.commit{
-		margin:120upx auto;
+		margin:80upx auto;
 	}
 </style>

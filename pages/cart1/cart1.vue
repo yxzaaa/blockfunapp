@@ -28,7 +28,7 @@
 							></image>
 						</view>
 						<view class="guess-content" style="margin-left:20upx;margin-top:0;">
-							<span style="font-size: 28upx;color:#fff;height:80upx;">{{item.title.length>36?item.title.substring(0,36)+'...':item.title}}</span>
+							<span style="font-size: 28upx;color:#fff;height:72upx;line-height: 36upx;">{{item.title.length>36?item.title.substring(0,36)+'...':item.title}}</span>
 							<text style="font-size:24upx;color:#999999;margin-top:8upx;">消耗积分 {{item.credit*item.num}}</text>
 							<span style="color:#DA53A2; position:relative;">
 								<span style="display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,0)}}.</span>
@@ -88,8 +88,8 @@
 			<view class="section-header">
 				<text class="section-title">猜你喜欢</text>
 			</view>
-			<view v-if="!loading">
-				<waterfall-flow :list="hotList" :loading="loading" @click="toDetail"></waterfall-flow>
+			<view>
+				<waterfall-flow :list="hotList" @click="toDetail"></waterfall-flow>
 			</view>
 		</view>
 	</view>
@@ -154,7 +154,6 @@
 				this.$http({
 					url:'/mall/cart',
 					success:res=>{
-						console.log(res);
 						if(res.code == 200){
 							uni.hideLoading();
 							this.cartList = [];
@@ -293,14 +292,12 @@
 				})
 			},
 			deleteCart(){
-				console.log(this.cartList);
 				var codes = [];
 				this.cartList.map(item=>{
 					if(item.isActive){
 						codes.push(item.code);
 					}
 				})
-				console.log(codes.join(','));
 				this.$http({
 					url:'/mall/cart',
 					type:'application/x-www-form-urlencoded',
@@ -309,7 +306,6 @@
 						code:codes.join(',')
 					},
 					success:res=>{
-						console.log(res);
 						if(res.code == 200){
 							this.updateList();
 						}

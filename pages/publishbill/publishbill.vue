@@ -185,7 +185,6 @@
 				this.currCountType = e.target.value;
 			},
 			payTimeChange(e){
-				console.log(e);
 				this.currPayTime = e.target.value;
 			},
 			message(){

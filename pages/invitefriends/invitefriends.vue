@@ -5,8 +5,8 @@
 		<view class="app-container full">
 			<view class="fixed-buttons">
 				<view class="button-group">
-					<fun-button value="复制链接" width="320upx" type="light" large url="../autolock/autolock"></fun-button>
-					<fun-button value="生成邀请卡" width="320upx" large url="../invitefriends/invitefriends"></fun-button>
+					<fun-button value="复制链接" width="320upx" type="light" large></fun-button>
+					<fun-button value="生成邀请卡" width="320upx" large url="../initcard/initcard"></fun-button>
 				</view>
 			</view>
 			<view style="padding:0upx 40upx;padding-bottom:150upx;">

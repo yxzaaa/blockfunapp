@@ -88,7 +88,6 @@
 			this.scroll=val.scrollTop
 		},
 		onLoad(option){
-			console.log(option);
 			if(option.delta){
 				this.delta = parseInt(option.delta);
 			}
@@ -97,7 +96,6 @@
 				url:'/file/static/area.json',
 				method:'GET',
 				success:res=>{
-					console.log(res);
 					this.addressData = new Set(res);
 					this.addressData.forEach((element)=>{
 					    if(element.parentid == 0){
@@ -127,7 +125,6 @@
 				var values = e.detail.value;
 				values[1] = values[1] === undefined?0:values[1];
 				values[2] = values[2] === undefined?0:values[2];
-				console.log(values);
 				this.area = Array.from(this.province)[values[0]].name + Array.from(this.citys)[values[1]].name;
 				this.areaid = Array.from(this.citys)[values[1]].areaid;
 				if(Array.from(this.areas)[values[2]]){

@@ -141,7 +141,6 @@
 						content:'升级为SVIP用户后，即可享有挂单资格',
 						confirmText:'去升级',
 						success:res=>{
-							console.log(res);
 							if(res.confirm){
 								uni.navigateTo({
 									url:'../paysvip/paysvip'

@@ -96,7 +96,6 @@
 			this.$http({
 				url:'/order/show?id='+this.orderId,
 				success:res=>{
-					console.log(res);
 					if(res.code == 200){
 						this.payStatus = res.data.status;
 						this.createTime = res.data.create;

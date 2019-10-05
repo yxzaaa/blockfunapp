@@ -114,9 +114,6 @@
 			};
 		},
 		onLoad(option){
-			console.log(option);
-			// this.coin = option.coin;
-			// this.total = option.total;
 			//请求当前币种转账信息
 			this.$http({
 				url:'/v1/main/account/withdraw-preloading',

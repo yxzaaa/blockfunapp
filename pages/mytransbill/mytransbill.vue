@@ -137,7 +137,6 @@
 						page:this.currpage
 					},
 					success:res=>{
-						console.log(res);
 						if(res.code == 200){
 							uni.hideLoading();
 							this.borrowList = res.data.item;

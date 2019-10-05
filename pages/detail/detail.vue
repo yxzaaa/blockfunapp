@@ -126,7 +126,6 @@
 					<Skeleton height="200upx" :loading="loading"></Skeleton>
 				</view>
 			</view>
-			
 			<!-- 底部按钮 -->
 			<view class="fixed-buttons" style="display: flex;justify-content: space-between;align-items: center;">
 				<view style="width:66upx;height:44upx;padding-left:30upx;" class="button-group">
@@ -150,6 +149,7 @@
 	import ShareImage from '@/components/share-image.vue';
 	import uniPopup from "@/components/uni-popup/uni-popup.vue";
 	import Skeleton from '@/components/Skeleton.vue';
+	import QRCode from '@/components/wxqrcode.js';
 	export default {
 		components: {
 			share,
@@ -241,7 +241,8 @@
 						summary:'',
 						scene:'WXSenceTimeline',
 					}
-				]
+				],
+				imgQrCode:''
 			};
 		},
 		onPageScroll(val){
@@ -251,7 +252,6 @@
 			this.$http({
 				url:'/mall/show?itemid='+option.id,
 				success:res=>{
-					console.log(res);
 					if(res.code == 200){
 						this.loading = false;
 						this.credit = res.data.credit;
@@ -282,8 +282,14 @@
 					}
 				}
 			})
+			this.qrcode();
 		},
 		methods:{ 
+			qrcode () {
+			  this.imgQrCode = QRCode.createQrCodeImg('https://blockfuntest.dm1.in/h5/html/index.html', {  
+			       size: parseInt(100)//二维码大小  
+			  })
+			},
 			openModal(type){
 				this.modalType = type;
 				this.$refs.popup.open();
@@ -348,7 +354,6 @@
 								num:this.buyCount
 							},
 							success:res=>{
-								console.log(res);
 								if(res.code == 200){
 									this.$refs.popup.close();
 									uni.showToast({
@@ -415,10 +420,9 @@
 						});
 					}
 				}else if(type == 'share'){
-					//生成二维码
 					this.$refs.share.share({
 						img:this.imgList[0],
-						erweima:'',
+						qrcode:this.imgQrCode,
 						price:this.price,
 						credit:this.credit,
 						catname:this.catname,

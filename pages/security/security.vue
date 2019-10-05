@@ -22,7 +22,7 @@
 					</view>
 					<view class="item-horizen"></view>
 				</navigator>
-				<navigator url="../forgetpaypassword/forgetpaypassword">
+				<view>
 					<view class="design">
 						<view class="left">
 							<image src="../../static/bg/lock.png"></image>
@@ -34,7 +34,7 @@
 						</view>
 					</view>
 					<view class="item-horizen"></view>
-				</navigator>
+				</view>
 				<view class="design">
 					<view class="left">
 						<image src="../../static/bg/finger.png"></image>

@@ -98,7 +98,6 @@
 					title:'购买 SVIP 会员',
 					content:'您即将购买SVIP会员，我们将从您的钱包中直接扣除199USDT，会员有效期一年。',
 					success:res=>{
-						console.log(res);
 						if(res.confirm){
 							
 						}else if(res.cancel){

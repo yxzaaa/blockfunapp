@@ -125,7 +125,6 @@
 							uni.hideLoading();
 							this.xdogList = res.data.item;
 							this.totalPage = res.data.max;
-							console.log(this.xdogList);
 						}
 					}
 				})

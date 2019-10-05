@@ -147,7 +147,6 @@
 							this.totalCount += parseFloat(val.price)*parseInt(val.num);
 							this.totalCredit += parseInt(val.credit)*parseInt(val.num);
 						})
-						console.log(this.totalCount);
 					}else{
 						
 					}
@@ -159,7 +158,6 @@
 				uni.getStorage({
 					key:'currAddress',
 					success:res=>{
-						console.log(res);
 						this.hasDefault = true;
 						this.addressData = res.data;
 						uni.removeStorageSync('currAddress');
@@ -182,7 +180,6 @@
 							submit:1
 						},
 						success:res=>{
-							console.log(res);
 							if(res.code == 200){
 								uni.setStorage({
 									key:'submit_order_result',

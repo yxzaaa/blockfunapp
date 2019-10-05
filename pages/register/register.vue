@@ -9,7 +9,7 @@
 			</view>
 			<view class="login-form">
 				<view class="login-form-item" style="display: flex;justify-content: space-between;align-items: center;">
-					<view style="display: flex;justify-content: flex-start;">
+					<view style="display: flex;justify-content: flex-start;align-items: center;">
 						<image class="login-form-label" :src="imageLib.phone"></image>
 						<input type="number" class="login-form-input" style="width:420upx;" placeholder="手机号码" v-model="phone"/>
 					</view>

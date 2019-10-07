@@ -15,8 +15,8 @@
 					</view>
 					<picker @change="countryChange" :value="currCountry" :range="countryLib" :range-key="'name'" mode="selector">
 						<view 
-						style="padding:0upx 20upx;border-radius: 6upx;background: #2D1F25;line-height: 48upx;color:#fff;display: flex;justify-content: center;align-items: center;margin-right:20upx;">
-							<text style="#999;font-size: 24upx;">{{countryLib[currCountry]?countryLib[currCountry].code:'CN'}}</text>
+						style="padding:0upx 20upx;border-radius: 6upx;background: #2D1F25;line-height: 48upx;color:#fff;display: flex;justify-content: center;align-items: center;margin-left:20upx;">
+							<text style="#999;font-size: 24upx;white-space: nowrap;">{{countryLib[currCountry]?countryLib[currCountry].code:'CN'}}</text>
 							<image :src="imageLib.sanjiao" style="width:20upx;height:14upx;margin-left:6upx;"></image>
 						</view>
 					</picker>

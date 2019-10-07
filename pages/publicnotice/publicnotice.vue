@@ -4,8 +4,8 @@
 		<uni-nav-bar title="公告" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<view class="app-container full">
 			<view class="notice-head">
-				<text style="font-size: 40upx;font-family:'Montserrat-Light';">2019/01/12</text>
-				<text>星期二</text>
+				<text style="font-size: 40upx;font-family:'Montserrat-Light';">{{getDate()}}</text>
+				<text>{{getDay()}}</text>
 			</view>
 			<view class="notice-list">
 				<block v-for="(item,index) in notices" :key="item.id">
@@ -75,6 +75,19 @@
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
+		methods:{
+			getDate(){
+				var date = new Date();
+				var month = (date.getMonth()+1)>=10?date.getMonth()+1:'0'+(date.getMonth()+1);
+				var day = date.getDate()>=10?date.getDate():'0'+date.getDate();
+				return date.getFullYear() + '/' + month + '/' + day;
+			},
+			getDay(){
+				var day = new Date().getDay();
+				var weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+				return weekday[day];
+			}
+		}
 	}
 </script>
 

@@ -128,13 +128,13 @@
 			</view>
 			<!-- 底部按钮 -->
 			<view class="fixed-buttons" style="display: flex;justify-content: space-between;align-items: center;">
-				<view style="width:66upx;height:44upx;padding-left:30upx;" class="button-group">
+				<!-- <view style="width:66upx;height:44upx;padding-left:30upx;" class="button-group">
 					<image src="../../static/bg/listen.png" style="width:36upx;height:44upx;"></image>
-				</view>
+				</view> -->
 				
-				<view class="button-group" style="width:500upx;">
-					<fun-button value="加入购物车" type="light" width="240upx" large @handle="openModal('cart')"></fun-button>
-					<fun-button value="立即购买" width="240upx" large @handle="openModal('buy')"></fun-button>
+				<view class="button-group" style="width:670upx;">
+					<fun-button value="加入购物车" type="light" width="320upx" large @handle="openModal('cart')"></fun-button>
+					<fun-button value="立即购买" width="320upx" large @handle="openModal('buy')"></fun-button>
 				</view>
 			</view>
 		</view>

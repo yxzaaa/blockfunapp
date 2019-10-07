@@ -250,6 +250,7 @@
 							password: this.password
 						},
 						success:res=>{
+							this.showPwdModal = false;
 							if(res.code == 200){
 								uni.showToast({
 									title:'发布成功',
@@ -281,6 +282,7 @@
 							password: this.password
 						},
 						success:res=>{
+							this.showPwdModal = false;
 							if(res.code == 200){
 								uni.showToast({
 									title:'发布成功',
@@ -295,7 +297,7 @@
 								uni.showToast({
 									title:res.message,
 									icon:'none'
-								})
+								});
 							}
 						}
 					})

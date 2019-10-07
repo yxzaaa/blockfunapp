@@ -2,7 +2,9 @@
 	<view class="container">
 		<uni-background />
 		<uni-nav-bar 
-			layout="search" 
+			:layout="showType == ''?'search':'center'"
+			:title="showType"
+			textColor="#fff"
 			:opacity="scroll"
 			:buttons="navButtons"
 			@input="searchInput"
@@ -15,7 +17,7 @@
 					<text style="color:rgba(255,255,255,0.5);font-size: 26upx;" @click="clearHis">清除历史</text>
 				</view>
 				<view class="history-list">
-					<view class="history-item" v-for="(item,index) in historyList" @click="search(item)">{{item}}</view>
+					<view class="history-item" v-for="(item,index) in historyList" :key="index" @click="search(item)">{{item}}</view>
 				</view>
 			</view>
 			<view v-if="itemList.length == 0 && showItem" style="width:670upx;">
@@ -70,11 +72,34 @@
 				historyList:[],
 				searchText:'',
 				showItem:false,
-				itemList:[]
+				itemList:[],
+				showType:'',
 			};
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
+		},
+		onLoad(option){
+			if(option.type){
+				this.showType = option.type;
+				this.navButtons = {
+					back:{
+						type:'normal',
+						text:'取消'
+					}
+				}
+				//搜索类目商品
+				this.$http({
+					url:'/mall/search?kw='+this.searchText,
+					success:res=>{
+						if(res.code == 200){
+							//设置搜索结果
+							this.itemList = res.data.item;
+							this.showItem = true;
+						}
+					}
+				})
+			}
 		},
 		onShow(){
 			if(uni.getStorageSync('search_history')){

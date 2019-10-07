@@ -8,10 +8,14 @@
 			</view>
 			<view class="button-list">
 				<block v-for="(item,index) in buttonList" :key="index">
-					<navigator class="button-list-item" :url="item.link">
+					<navigator class="button-list-item" :url="item.link" v-if="item.open">
 						<image :src="item.iconSrc"></image>
 						<text>{{item.name}}</text>
 					</navigator>
+					<view class="button-list-item" v-if="!item.open" @click="openLater()">
+						<image :src="item.iconSrc"></image>
+						<text>{{item.name}}</text>
+					</view>
 				</block>
 			</view>
 			<view class="news-box">
@@ -97,22 +101,26 @@
 					{
 						name:'智能锁仓',
 						iconSrc:'../../static/icons/suocang.png',
-						link:'../lockposition/lockposition'
+						link:'../lockposition/lockposition',
+						open:false
 					},
 					{
 						name:'抵押借贷',
 						iconSrc:'../../static/icons/jiedai.png',
-						link:'../pledge-debit/pledge-debit'
+						link:'../pledge-debit/pledge-debit',
+						open:true
 					},
 					{
 						name:'场外交易',
 						iconSrc:'../../static/icons/jiaoyi.png',
-						link:'../transout/transout'
+						link:'../transout/transout',
+						open:false
 					},
 					{
 						name:'信任转让',
 						iconSrc:'../../static/icons/zhuanrang.png',
-						link:'../assignment/assignment'
+						link:'../assignment/assignment',
+						open:false
 					},
 				],
 				walletList:[]
@@ -125,6 +133,12 @@
 			this.scroll = val.scrollTop;
 		},
 		methods:{
+			openLater(){
+				uni.showToast({
+					title:'您好，该功能暂未上线，敬请期待',
+					icon:'none'
+				})
+			},
 			//更新钱包
 			updateList(){
 				//获取钱包列表

@@ -166,6 +166,7 @@
 						remark: this.remark
 					},
 					success:res=>{
+						this.showPwdModal = false;
 						if(res.code == 200){
 							uni.showToast({
 								title:'转账成功',

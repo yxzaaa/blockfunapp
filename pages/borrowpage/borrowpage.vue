@@ -42,7 +42,7 @@
 					<view class="fun-card-item">
 						<view class="horizon-list-item">
 							<view class="left-item">
-								<text class="left-item-label">Forest 单价</text>
+								<text class="left-item-label">USDT单价</text>
 							</view>
 							<view class="right-item">
 								<text class="left-item-name">{{getNum(infos.price)}} USDT/{{infos.unit}}</text>
@@ -61,17 +61,17 @@
 								<text class="left-item-label">投资周期</text>
 							</view>
 							<view class="right-item">
-								<text class="left-item-name">{{infos.month}} 月</text>
+								<text class="left-item-name">{{infos.month}} 个月</text>
 							</view>
 						</view>
-						<view class="horizon-list-item">
+						<!-- <view class="horizon-list-item">
 							<view class="left-item">
 								<text class="left-item-label">抵押总量</text>
 							</view>
 							<view class="right-item">
 								<text class="left-item-name">{{infos.amount}}</text>
 							</view>
-						</view>
+						</view> -->
 						<!-- <view class="horizon-list-item">
 							<view class="left-item">
 								<text class="left-item-label">我要借款</text>
@@ -80,7 +80,7 @@
 								<input style="font-size: 26upx;color:#fff;text-align: right;" type="text" placeholder="请输入您的借款金额"/>
 							</view>
 						</view> -->
-						<view style="width:100%;height:3upx;background:rgba(255,255,255,0.2);margin:20upx 0upx;"></view>
+						<!-- <view style="width:100%;height:3upx;background:rgba(255,255,255,0.2);margin:20upx 0upx;"></view> -->
 						<!-- <view class="horizon-list-item">
 							<view class="left-item">
 								<text class="left-item-label">需要抵押</text>
@@ -97,14 +97,14 @@
 								<text class="left-item-name">先息后本</text>
 							</view>
 						</view> -->
-						<view class="horizon-list-item">
+						<!-- <view class="horizon-list-item">
 							<view class="left-item">
 								<text class="left-item-label">手续费</text>
 							</view>
 							<view class="right-item">
 								<text class="left-item-name">{{infos.fee}} USDT</text>
 							</view>
-						</view>
+						</view> -->
 					</view>
 				</view>
 			</view>
@@ -167,6 +167,7 @@
 						password:this.password
 					},
 					success:res=>{
+						this.showPwdModal = false;
 						if(res.code == 200){
 							uni.showToast({
 								title:this.infos.type == 1?'抵押成功':'投资成功',

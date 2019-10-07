@@ -176,6 +176,7 @@
 						password:this.password
 					},
 					success:res=>{
+						this.showPwdModal = false;
 						if(res.code == 200){
 							uni.showToast({
 								title:'还款成功',

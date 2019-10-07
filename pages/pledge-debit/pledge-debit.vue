@@ -13,16 +13,21 @@
 			</view>
 			<view class="fixed-drop-btn">
 				<image class="btn" src="../../static/icons/icon_drop.png" @click="toggleDropDown"></image>
-				<view class="dropdown" v-if="dropShow">
-					<navigator url="../billorders/billorders" style="width:100%;padding:24upx 0;display: flex;align-items: center;">
-						<image src="/static/icons/icon_dingdan.png" style="width:40upx;height:40upx;margin-right:20upx;"></image>
-						<text style="font-size: 28upx;color:#DA53A2">我的订单</text>
-					</navigator>
-					<view style="width:100%;height:2upx;background: #E2E2E2;"></view>
-					<navigator url="../mytransbill/mytransbill" style="width:100%;padding:24upx 0;display: flex;align-items: center;">
-						<image src="/static/icons/icon_guadan.png" style="width:40upx;height:40upx;margin-right:20upx;"></image>
-						<text style="font-size: 28upx;color:#DA53A2">我的挂单</text>
-					</navigator>
+			</view>
+			<view class="modal-box" v-if="dropShow" @click="dropShow = false">
+				<view class="fixed-drop-btn" @click="showDefault">
+					<image style="opacity: 0;" class="btn" src="../../static/icons/icon_drop.png" @click="toggleDropDown"></image>
+					<view class="dropdown" v-if="dropShow">
+						<navigator url="../billorders/billorders" style="width:100%;padding:24upx 0;display: flex;align-items: center;">
+							<image src="/static/icons/icon_dingdan.png" style="width:40upx;height:40upx;margin-right:20upx;"></image>
+							<text style="font-size: 28upx;color:#DA53A2">我的订单</text>
+						</navigator>
+						<view style="width:100%;height:2upx;background: #E2E2E2;"></view>
+						<navigator url="../mytransbill/mytransbill" style="width:100%;padding:24upx 0;display: flex;align-items: center;">
+							<image src="/static/icons/icon_guadan.png" style="width:40upx;height:40upx;margin-right:20upx;"></image>
+							<text style="font-size: 28upx;color:#DA53A2">我的挂单</text>
+						</navigator>
+					</view>
 				</view>
 			</view>
 			<view class="fix-tabs-box">
@@ -180,7 +185,7 @@
 				uni.navigateTo({
 					url:'../publishborrow/publishborrow'
 				})
-			}
+			},
 		}
 	}
 </script>
@@ -188,6 +193,9 @@
 <style lang="scss" scoped> 
 	.swiper-box{
 		height:calc(100vh - 274upx);
+	}
+	.modal-box{
+		background: transparent;
 	}
 	.fixed-drop-btn{
 		position: fixed;
@@ -209,8 +217,8 @@
 		}
 		.dropdown{
 			position:absolute;
-			top:50upx;
-			right:-18upx;
+			top:58upx;
+			right:-20upx;
 			width:260upx;
 			height:250upx;
 			padding:40upx;
@@ -290,7 +298,7 @@
 		display:flex;
 		justify-content:center;
 		align-items:center;
-		z-index:998;
+		z-index:90;
 		image{
 			width:64upx;
 			height:64upx;

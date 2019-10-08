@@ -10,8 +10,15 @@
 			@input="searchInput"
 			@search="search"
 		/>
+		<!-- 搜索空状态 -->
+		<view class="app-container full" v-if="itemList.length == 0 && showItem">
+			<view class='empty-box'>
+				<image src="../../static/bg/orders/search_res.png" style="width:420upx;height:200upx;"></image>
+				<text>未搜索到相关内容</text>
+			</view>
+		</view>
 		<view class="app-container full" style="padding-left:40upx;padding-right:40upx;">
-			<view class="history-box" v-if="historyList.length>0 && !showItem">
+			<view class="history-box" v-if="historyList.length>0 && !showItem && showType == ''">
 				<view style="display: flex;justify-content: space-between;padding:30upx 0;">
 					<text style="color:#fff;font-size: 26upx;">历史记录</text>
 					<text style="color:rgba(255,255,255,0.5);font-size: 26upx;" @click="clearHis">清除历史</text>
@@ -20,12 +27,9 @@
 					<view class="history-item" v-for="(item,index) in historyList" :key="index" @click="search(item)">{{item}}</view>
 				</view>
 			</view>
-			<view v-if="itemList.length == 0 && showItem" style="width:670upx;">
-				<image src="../../static/bg/orders/search_res.png" style="width:670upx;height:420upx;"></image>
-			</view>
 			<view class="item-box" v-if="showItem">
 				<navigator
-					v-for="(item, index) in itemList" :key="item.id"
+					v-for="(item,index) in itemList" :key="item.id"
 					class="guess-item"
 					:url="'../detail/detail?id='+item.id"
 				>
@@ -47,6 +51,7 @@
 						</span>
 					</view>
 				</navigator>
+				<uni-load-more :status="loadStatus" v-if="itemList.length > 0"></uni-load-more>
 			</view>
 		</view>
 	</view>
@@ -56,10 +61,12 @@
 	
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
+	import UniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	export default {
 		components:{
 			UniNavBar,
 			UniBackground,
+			UniLoadMore
 		},
 		data() {
 			return {
@@ -74,10 +81,32 @@
 				showItem:false,
 				itemList:[],
 				showType:'',
+				loadStatus:'noMore',
+				currPage:1,
+				totalPage:1,
 			};
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
+		},
+		onReachBottom(){
+			if(this.currPage<this.totalPage){
+				this.currPage ++;
+				this.loadStatus = 'loading';
+				this.$http({
+					url:'/mall/search?kw='+this.searchText +'&page='+this.currPage,
+					success:res=>{
+						if(res.code == 200){
+							//设置搜索结果
+							this.loadStatus = 'more';
+							this.itemList = res.data.item;
+							this.totalPage = res.data.max;
+						}
+					}
+				})
+			}else{
+				this.loadStatus = 'noMore';
+			}
 		},
 		onLoad(option){
 			if(option.type){
@@ -90,12 +119,13 @@
 				}
 				//搜索类目商品
 				this.$http({
-					url:'/mall/search?kw='+this.searchText,
+					url:'/mall/search?catid='+option.catid,
 					success:res=>{
 						if(res.code == 200){
 							//设置搜索结果
 							this.itemList = res.data.item;
 							this.showItem = true;
+							this.totalPage = res.data.max;
 						}
 					}
 				})
@@ -136,6 +166,7 @@
 								//设置搜索结果
 								this.itemList = res.data.item;
 								this.showItem = true;
+								this.totalPage = res.data.max;
 							}
 						}
 					})
@@ -164,6 +195,7 @@
 								//设置搜索结果
 								this.itemList = res.data.item;
 								this.showItem = true;
+								this.totalPage = res.data.max;
 							}
 						}
 					})
@@ -194,10 +226,8 @@
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: center;
-		padding: 30upx 40upx 10upx;
+		padding: 30upx 0upx 10upx;
 		margin-top: 16upx;
-		
-		
 	}
 	
 	.guess-list {

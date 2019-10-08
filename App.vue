@@ -13,16 +13,7 @@
 			}
 		},
 		onShow: function() {
-			uni.getClipboardData({
-				success:res=>{
-					var id = res.split('$$')[1];
-					if(id){
-						uni.navigateTo({
-							url:"../detail/detail?id="+id
-						})
-					}
-				}
-			})
+			
 		},
 		onHide: function() {
 		},

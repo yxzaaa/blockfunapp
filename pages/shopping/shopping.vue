@@ -27,7 +27,7 @@
 			
 			<view class="type-box" v-if="!loading">
 				<block v-for="(item,index) in typeList" :key="item.catid">
-					<navigator :url="'../search/search?type='+item.title" style="margin-bottom:30upx;position: relative;height:240upx;">
+					<navigator :url="'../search/search?type='+item.title+'&catid='+item.catid" style="margin-bottom:30upx;position: relative;height:240upx;">
 						<image :src="item.img" style="width:100%;display:block;height:240upx"/>
 						<span style="position: absolute; left:50upx;top:50%;margin-top:-32upx;line-height:64upx;font-size: 32upx;color:#fff;font-weight:bold;">{{item.title}}</span>
 					</navigator>

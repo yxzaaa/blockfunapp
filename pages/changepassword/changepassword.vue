@@ -6,7 +6,7 @@
 			:buttons="navButtons"
 		/>
 		<view class="app-container full"></view>
-		<view style="margin:0upx 40upx 0;color:#fff;font-size: 48upx;">忘记支付密码</view>
+		<view style="margin:0upx 40upx 0;color:#fff;font-size: 48upx;">修改登录密码</view>
 		<view class="textbox">
 			<view class="text">
 				<span class="number">手机验证码</span>
@@ -16,15 +16,15 @@
 				</view>
 			</view>
 			<view class="text" style="margin-top:60upx;">
-				<span class="number">新支付密码</span>
+				<span class="number">新登录密码</span>
 				<view>
-					<input type="password" maxlength="8" placeholder="请输入8位新支付密码">
+					<input type="password" maxlength="16" placeholder="请输入8~16位新登录密码">
 				</view>
 			</view>
 			<view class="text" style="margin-top:60upx;">
-				<span class="number">确认支付密码</span>
+				<span class="number">确认登录密码</span>
 				<view>
-					<input type="password" maxlength="8" placeholder="请再次输入支付密码">
+					<input type="password" maxlength="16" placeholder="请再次输入登录密码">
 				</view>
 			</view>
 		</view>

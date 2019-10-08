@@ -270,6 +270,10 @@
             "path" : "pages/initcard/initcard",
             "style" : {}
         }
+        ,{
+            "path" : "pages/changepassword/changepassword",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

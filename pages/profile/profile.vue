@@ -98,7 +98,8 @@
 					</view>
 					<view class="item-horizen"></view>
 				</navigator>
-				<view @click="openLater()">
+				<!-- <navigator url="../realname-attest/realname-attest"> -->
+				<view  @click="openLater()">
 					<view class="action-item">
 						<view>
 							<image src="../../static/bg/realname.png"></image>
@@ -108,6 +109,7 @@
 					</view>
 					<view class="item-horizen"></view>
 				</view>
+				<!-- </navigator> -->
 				<navigator url="../security/security">
 					<view class="action-item">
 						<view>

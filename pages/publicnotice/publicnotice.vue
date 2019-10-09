@@ -16,10 +16,12 @@
 						</view>
 						<view class="right-box">
 							<text style="color:#fff;font-size: 30upx;">{{item.title}}</text>
-							<text>{{item.date}}</text>
+							<text>{{getItemDate(item.created_on)}}</text>
 							<text>亲爱的社区用户：</text>
-							<text>{{item.describe}}</text>
-							<navigator style="color:#DA53A2;font-size:28upx;margin-top:20upx;margin-bottom: 40upx;display: inline-block;">查看详情</navigator>
+							<view :class="['content-box',item.show?'':'show-more']" scroll-y>
+								<text>{{item.content}}</text>
+							</view>
+							<view style="color:#DA53A2;font-size:28upx;margin-top:20upx;margin-bottom: 40upx;display: inline-block;" @click="showMore(index)">{{item.show?'收起':'查看详情'}}</view>
 						</view>
 					</view>
 				</block>
@@ -50,32 +52,55 @@
 				imageLib:{
 					ellipse:'../../static/icons/Ellipse.png'
 				},
-				notices:[
-					{
-						id:1,
-						title:'Block Fun将支持钱包转账功能',
-						date:'18:08',
-						describe:'Forest 主网已于 2019/1/24上线。Block Fun将支持钱包转账功能Forest 主网已于 2019/1/24上线。Block Fun将支持钱包转账功能Forest 主网已于 2019/1/24上线。Block Fun将支持钱包转账功能'
-					},
-					{
-						id:2,
-						title:'Block Fun将支持钱包转账功能',
-						date:'18:08',
-						describe:'Forest 主网已于 2019/1/24上线。Block Fun将支持钱包转账功能'
-					},
-					{
-						id:3,
-						title:'Block Fun将支持钱包转账功能',
-						date:'18:08',
-						describe:'Forest 主网已于 2019/1/24上线。Block Fun将支持钱包转账功能'
-					},
-				]
+				notices:[]
 			};
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
+		onLoad(){
+			//获取公告列表
+			this.$http({
+				url:'/announce/search',
+				success:res=>{
+					console.log(res);
+					if(res.code == 200){
+						this.notices = res.data;
+						this.notices.map(item=>{
+							item.show = false;
+						})
+					}
+				}
+			})
+		},
 		methods:{
+			showMore(index){
+				var isShow = this.notices[index].show?false:true;
+				var item = this.notices[index];
+				item.show = isShow;
+				this.$set(this.notices,index,item);
+				if(isShow){
+					this.notices.map((val,i)=>{
+						if(i !== index){
+							val.show = false;
+							this.$set(this.notices,i,val);
+						}
+					})
+				}
+			},
+			getItemDate(timestamp){
+				var date = new Date(timestamp*1000);
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				var hour = date.getHours();
+				var min = date.getMinutes();
+				month = month>=10?month:'0'+month;
+				day = day>=10?day:'0'+day;
+				hour = hour>=10?hour:'0'+hour;
+				min = min>=10?min:'0'+min;
+				return year+'/'+month+'/'+day+' '+hour+':'+min
+			}, 
 			getDate(){
 				var date = new Date();
 				var month = (date.getMonth()+1)>=10?date.getMonth()+1:'0'+(date.getMonth()+1);
@@ -139,6 +164,14 @@
 					line-height: 48upx;
 					color:#999;
 					display: block;
+				}
+				.content-box{
+					width:100%;
+					transition:all .3s;
+					overflow:hidden;
+					&.show-more{
+						max-height: 190upx;
+					}
 				}
 			}
 		}

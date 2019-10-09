@@ -51,7 +51,7 @@
 						<!-- 图片描述 -->
 						<view class="guess-content" style="margin-left:20upx;margin-top:0;">
 							<view style="font-size: 28upx;color:#fff;height:80upx;">{{item.title.length>40?item.title.substring(0,40)+' ...':item.title}}</view>
-							<view style="font-size:24upx;color:#999999;margin-top:4upx;">消耗积分 {{item.credit*item.num}}</view>
+							<!-- <view style="font-size:24upx;color:#999999;margin-top:4upx;">消耗积分 {{item.credit*item.num}}</view> -->
 							<view style="display: flex;justify-content: space-between;align-items: center;">
 								<span style="color:#DA53A2;">
 									<span style="display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,0)}}.</span>
@@ -76,10 +76,10 @@
 								<span style="font-size: 24upx;color:#DA53A2;font-family:'Montserrat-Bold';">{{String(totalCount.toFixed(4)).split('.')[1]}}</span>
 								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
 							</span>
-							<span>
+							<!-- <span>
 								<span style="font-size: 24upx;color:#999999;">积分：</span>
 								<span style="font-size: 24upx;color:#fff;">{{totalCredit}}</span>
-							</span>
+							</span> -->
 						</view>
 						<fun-button @handle="submitOrder" value="提交订单" large wsssidth="240upx"></fun-button>
 					</view>

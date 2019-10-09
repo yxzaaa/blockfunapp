@@ -118,7 +118,7 @@
 			this.$http({
 				url:'/v1/main/account/withdraw-preloading',
 				data:{
-					coin:option.coin
+					coin:option.coin.toLowerCase()
 				},
 				success:res=>{
 					if(res.code == 200){

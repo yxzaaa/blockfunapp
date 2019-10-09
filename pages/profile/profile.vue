@@ -98,7 +98,7 @@
 					</view>
 					<view class="item-horizen"></view>
 				</navigator>
-				<navigator url="../realname-attest/realname-attest">
+				<view @click="openLater()">
 					<view class="action-item">
 						<view>
 							<image src="../../static/bg/realname.png"></image>
@@ -107,7 +107,7 @@
 						<image src="../../static/bg/jiantou.png"></image>
 					</view>
 					<view class="item-horizen"></view>
-				</navigator>
+				</view>
 				<navigator url="../security/security">
 					<view class="action-item">
 						<view>
@@ -191,6 +191,12 @@
 			})
 		},
 		methods:{
+			openLater(){
+				uni.showToast({
+					title:'您好，该功能暂未上线，敬请期待',
+					icon:'none'
+				})
+			},
 			copy(){
 				uni.setClipboardData({
 					data:this.userInfo.uid,

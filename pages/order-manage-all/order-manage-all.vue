@@ -17,7 +17,7 @@
 			<scroll-view v-else class="order-box" scroll-y @scrolltolower="reachBottom">
 				<view class="managebox" v-for="(val,index) in orderList" :key="index"> <!-- 待办管理 -->
 					<view class="backlog" @click="goDetail(val.id)"> 
-						<span>{{val.id}}</span>
+						<span>{{val.order}}</span>
 						<view style="font-size:28upx" :style="{color:getStatus(val.status).color }">{{getStatus(val.status).name}}</view>
 					</view>
 					<view class="goodslist" @click="goDetail(val.id)">

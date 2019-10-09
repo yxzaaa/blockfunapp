@@ -13,8 +13,8 @@
 			<view class="content">
 				<view class="item-title" style="color:#fff;font-size:14px; margin-bottom:5px;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</view>
 				<view class="user">
-					<text class="item-content">消耗积分</text>
-					<text class="item-consume">{{item.credit}}</text>
+					<!-- <text class="item-content">消耗积分</text> -->
+					<!-- <text class="item-consume">{{item.credit}}</text> -->
 				</view>
 				<view>
 					<span style="color:#DA53A2;font-size:36upx;font-family:'Montserrat-Bold';">

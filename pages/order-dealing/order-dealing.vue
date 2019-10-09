@@ -65,7 +65,7 @@
 			<view class="orderinfo" v-if="!loading">
 				<view class="numinfo">
 					<span class="content">订单编号</span>
-					<span class="ordernum">{{orderInfo.id}}</span>
+					<span class="ordernum">{{orderInfo.order}}</span>
 				</view>
 				<view class="timeinfo">
 					<span class="content">下单时间</span>

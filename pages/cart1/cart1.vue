@@ -29,7 +29,7 @@
 						</view>
 						<view class="guess-content" style="margin-left:20upx;margin-top:0;">
 							<span style="font-size: 28upx;color:#fff;height:72upx;line-height: 36upx;">{{item.title.length>36?item.title.substring(0,36)+'...':item.title}}</span>
-							<text style="font-size:24upx;color:#999999;margin-top:8upx;">消耗积分 {{item.credit*item.num}}</text>
+							<!-- <text style="font-size:24upx;color:#999999;margin-top:8upx;">消耗积分 {{item.credit*item.num}}</text> -->
 							<span style="color:#DA53A2; position:relative;">
 								<span style="font-size:30upx;display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,0)}}.</span>
 								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,1)}}</span>
@@ -59,10 +59,10 @@
 								<span style="font-size: 24upx;color:#DA53A2;font-family:'Montserrat-Bold';">{{String(totalCount.toFixed(4)).split('.')[1]}}</span>
 								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
 							</span>
-							<span>
+							<!-- <span>
 								<span style="font-size: 24upx;color:#999999;">积分：</span>
 								<span style="font-size: 24upx;color:#fff;">{{String(totalCredit)}}</span>
-							</span>
+							</span> -->
 						</view>
 						<fun-button value="去结算" large width="200upx" @handle="goOrderPage"></fun-button>
 					</view>

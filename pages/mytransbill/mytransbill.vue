@@ -45,7 +45,8 @@
 									</view>
 								</view>
 								<view class="debit-btn">
-									<text>{{getTimeDelay(item.expired_on)}}天后过期</text>
+									<text v-if="getTimeDelay(item.expired_on)=='已过期'" style="color:#999;">{{getTimeDelay(item.expired_on)}}</text>
+									<text v-else>{{getTimeDelay(item.expired_on)}}</text>
 									<view>
 										<view @click="billUpOrDown(item.id,item.status)">{{item.status == 2?'上架':'下架'}}</view>
 									</view>
@@ -232,7 +233,11 @@
 			getTimeDelay(end){
 				var stamp = new Date().getTime();
 				var overDay = parseInt((end*1000 - stamp)/(24*3600*1000));
-				return overDay;
+				if(overDay<=0){
+					return '已过期'
+				}else{
+					return overDay + '天后过期';
+				}
 			},
 			tabChange(value){
 				this.activeTab = value.detail.current;

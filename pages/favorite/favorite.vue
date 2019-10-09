@@ -38,7 +38,7 @@
 							<!-- 图片描述 -->
 							<view class="guess-content" :style="{marginLeft:'20upx',marginTop:'0',width:isManager?'420upx':'490upx'}">
 								<span style="font-size: 28upx;color:#fff;height:72upx;line-height: 36upx;">{{item.title.length>36?item.title.substring(0,36)+' ...':item.title}}</span>
-								<text style="font-size:24upx;color:#999999;margin-top:4upx;">消耗积分 {{item.credit}}</text>
+								<!-- <text style="font-size:24upx;color:#999999;margin-top:4upx;">消耗积分 {{item.credit}}</text> -->
 								<span style="color:#DA53A2;">
 									<span style="display: inline-block;font-family:'Montserrat-Bold';">{{item.price.split('.')[0]}}</span>
 									<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';">{{item.price.split('.')[1]?'.'+item.price.split('.')[1]:''}}</span>

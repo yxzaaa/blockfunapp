@@ -53,7 +53,7 @@
 							ctx.fillStyle = "rgba(255,255,255,0.5)";
 							ctx.fillText('USDT', 10, 210);
 							ctx.fillStyle = "rgba(255,255,255,0.5)";
-							ctx.fillText('消耗积分', 10, 234);
+							// ctx.fillText('消耗积分', 10, 234);
 							ctx.fillStyle = "rgba(255,255,255,1)";
 							ctx.fillText(data.credit, 64, 234);
 							ctx.fillStyle = "#DA53A2";

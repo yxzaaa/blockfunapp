@@ -30,6 +30,10 @@
 						<view class="guess-content" style="margin-left:20upx;margin-top:0;">
 							<span style="font-size: 28upx;color:#fff;height:72upx;line-height: 36upx;">{{item.title.length>36?item.title.substring(0,36)+'...':item.title}}</span>
 							<!-- <text style="font-size:24upx;color:#999999;margin-top:8upx;">消耗积分 {{item.credit*item.num}}</text> -->
+							<view style="overflow:hidden;white-space: nowrap;width:400upx;padding-top:8upx;display: flex;justify-content: flex-start;align-items: center;">
+								<span style="color: #999999;font-size:24upx;">{{item.s1}}</span>
+								<span style="color: #999999;font-size:24upx;margin-left:18upx;" v-if="item.s2">{{item.s2}}</span>
+							</view>
 							<span style="color:#DA53A2; position:relative;">
 								<span style="font-size:30upx;display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,0)}}.</span>
 								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,1)}}</span>

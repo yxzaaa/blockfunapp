@@ -566,7 +566,7 @@
 		width:750upx;
 		padding:0upx 40upx;
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		border-bottom:1px solid rgba(255,255,255,0.2);
 		position:relative;
 		.fix-tabs-item{

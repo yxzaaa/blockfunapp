@@ -12,9 +12,9 @@
 				<view class="fix-tabs-item">
 					<text :class="{active:activeTab == 1}" @click="toggleTab(1)">借款挂单</text>
 				</view>
-				<view class="fix-tabs-item">
+				<!-- <view class="fix-tabs-item">
 					<text :class="{active:activeTab == 2}" @click="toggleTab(2)">投资挂单</text>
-				</view>
+				</view> -->
 			</view>
 				<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom">
 					<view style="padding:40upx;padding-bottom:0px;">

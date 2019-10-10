@@ -73,7 +73,8 @@
 					data:'https://blockfuntest.dm1.in/h5/html/index.html',
 					success:()=>{
 						uni.showToast({
-							title:'邀请卡链接已复制到剪贴板'
+							title:'邀请卡链接已复制到剪贴板',
+							icon:'none'
 						})
 					}
 				})
@@ -83,7 +84,8 @@
 					data:this.friendCode,
 					success:()=>{
 						uni.showToast({
-							title:'邀请码已复制到剪贴板'
+							title:'邀请码已复制到剪贴板',
+							icon:'none'
 						})
 					}
 				})

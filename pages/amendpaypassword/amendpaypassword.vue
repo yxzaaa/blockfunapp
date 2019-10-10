@@ -19,7 +19,7 @@
 			<view style="width:670upx;">
 				<possword-inputer @input="setPassword" v-if="currStep == 2" size="74upx" borderColor="rgba(255,255,255,0.4)" fontSize="48upx"></possword-inputer>
 			</view>
-			<navigator style="color:#DA53A2;font-size: 28upx;padding-top:30upx;padding-bottom:80upx;" url="../forgetpaypassword/forgetpaypassword">忘记密码？</navigator>
+			<navigator style="width:150upx;color:#DA53A2;font-size: 28upx;padding-top:30upx;padding-bottom:80upx;" url="../forgetpaypassword/forgetpaypassword">忘记密码？</navigator>
 			<fun-button value="确认" block large width="670upx" @handle="confirmStep"></fun-button>
 		</view>
 	</view>
@@ -80,12 +80,9 @@
 				}
 			},
 			confirmStep(){
-				if(this.currStep == 0){
-					//验证原支付密码
-					if(this.oldPassword.length == 8){
-						this.currStep = 1;
-					}
-				}else if(this.currStep == 1){
+				if(this.currStep == 0 && this.oldPassword.length == 8){
+					this.currStep = 1;
+				}else if(this.currStep == 1 && this.newPassWord.length == 8){
 					this.currStep = 2;
 				}else if(this.currStep == 2){
 					//修改支付密码
@@ -117,7 +114,7 @@
 								}
 							}
 						})
-					}else{
+					}else if(this.confirmPassword.length == 8){
 						uni.showToast({
 							title:'两次输入的密码不一致',
 							icon:'none'

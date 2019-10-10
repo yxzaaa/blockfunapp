@@ -16,7 +16,16 @@
 				</view>
 				<view class="row b-b">
 					<text class="tit">手机号</text>
-					<input v-model="phone" class="input" type="number" placeholder="请输入11位手机号" placeholder-style="color:rgba(255,255,255,0.5)"/>
+					<view style="display: flex;justify-content: space-between;align-items: center;">
+						<input maxlength="11" v-model="phone" class="input" type="number" placeholder="请输入11位手机号" placeholder-style="color:rgba(255,255,255,0.5)"/>
+						<picker @change="countryChange" :value="currCountry" :range="countryLib" :range-key="'name'" mode="selector">
+							<view 
+							style="padding:0upx 20upx;border-radius: 6upx;background: #2D1F25;line-height: 48upx;color:#fff;display: flex;justify-content: center;align-items: center;margin-left:20upx;">
+								<text style="#999;font-size: 24upx;white-space: nowrap;">{{countryLib[currCountry]?countryLib[currCountry].code:'CN'}}</text>
+								<image :src="imageLib.sanjiao" style="width:20upx;height:14upx;margin-left:6upx;"></image>
+							</view>
+						</picker>
+					</view>
 				</view>
 				<view class="row b-b">
 					<text class="tit">所属区域</text>
@@ -50,6 +59,7 @@
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import FunButton from '@/components/fun-button.vue';
+	import PhoneLib from '@/static/json/phone.json';
 	export default {
 		components:{
 			UniNavBar,
@@ -74,6 +84,7 @@
 					check:'../../static/bg/check.png',
 					checkbox:'../../static/bg/checkbox.png',
 					shape:'../../static/icons/Shape1.png',
+					sanjiao:'../../static/icons/sanjiao.png',
 				},
 				addressid:null,
 				getterName:'',
@@ -87,13 +98,16 @@
 				loadingMPData:true,
 				province:new Set(),
 				citys:new Set(),
-				areas:new Set()
+				areas:new Set(),
+				currCountry:46,
+				countryLib:[]
 			}
 		},
 		onPageScroll(val){
 			this.scroll=val.scrollTop
 		},
 		onLoad(){
+			this.countryLib = PhoneLib;
 			//获取当前编辑的收货地址数据
 			uni.getStorage({
 				key:'currEditAddress',
@@ -133,6 +147,10 @@
 			})
 		},
 		methods: {
+			getCallingCode(){
+				var str = this.countryLib[this.currCountry].callingCode;
+				return str.replace(/\s*/g,"");
+			},
 			//切换省市区
 			changeArea(e){
 				var values = e.detail.value;
@@ -178,13 +196,20 @@
 			},
 			//修改收货地址
 			addressPlus(){
+				if(this.phone.length < 11){
+					uni.showToast({
+						title:'请输入正确的手机号码',
+						icon:'none'
+					})
+					return;
+				}
 				this.$http({
 					url:'/member/address',
 					data:{
 						action:'edit',
 						areaid:this.areaid,
 						truename:this.getterName,
-						mobile:'86'+this.phone,
+						mobile:this.getCallingCode()+this.phone,
 						address:this.address,
 						default:this.isdefault?1:0,
 						id:this.addressid

@@ -18,7 +18,7 @@
 								<text class="text-vertical-top">我的邀请码</text>
 								<text class="text-vertical-bottom">{{friendCode}}</text>
 							</view>
-							<view class="lock-item-block" @click="copy">
+							<view class="lock-item-block" @click="copyCode">
 								复制
 							</view>
 						</view>
@@ -69,6 +69,16 @@
 		},
 		methods:{
 			copy(){
+				uni.setClipboardData({
+					data:'https://blockfuntest.dm1.in/h5/html/index.html',
+					success:()=>{
+						uni.showToast({
+							title:'邀请卡链接已复制到剪贴板'
+						})
+					}
+				})
+			},
+			copyCode(){
 				uni.setClipboardData({
 					data:this.friendCode,
 					success:()=>{

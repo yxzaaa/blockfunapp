@@ -19,7 +19,7 @@
 			</view>
 			<view class="status-box" style="padding:20upx 40upx;">
 				<view class="left-status">
-					<image :src="imageLib.logosmall" style="width:40upx;height:40upx;" />
+					<image :src="'/static/avatar/'+coin+'.png'" style="width:40upx;height:40upx;" />
 					<text style="font-size:30upx;font-family:'Montserrat-Light';color:#fff;">{{coin}}</text>
 					<!-- <text style="font-size:26upx;color:#999;">{{coin}}</text> -->
 				</view>

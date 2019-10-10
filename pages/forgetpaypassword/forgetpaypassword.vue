@@ -11,24 +11,24 @@
 			<view class="text">
 				<span class="number">手机验证码</span>
 				<view>
-					<input type="number" placeholder="请输入验证码" maxlength="6">
-					<span>发送验证码</span>
+					<input v-model="checkCode" type="number" placeholder="请输入验证码" maxlength="6">
+					<span @click="getCode">{{codeDelay === 0?'获取验证码':codeDelay+' s'}}</span>
 				</view>
 			</view>
 			<view class="text" style="margin-top:60upx;">
 				<span class="number">新支付密码</span>
 				<view>
-					<input type="password" maxlength="8" placeholder="请输入8位新支付密码">
+					<input v-model="password" type="password" maxlength="8" placeholder="请输入8位新支付密码">
 				</view>
 			</view>
 			<view class="text" style="margin-top:60upx;">
 				<span class="number">确认支付密码</span>
 				<view>
-					<input type="password" maxlength="8" placeholder="请再次输入支付密码">
+					<input v-model="confirmPassword" type="password" maxlength="8" placeholder="请再次输入支付密码">
 				</view>
 			</view>
 		</view>
-		<view class="commit">确认</view>
+		<view class="commit" @click="confirmChange">确认</view>
 	</view>
 </template>
 
@@ -49,14 +49,88 @@
 						type:'normal',
 						text:'取消'
 					},		
-				}
+				},
+				phone:'',
+				codeDelay:0,
+				password:'',
+				confirmPassword:'',
+				checkCode:'',
+				codeTimer:null,
 			}
+		},
+		onLoad(){
+			//获取用户手机号
+			uni.getStorage({
+				key:'userInfo',
+				success:res=>{
+					this.phone = res.data.login_name
+				}
+			})
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
 		methods: {
-			
+			getCode(){
+				if(this.codeDelay === 0){
+					this.$http({
+						url:'/v1/users/login/forget-login-password/send-code?login_name='+this.phone,
+						success:res=>{
+							if(res.code == 200){
+								this.codeDelay = 60;
+								this.codeTimer = setInterval(()=>{
+									if(this.codeDelay>0){
+										this.codeDelay --;
+									}else{
+										clearInterval(this.codeTimer);
+										this.codeTimer = null;
+									}
+								},1000);
+							}else{
+								uni.showToast({
+									title:res.message,
+									icon:'none'
+								})
+							}
+						}
+					})
+				}
+			},
+			confirmChange(){
+				if(this.password.length === 8 && this.password === this.confirmPassword){
+					this.$http({
+						url:'/v1/main/users/reset-confirm-account-payment-password',
+						data:{
+							validate_code:this.checkCode,
+							pay_password:this.password,
+							pay_password_hash:this.$md5(this.password)
+						},
+						success:res=>{
+							if(res.code == 200){
+								uni.showToast({
+									title:'支付密码设置成功，请牢记！',
+									icon:'none'
+								})
+								setTimeout(()=>{
+									uni.navigateBack({
+										delta:2
+									})
+								},1500)
+							}else{
+								uni.showToast({
+									title:res.message,
+									icon:'none'
+								})
+							}
+						}
+					})
+				}else{
+					uni.showToast({
+						title:'请检查密码输入',
+						icon:'none'
+					})
+				}
+			}
 		}
 	}
 </script>

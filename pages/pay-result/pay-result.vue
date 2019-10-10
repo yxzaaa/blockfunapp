@@ -36,7 +36,7 @@
 			<view class="orderinfo">
 				<view class="numinfo">
 					<span class="content">订单编号</span>
-					<span class="ordernum">{{orderId}}</span>
+					<span class="ordernum">{{order}}</span>
 				</view>
 				<view class="timeinfo">
 					<span class="content">下单时间</span>
@@ -84,6 +84,7 @@
 					}
 				],
 				orderId:null,
+				order:'',
 				payStatus:'1',
 				createTime:'',
 				payment:'',
@@ -101,6 +102,7 @@
 						this.createTime = res.data.create;
 						this.payment = res.data.payment;
 						this.amount = res.data.amount;
+						this.order = res.data.order;
 					}
 				}
 			})
@@ -132,17 +134,19 @@
 	.payNumber{
 		width:750upx;
 		height:68upx;
-		padding:80upx 243upx 0;
+		padding:80upx 0upx;
+		padding-bottom:0upx;
 		.symbolNumber{
-			width:264upx;
+			width:750upx;
 			height:68upx;
+			text-align: center;
 		}
 		.symbol{
 			font-size:32upx;
 			font-family:'Montserrat-Bold';
-			color:#DA53A2;
+			color:rgba(255,255,255,0.5);
 			font-weight: 600;
-			margin-right:10upx;
+			margin-right:20upx;
 		}
 		.price{
 			font-size:56upx;

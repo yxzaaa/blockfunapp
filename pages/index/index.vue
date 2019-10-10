@@ -85,9 +85,9 @@
 			return {
 				scroll:0,
 				navButtons:{
-					search:{
-						type:'normal'
-					}
+					// search:{
+					// 	type:'normal'
+					// }
 				},
 				imageLib:{
 					message:'../../static/icons/message.png',

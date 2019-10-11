@@ -29,7 +29,7 @@
 							<span>登录密码</span>
 						</view>
 						<view class="right">
-							<span>修改</span>
+							<span>重置</span>
 							<image src="../../static/bg/right.png"></image>
 						</view>
 					</view>

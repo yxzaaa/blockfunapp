@@ -274,6 +274,10 @@
             "path" : "pages/changepassword/changepassword",
             "style" : {}
         }
+        ,{
+            "path" : "pages/billdetails/billdetails",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

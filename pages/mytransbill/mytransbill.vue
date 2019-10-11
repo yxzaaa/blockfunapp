@@ -10,10 +10,10 @@
 		<view class="app-container full">
 			<view class="fix-tabs-box">
 				<view class="fix-tabs-item">
-					<text :class="{active:activeTab == 1}" @click="toggleTab(1)">借款挂单</text>
+					<text :class="{active:activeTab == 2}" @click="toggleTab(2)">借款挂单</text>
 				</view>
 				<!-- <view class="fix-tabs-item">
-					<text :class="{active:activeTab == 2}" @click="toggleTab(2)">投资挂单</text>
+					<text :class="{active:activeTab == 1}" @click="toggleTab(1)">投资挂单</text>
 				</view> -->
 			</view>
 				<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom">
@@ -40,15 +40,16 @@
 									<view class="debit">
 										<span class="text">周期(月)</span>
 										<span class="number">
-											{{item.month}}<span>月</span>
+											{{item.month}}<span>个月</span>
 										</span>
 									</view>
 								</view>
 								<view class="debit-btn">
 									<text v-if="getTimeDelay(item.expired_on)=='已过期'" style="color:#999;">{{getTimeDelay(item.expired_on)}}</text>
 									<text v-else>{{getTimeDelay(item.expired_on)}}</text>
-									<view>
-										<view @click="billUpOrDown(item.id,item.status)">{{item.status == 2?'上架':'下架'}}</view>
+									<view class="button-group">
+										<fun-button type="light" @handle="setDetail(index)" value="详情" width="150upx"></fun-button>
+										<fun-button width="150upx" @handle="billUpOrDown(item.id,item.status)" :value="item.status == 2?'上架':'下架'"></fun-button>
 									</view>
 								</view>
 							</view>
@@ -65,16 +66,18 @@
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import UniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
+	import FunButton from '@/components/fun-button.vue';
 	export default {
 		components:{
 			UniNavBar,
 			UniBackground,
-			UniLoadMore
+			UniLoadMore,
+			FunButton
 		},
 		data() {
 			return {
 				scroll:0,
-				activeTab:1,
+				activeTab:2,
 				currpage:1,
 				totalPage:1,
 				navButtons:{
@@ -104,6 +107,19 @@
 			this.updateList();
 		},
 		methods: {
+			//设置挂单详情
+			setDetail(index){
+				var details = this.borrowList[index];
+				uni.setStorage({
+					key:'my_bill_detail',
+					data:details,
+					success:()=>{
+						uni.navigateTo({
+							url:'../billdetails/billdetails'
+						})
+					}
+				})
+			},
 			//上拉加载
 			reachBottom(){
 				if(this.currPage<this.totalPage){
@@ -320,14 +336,8 @@
 				color:#DA53A2;
 				font-size: 24upx;
 			}
-			view{
-				width:192upx;
-				background: #DA53A2;
-				border-radius: 200upx;
-				text-align: center;
-				line-height: 64upx;
-				color: #FEFEFE;
-				font-size: 28upx;
+			.button-group{
+				width:320upx;
 			}
 			
 		}

@@ -6,7 +6,7 @@
 			:buttons="navButtons"
 		/>
 		<view class="app-container full"></view>
-		<view style="margin:0upx 40upx 0;color:#fff;font-size: 48upx;">修改登录密码</view>
+		<view style="margin:0upx 40upx 0;color:#fff;font-size: 48upx;">重置登录密码</view>
 		<view class="textbox">
 			<view class="text">
 				<span class="number">手机验证码</span>

@@ -244,7 +244,7 @@
 						data:{
 							coin: this.coinLib[this.currCoin],
 							price: this.price,
-							amount: this.totalPrice,
+							amount: this.totalCount,
 							rate: this.rate/100,
 							month: this.classLib[this.currClass].value,
 							password: this.password

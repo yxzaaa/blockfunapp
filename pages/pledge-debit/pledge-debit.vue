@@ -32,11 +32,11 @@
 			</view>
 			<view class="fix-tabs-box">
 				<view class="fix-tabs-item">
-					<text :class="{active:activeTab == 1}" @click="toggleTab(1)">我要借款</text>
+					<text :class="{active:activeTab == 2}" @click="toggleTab(2)">我要借款</text>
 				</view>
-				<view class="fix-tabs-item">
-					<text :class="{active:activeTab == 2}" @click="toggleTab(2)">我要投资</text>
-				</view>
+				<!-- <view class="fix-tabs-item">
+					<text :class="{active:activeTab == 1}" @click="toggleTab(1)">我要投资</text>
+				</view> -->
 			</view>
 			<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom">
 				<view style="padding:40upx;padding-bottom:0px;">
@@ -90,7 +90,7 @@
 		data() {
 			return {
 				scroll:0,
-				activeTab:1,
+				activeTab:2,
 				currPage:1,
 				totalPage:1,
 				navButtons:{

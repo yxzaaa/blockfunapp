@@ -21,7 +21,11 @@
 			<view class="news-box">
 				<view class="news-list">
 					<image :src="imageLib.message"></image>
-					<text>{{message}}</text>
+					<swiper vertical="true" :autoplay="true">
+						<block v-for="(item,index) in notices" :key="index">
+							<swiper-item><text>{{item.title}}</text></swiper-item>
+						</block>
+					</swiper>
 				</view>
 				<navigator class="more-detail" url="../publicnotice/publicnotice">更多</navigator>
 			</view>
@@ -117,17 +121,28 @@
 						open:false
 					},
 					{
-						name:'信任转让',
+						name:'新人转让',
 						iconSrc:'../../static/icons/zhuanrang.png',
 						link:'../assignment/assignment',
 						open:false
 					},
 				],
-				walletList:[]
+				walletList:[],
+				notices:[]
 			}
 		},
 		onShow(){
 			this.updateList();
+			//获取公告列表
+			this.$http({
+				url:'/announce/search',
+				success:res=>{
+					console.log(res);
+					if(res.code == 200){
+						this.notices = res.data;
+					}
+				}
+			})
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
@@ -236,13 +251,23 @@
 				height:36upx;
 				margin-right:15upx;
 			}
-			text{
-				font-size: 24upx;
-				color:#999;
-				max-width: 500upx;
+			swiper{
+				height:32upx;
+				width:500upx;
 				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
+				swiper-item{
+					display: flex;
+					align-items: center;
+					text{
+						width:100%;
+						overflow: hidden;
+						color:rgba(255,255,255,0.5);
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						font-size: 24upx;
+						line-height: 32upx;
+					}
+				}
 			}
 		}
 		.more-detail{

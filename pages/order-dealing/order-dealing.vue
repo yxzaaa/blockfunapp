@@ -67,6 +67,10 @@
 					<span class="content">订单编号</span>
 					<span class="ordernum">{{orderInfo.order}}</span>
 				</view>
+				<view class="timeinfo" v-if="orderInfo.send_no !== ''">
+					<span class="content">快递信息</span>
+					<span class="date">{{orderInfo.send_type}} {{orderInfo.send_no}}</span>
+				</view>
 				<view class="timeinfo">
 					<span class="content">下单时间</span>
 					<span class="date">{{orderInfo.create}}</span>
@@ -79,8 +83,8 @@
 			<view class="money" v-if="!loading">
 				<span style="color:#fff;font-size: 28upx;margin-right: 20upx;">实付款</span>
 				<span style="color:#DA53A2;font-size:28upx;font-family: Montserrat-Bold;font-weight: 600;">
-					{{orderInfo.amount}}
-					<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
+					{{getNum(orderInfo.paid)}}
+					<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">{{orderInfo.unit}}</span>
 				</span>
 			</view>
 			<view style="padding:10upx 40upx;" v-if="loading">
@@ -149,6 +153,9 @@
 						}
 					}
 				})
+			},
+			getNum(num){
+				return (parseFloat(num)).toFixed(4);
 			},
 			getOrderDelay(){
 				var hh = 0,mm = 0,ss = 0;

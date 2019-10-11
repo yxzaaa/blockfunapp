@@ -17,7 +17,7 @@
 				<view class="fun-horizen"></view>
 				<view class="fun-card-item">
 					<view class="erweima">
-						<image :src="erweima"></image>
+						<image :src="imgQrCode"></image>
 					</view>
 				</view>
 				<view class="fun-card-item" style="padding-top:10upx;">
@@ -47,6 +47,7 @@
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import FunButton from '@/components/fun-button.vue';
+	import QRCode from '@/components/wxqrcode.js';
 	export default {
 		components:{
 			UniNavBar,
@@ -67,12 +68,14 @@
 				},
 				erweima:'../../static/image.png',
 				coin:'',
-				address:''
+				address:'',
+				imgQrCode:''
 			};
 		},
 		onLoad(option){
 			this.coin = option.coin;
 			this.address = option.address;
+			this.qrcode();
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
@@ -84,7 +87,12 @@
 					success:()=>{
 					}
 				})
-			}
+			},
+			qrcode () {
+			  this.imgQrCode = QRCode.createQrCodeImg(this.address, {  
+			       size: parseInt(100)//二维码大小  
+			  })
+			},
 		}
 	}
 </script>

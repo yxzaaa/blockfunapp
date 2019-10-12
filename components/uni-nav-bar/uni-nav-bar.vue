@@ -17,7 +17,7 @@
 		<!-- 搜索框布局 -->
 		<view class="search-bar-box" v-if="layout === 'search'">
 			<div class="search-input-box">
-				<input @input="input" type="text" class="search-input" placeholder="请输入商品信息" :focus="searchFocus">
+				<input adjust-position="false" confirm-type="搜索" @confirm="search" @input="input" type="text" class="search-input" placeholder="请输入商品信息" :focus="searchFocus">
 				<image src="../../static/icons/input-search.png" class="input-icon" @click="search"/>
 			</div>
 		</view>

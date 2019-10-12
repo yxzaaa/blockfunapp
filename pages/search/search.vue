@@ -32,6 +32,7 @@
 					v-for="(item,index) in itemList" :key="item.id"
 					class="guess-item"
 					:url="'../detail/detail?id='+item.id"
+					:style="{paddingBottom:index == itemList.length-1?'0upx':'40upx'}"
 				>
 				<!-- 引入图片 -->
 					<view class="image-wrapper">
@@ -179,7 +180,7 @@
 									uni.getStorage({
 										key:'search_history',
 										success:val=>{
-											if(this.searchText.length>0){
+											if(!(new Set(val.data).has(this.searchText))){
 												val.data.push(this.searchText);
 												this.historyList = val.data;
 												uni.setStorage({
@@ -226,8 +227,7 @@
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: center;
-		padding: 30upx 0upx 10upx;
-		margin-top: 16upx;
+		padding:0upx;
 	}
 	
 	.guess-list {

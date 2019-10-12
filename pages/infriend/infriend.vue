@@ -7,7 +7,7 @@
 				<view class="button-group">
 					<fun-button @handle="copy" value="复制链接" width="320upx" type="text" icon="../../static/icons/icon_lianjie.png"></fun-button>
 					<span>|</span>
-					<fun-button url="../initcard/initcard" value="生成邀请卡" width="320upx" type="text" icon="../../static/icons/icon_yaoqinka.png"></fun-button>
+					<fun-button :url="'../initcard/initcard?code='+friendCode" value="生成邀请卡" width="320upx" type="text" icon="../../static/icons/icon_yaoqinka.png"></fun-button>
 				</view>
 			</view>
 			<view style="padding:0upx 40upx;padding-bottom:150upx;">

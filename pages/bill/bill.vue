@@ -8,9 +8,9 @@
 			:buttons="navButtons"
 		/>
 		<view class="app-container full">
-			<horizon-tab :tabs="statusTabs" padding="42" @click="updateList"></horizon-tab>
+			<horizon-tab :tabs="statusTabs" padding="42" @click="updateList" :active-tab.sync="currStatus"></horizon-tab>
 			<!-- 收益 -->
-			<scroll-view scroll-y class="earnbox" @scrolltolower="reachBottom">
+			<scroll-view scroll-y class="earnbox" @scrolltolower="reachBottom"  @touchstart="start" @touchend="end">
 				<view class="earning" v-for="(item,index) in walletList" :key="index">
 					<view class="earn-text">
 						<view class="earn-img" style="width:36upx;height:36upx;margin-right: 24upx;">
@@ -50,6 +50,7 @@
 		data() {
 			return {
 				scroll:0,
+				currStatus:0,
 				navButtons:{
 					back:{
 						type:'normal',
@@ -61,7 +62,8 @@
 				currPage:1,
 				totalPage:0,
 				walletList:[],
-				loadStatus:'noMore'
+				loadStatus:'noMore',
+				startData:{}
 			}
 		},
 		onPageScroll(val){
@@ -136,6 +138,24 @@
 						this.totalPage = res.max;
 					}
 				})
+			},
+			start(e){
+			    this.startData.clientX=e.changedTouches[0].clientX;        
+			    this.startData.clientY=e.changedTouches[0].clientY;
+			},
+			end(e){
+			    const subX=e.changedTouches[0].clientX-this.startData.clientX;
+			    if(subX<-100){
+					if(this.currStatus<this.statusTabs.length-1){
+						this.currStatus++;
+						this.updateList(this.currStatus);
+					}
+				}else if(subX>100){
+					if(this.currStatus>0){
+						this.currStatus--;
+						this.updateList(this.currStatus);
+					}
+				}
 			},
 			getNum(num){
 				return (parseFloat(num)).toFixed(2);

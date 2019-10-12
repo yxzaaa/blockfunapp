@@ -42,45 +42,21 @@
 				imageLib:{
 					bg:'../../static/bg/lockbill.jpg'
 				},
-				friendCount:0,
-				friends:[],
 				imgQrCode:''
 			}
 		},
-		onLoad(){
-			//获取我的好友列表
-			this.$http({
-				url:'/v1/main/users/my-friends',
-				success:res=>{
-					if(res.code == 200){
-						this.friendCount = res.data.count;
-						this.friends = res.data.friends;
-						this.qrcode();
-					}
-				}
-			})
+		onLoad(option){
+			this.qrcode(option.code);
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
 		methods: {
-			getDate(timestamp){
-				var date = new Date(timestamp*1000);
-				var year = date.getFullYear();
-				var month = date.getMonth() + 1;
-				var day = date.getDate();
-				var hour = date.getHours();
-				var min = date.getMinutes();
-				month = month>=10?month:'0'+month;
-				day = day>=10?day:'0'+day;
-				hour = hour>=10?hour:'0'+hour;
-				min = min>=10?min:'0'+min;
-				return year+'/'+month+'/'+day+' '+hour+':'+min
-			},
-			qrcode () {
-			  this.imgQrCode = QRCode.createQrCodeImg('https://blockfuntest.dm1.in/h5/html/index.html', {  
-			       size: parseInt(100)//二维码大小  
-			  })
+			qrcode (code) {
+				var url = 'https://blockfuntest.dm1.in/h5/html/index.html?conn='+code;
+				this.imgQrCode = QRCode.createQrCodeImg(url, {  
+				    size: parseInt(200)//二维码大小  
+				})
 			},
 		}
 	}

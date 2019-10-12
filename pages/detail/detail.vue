@@ -62,7 +62,7 @@
 					</view>
 				</view>
 			</uni-popup>
-			<swiper v-if="!loading" class="carousel" indicator-dots=true circular=true interval="3000" duration="700" indicator-active-color="#DA53A2">
+			<swiper v-if="!loading" class="carousel" indicator-dots=true circular=true interval="3000" duration="700" indicator-active-color="#fafafa">
 				<swiper-item v-for="(item,index) in imgList" :key="index">
 					<view class="image-wrapper image">
 						<image
@@ -271,6 +271,12 @@
 								active:null
 							})
 						})
+						if(this.skuActive.length == 1){
+							this.skuActive.push({
+								title:'empty',
+								active:1
+							})
+						}
 						Object.keys(this.skuCodes).forEach(key => {
 						     this.totalStock += parseInt(this.skuCodes[key]);
 						})
@@ -307,6 +313,7 @@
 					}else{
 						this.currStock = this.totalStock;
 					}
+					console.log(this.skuActive);
 				}
 			},
 			getStock(index,i){

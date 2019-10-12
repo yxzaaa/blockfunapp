@@ -10,7 +10,7 @@
 		/>
 		<view class="app-container">
 			<view class="banner-box" v-if="!loading">
-				<swiper :indicator-dots="true" :autoplay="true" style="height:720upx;">
+				<swiper :indicator-dots="true" :autoplay="true" style="height:720upx;" indicator-active-color="#fafafa">
 					<block v-for="(item,index) in bannerList"
 					:key="index"
 					>

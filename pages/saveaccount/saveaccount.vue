@@ -90,7 +90,7 @@
 			},
 			qrcode () {
 			  this.imgQrCode = QRCode.createQrCodeImg(this.address, {  
-			       size: parseInt(100)//二维码大小  
+			       size: parseInt(200)//二维码大小  
 			  })
 			},
 		}

@@ -4,9 +4,9 @@
 		<uni-nav-bar :title="coin+' 账单'" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<view class="app-container full">
 			<view class="horizon-tab">
-				<horizon-tab :tabs="navTabs" padding="50" @click="updateList"/>
+				<horizon-tab :tabs="navTabs" padding="50" @click="updateList" :active-tab.sync="currStatus"/>
 			</view>
-			<scroll-view class="order-box" scroll-y style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom">
+			<scroll-view class="order-box" scroll-y style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom" @touchstart="start" @touchend="end">
 				<view class="horizon-list">
 					<view class="horizon-list-item" v-for="val in xdogList" :key="val.id">
 						<view class="left-item">
@@ -68,7 +68,8 @@
 				coin:'',
 				currPage:1,
 				totalPage:1,
-				loadStatus:'noMore'
+				loadStatus:'noMore',
+				startData:{}
 			};
 		},
 		onLoad(option){
@@ -128,6 +129,27 @@
 						}
 					}
 				})
+			},
+			start(e){
+			                    
+			    this.startData.clientX=e.changedTouches[0].clientX;
+			                 
+			    this.startData.clientY=e.changedTouches[0].clientY;
+			},
+			end(e){
+			    // console.log(e)
+			    const subX=e.changedTouches[0].clientX-this.startData.clientX;
+			    if(subX<-100){
+					if(this.currStatus<this.navTabs.length-1){
+						this.currStatus++;
+						this.updateList(this.currStatus);
+					}
+				}else if(subX>100){
+					if(this.currStatus>0){
+						this.currStatus--;
+						this.updateList(this.currStatus);
+					}
+				}
 			},
 			toDetail(item){
 				uni.setStorage({

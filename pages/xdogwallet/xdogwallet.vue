@@ -4,9 +4,9 @@
 		<uni-nav-bar :title="coin+' Wallet 钱包'" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<view class="app-container full">
 			<view class="horizon-tab">
-				<horizon-tab :tabs="navTabs" padding="40" @click="updateList"/>
+				<horizon-tab :tabs="navTabs" padding="40" @click="updateList" :active-tab.sync="currStatus"/>
 			</view>
-			<scroll-view class="order-box" scroll-y>
+			<scroll-view class="order-box" scroll-y @scrolltolower="reachBottom" @touchstart="start" @touchend="end">
 				<view class="horizon-list">
 					<block v-for="(item,index) in xdogList" :key="index">
 						<view class="horizon-list-item" @click="toDetail(item)">
@@ -51,6 +51,7 @@
 				imageLib:{
 					more:'../../static/icons/more.png'
 				},
+				currStatus:0,
 				navTabs:[
 					{
 						id:0,
@@ -86,6 +87,7 @@
 					// }
 				],
 				coin:'',
+				startData:{}
 			};
 		},
 		onLoad(option){
@@ -96,6 +98,24 @@
 			this.scroll = val.scrollTop;
 		},
 		methods:{
+			start(e){
+			    this.startData.clientX=e.changedTouches[0].clientX;        
+			    this.startData.clientY=e.changedTouches[0].clientY;
+			},
+			end(e){
+			    const subX=e.changedTouches[0].clientX-this.startData.clientX;
+			    if(subX<-100){
+					if(this.currStatus<this.navTabs.length-1){
+						this.currStatus++;
+						this.updateList(this.currStatus);
+					}
+				}else if(subX>100){
+					if(this.currStatus>0){
+						this.currStatus--;
+						this.updateList(this.currStatus);
+					}
+				}
+			},
 			//更新转账记录
 			updateList(index){
 				uni.showLoading({

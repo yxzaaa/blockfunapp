@@ -289,7 +289,7 @@
 	.fiexd-btn{
 		position: fixed;
 		right:70upx;
-		bottom:120upx;
+		bottom:70upx;
 		background: #fff;
 		width:98upx;
 		height:96upx;

@@ -1,7 +1,7 @@
 <template>
-	<scroll-view class="tab-box" scroll-x="true" scroll-left="0">
+	<scroll-view class="tab-box" scroll-x="true" :scroll-into-view="'kid'+activeTab" scroll-with-animation="true">
 		<block v-for="(item,index) in tabs" :key="index">
-			<view :class="['tab-item',activeTab == index?'active':'']" @click="toggleActive(index)" :style="{paddingLeft:padding+'upx',paddingRight:padding+'upx'}">{{item.text}}</view>
+			<view :id="'kid'+index" :class="['tab-item',activeTab == index?'active':'']" @click="toggleActive(index)" :style="{paddingLeft:padding+'upx',paddingRight:padding+'upx'}">{{item.text}}</view>
 		</block>
 	</scroll-view>
 </template>
@@ -14,18 +14,21 @@
 			},
 			padding:{
 				type:String
+			},
+			activeTab:{
+				default:0
 			}
 		},
 		data() {
 			return {
-				activeTab:0
+				position:0,
 			};
 		},
 		mounted(){
 		},
 		methods:{
 			toggleActive(index){
-				this.activeTab = index;
+				this.$emit('update:activeTab',index)
 				this.$emit('click',index);
 			},
 		}

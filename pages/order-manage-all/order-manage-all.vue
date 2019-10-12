@@ -9,13 +9,13 @@
 		/>
 		<view class="app-container full">
 			<!-- 顶部滑动 -->
-			<horizon-tab :tabs="statusTabs" padding="45" @click="toggleStatus" ></horizon-tab>
-			<view class='empty-box' v-if="orderList.length == 0">
-				<image src="../../static/icons/empty_order.png" style="width:420upx;height:200upx;"></image>
-				<text>您没有相关订单</text>
-			</view>
-			<scroll-view v-else class="order-box" scroll-y @scrolltolower="reachBottom">
-				<view class="managebox" v-for="(val,index) in orderList" :key="index"> <!-- 待办管理 -->
+			<horizon-tab :tabs="statusTabs" padding="45" @click="toggleStatus" :active-tab.sync="currStatus" ></horizon-tab>
+			<scroll-view class="order-box" scroll-y @scrolltolower="reachBottom" @touchstart="start" @touchend="end">
+				<view class='empty-box' v-if="orderList.length == 0">
+					<image src="../../static/icons/empty_order.png" style="width:420upx;height:200upx;"></image>
+					<text>您没有相关订单</text>
+				</view>
+				<view v-if="orderList.length !== 0" class="managebox" v-for="(val,index) in orderList" :key="index"> <!-- 待办管理 -->
 					<view class="backlog" @click="goDetail(val.id)"> 
 						<span>{{val.order}}</span>
 						<view style="font-size:28upx" :style="{color:getStatus(val.status).color }">{{getStatus(val.status).name}}</view>
@@ -27,7 +27,7 @@
 							</view>
 							<view class="text">
 								<span style="color:#fff;font-size:26upx;width:470upx;height:66upx;line-height: 34upx;display: block;">{{val1.title.length>40?val1.title.substring(0,40)+' ...':val1.title}}</span>
-								<scroll-view scroll-x="true" style="white-space: nowrap;width:470upx;height:42upx;">
+								<scroll-view scroll-x="true" style="white-space: nowrap;width:470upx;height:44upx;display: flex;align-items: center;">
 									<span style="color: #999999;font-size:24upx;margin-right:24upx;">数量：{{val1.number}}</span>
 									<span style="color: #999999;font-size:24upx;">{{val1.p1}}：{{val1.s1}}</span>
 									<span style="color: #999999;font-size:24upx;margin-left:24upx;" v-if="val1.p2">{{val1.p2}}：{{val1.s2}}</span>
@@ -54,7 +54,7 @@
 						<fun-button @handle="confirmReceipt(val.id)" class="funbtn1" value="确认收货" width="200upx" v-if="val.status == 3"></fun-button>
 					</view>
 				</view>
-				<uni-load-more :status="loadStatus"></uni-load-more>
+				<uni-load-more v-if="orderList.length !== 0" :status="loadStatus"></uni-load-more>
 			</scroll-view>
 		</view>
 	</view>
@@ -95,7 +95,8 @@
 				currStatus:0,
 				currPage:1,
 				totalPage:1,
-				loadStatus:'noMore'
+				loadStatus:'noMore',
+				startData:{}
 			}
 		},
 		onPageScroll(val){
@@ -140,6 +141,24 @@
 						}
 					}
 				})
+			},
+			start(e){         
+			    this.startData.clientX=e.changedTouches[0].clientX;        
+			    this.startData.clientY=e.changedTouches[0].clientY;
+			},
+			end(e){
+			    const subX=e.changedTouches[0].clientX-this.startData.clientX;
+			    if(subX<-100){
+					if(this.currStatus<this.statusTabs.length-1){
+						this.currStatus++;
+						this.toggleStatus(this.currStatus);
+					}
+				}else if(subX>100){
+					if(this.currStatus>0){
+						this.currStatus--;
+						this.toggleStatus(this.currStatus);
+					}
+				}
 			},
 			//确认收货
 			confirmReceipt(id){

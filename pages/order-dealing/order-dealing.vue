@@ -8,7 +8,17 @@
 			:opacity="scroll"
 			:buttons="navButtons"
 		/>
-		<view class="app-container full">
+		<view class="app-container full fixbutton">
+			<!-- 底部按钮 -->
+			<view class="fixed-buttons" style="display: flex;justify-content: flex-end;align-items: center;" v-if="orderInfo.status && (orderInfo.status == 1 || orderInfo.status ==3)">
+				<view class="button-group" style="width:420upx;justify-content: space-between;" v-if="orderInfo.status && orderInfo.status == 1">
+					<fun-button value="取消订单" width="200upx" background="rgba(41,26,33,0.6)" color="#999" large @handle="cancelOrder"></fun-button>
+					<fun-button value="去支付" width="200upx" large @handle="goPayOrder"></fun-button>
+				</view>
+				<view class="button-group" style="width:670upx;" v-if="orderInfo.status && orderInfo.status == 3">
+					<fun-button value="确认收货" width="670upx" large @handle="confirmReceipt"></fun-button>
+				</view>
+			</view>
 			<!-- 待付款计时器 -->
 			<view class="topay" v-if="!loading">
 				<view style="display: flex;flex-direction: column;">
@@ -68,7 +78,7 @@
 					<span class="ordernum">{{orderInfo.order}}</span>
 				</view>
 				<view class="timeinfo" v-if="orderInfo.send_no !== ''">
-					<span class="content">快递信息</span>
+					<span class="content">物流信息</span>
 					<span class="date">{{orderInfo.send_type}} {{orderInfo.send_no}}</span>
 				</view>
 				<view class="timeinfo">
@@ -102,11 +112,13 @@
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import Skeleton from '@/components/Skeleton.vue';
+	import FunButton from '@/components/fun-button.vue';
 	export default {
 		components:{
 			UniNavBar,
 			UniBackground,
-			Skeleton
+			Skeleton,
+			FunButton
 		},
 		data() {
 			return {
@@ -162,7 +174,6 @@
 				hh = Math.floor(this.getDelay/3600);
 				mm = Math.floor((this.getDelay - hh*3600)/60);
 				ss = this.getDelay - hh*3600 - mm*60;
-				hh = hh>=10?hh:'0'+hh;
 				mm = mm>=10?mm:'0'+mm;
 				ss = ss>=10?ss:'0'+ss;
 				if(hh == 0){
@@ -202,6 +213,48 @@
 					status:currStatus,
 					img:currImg
 				};
+			},
+			//确认收货
+			confirmReceipt(){
+				uni.showModal({
+					title:'确认收货？',
+					content:'确认收货后货款将转到商家账户！',
+					success:(res)=>{
+						if (res.confirm) {
+							this.$http({
+								url:'/order/receive?id='+this.orderId,
+								success:res=>{
+									if(res.code == 200){
+										this.getOrderDetail();
+									}
+								}
+							})
+						}
+					}
+				})
+			},
+			goPayOrder(){
+				uni.navigateTo({
+					url:'../pay-order/pay-order?id='+this.orderId+'&amount='+this.orderInfo.amount
+				})
+			},
+			cancelOrder(){
+				uni.showModal({
+					title:'取消订单？',
+					content:'亲，确定要抛弃我吗！',
+					success:(res)=>{
+						if (res.confirm) {
+							this.$http({
+								url:'/order/close?id='+this.orderId,
+								success:res=>{
+									if(res.code == 200){
+										this.getOrderDetail();
+									}
+								}
+							})
+						}
+					}
+				})
 			},
 			getContent(status){
 				var currContent="";

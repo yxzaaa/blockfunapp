@@ -77,11 +77,11 @@
 					</view>
 				</navigator>
 				<view class="manage">
-					<span class="title">在线客服</span>
+					<span class="title">提交工单</span>
 					<view>
 						<span class="goodsinfo">
 							<span class="number">0</span>
-							<span class="text">条客服信息</span>
+							<span class="text">条工单信息</span>
 						</span>
 						<image src="../../static/bg/service.png" style="width:72upx;height:72upx;"></image>
 					</view>

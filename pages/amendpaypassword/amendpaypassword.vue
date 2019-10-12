@@ -81,7 +81,25 @@
 			},
 			confirmStep(){
 				if(this.currStep == 0 && this.oldPassword.length == 8){
-					this.currStep = 1;
+					//验证原密码
+					this.$http({
+						url:'/v1/main/users/reset-confirm-account-payment-password-by-password',
+						data:{
+							password:this.oldPassword,
+							pay_password:this.oldPassword,
+							pay_password_hash:this.$md5(this.oldPassword)
+						},
+						success:res=>{
+							if(res.code == 200){
+								this.currStep = 1;
+							}else{
+								uni.showToast({
+									title:res.message,
+									icon:'none'
+								})
+							}
+						}
+					})
 				}else if(this.currStep == 1 && this.newPassWord.length == 8){
 					this.currStep = 2;
 				}else if(this.currStep == 2){

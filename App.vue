@@ -13,7 +13,18 @@
 			}
 		},
 		onShow: function() {
-			
+			//获取用户信息，验证登录状态
+			this.$http({
+				url:'/v1/main/users/user-info',
+				success:res=>{
+					console.log(res);
+					if(res.code !== 200){
+						uni.reLaunch({
+							url:'/pages/login/login'
+						})
+					}
+				}
+			})
 		},
 		onHide: function() {
 		},

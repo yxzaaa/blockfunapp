@@ -541,14 +541,16 @@
 				padding-top:40upx;
 				span{
 					color:#ffffff;
-					padding:24upx;
+					padding:24upx 32upx;
 					background:#15030B;
 					border-radius: 8upx;
 					margin-right:20upx;
 					font-size: 24upx;
 					&.active{
-						box-shadow: 0px 0px 1upx 2upx #DA53A2 inset;
+						box-shadow: 0px 0px 1px 1px #DA53A2 inset;
+						// border:2upx solid #DA53A2;
 						color:#DA53A2;
+						font-weight: bold;
 					}
 					&.nostock{
 						opacity: 0.5;

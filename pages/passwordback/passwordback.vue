@@ -9,8 +9,17 @@
 			</view>
 			<view class="login-form">
 				<view class="login-form-item">
-					<image class="login-form-label" :src="imageLib.phone"></image>
-					<input type="number" class="login-form-input" placeholder="手机号码" maxlength="11" v-model="phone"/>
+					<view style="display: flex;justify-content: flex-start;align-items: center;">
+						<image class="login-form-label" :src="imageLib.phone"></image>
+						<input style="width:480upx;" type="number" class="login-form-input" placeholder="手机号码" maxlength="11" v-model="phone"/>
+					</view>
+					<picker @change="countryChange" :value="currCountry" :range="countryLib" :range-key="'name'" mode="selector">
+						<view 
+						style="padding:0upx 20upx;border-radius: 6upx;background: #2D1F25;line-height: 48upx;color:#fff;display: flex;justify-content: center;align-items: center;margin-left:20upx;">
+							<text style="#999;font-size: 24upx;white-space: nowrap;">{{countryLib[currCountry]?countryLib[currCountry].code:'CN'}}</text>
+							<image :src="imageLib.sanjiao" style="width:20upx;height:14upx;margin-left:6upx;"></image>
+						</view>
+					</picker>
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.cert"></image>
@@ -36,6 +45,7 @@
 	import UniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import UniBackground from '@/components/uni-background/uni-background.vue';
 	import FunButton from '@/components/fun-button.vue';
+	import PhoneLib from '@/static/json/phone.json';
 	export default {
 		components:{
 			UniNavBar,
@@ -56,19 +66,32 @@
 					password:'../../static/icons/icon_mima.png',
 					cert:'../../static/icons/icon_yanzhengma.png',
 					code:'../../static/icons/icon_yaoqingma.png',
+					sanjiao:'../../static/icons/sanjiao.png',
 				},
 				codeDelay:0,
 				codeTimer:null,
 				phone:'',
 				checkCode:'',
 				password:'',
+				currCountry:46,
+				countryLib:[]
 			};
 		},
+		onLoad(){
+			this.countryLib = PhoneLib;
+		},
 		methods:{
+			countryChange(e){
+				this.currCountry = e.target.value;
+			},
+			getCallingCode(){
+				var str = this.countryLib[this.currCountry].callingCode;
+				return str.replace(/\s*/g,"");
+			},
 			getCode(){
 				if(this.codeDelay === 0 && this.phone.length === 11){
 					this.$http({
-						url:'/v1/users/login/forget-login-password/send-code?login_name=86'+this.phone,
+						url:'/v1/users/login/forget-login-password/send-code?login_name='+this.getCallingCode()+this.phone,
 						success:res=>{
 							if(res.code == 200){
 								this.codeDelay = 60;
@@ -99,7 +122,7 @@
 				this.$http({
 					url:'/v1/users/login/forget-login-password/reset',
 					data:{
-						login_name:'86'+this.phone,
+						login_name:this.getCallingCode()+this.phone,
 						new_password:this.password,
 						new_password_hash:this.$md5(this.password),
 						validate_code:this.checkCode

@@ -21,7 +21,6 @@
 		},
 		data() {
 			return {
-				position:0,
 			};
 		},
 		mounted(){

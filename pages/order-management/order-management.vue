@@ -190,7 +190,7 @@
 									data:res.data,
 									success:res=>{
 										uni.navigateTo({
-											url:'../pay-order/pay-order'
+											url:'../pay-order/pay-order' 
 										})
 									}
 								})

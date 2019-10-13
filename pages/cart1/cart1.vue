@@ -39,9 +39,9 @@
 								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';">{{getPrice(item.price,item.num,1)}}</span>
 								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
 								<span class="cut" style="position:absolute;right:0upx;display: inline-block;bottom:2upx;">
-									<span style="margin-right:16upx;font-size:30upx;color:#fff;font-weight: bold;display: inline-block;" @click="setNum(index,0)"> - </span>
+									<span style="margin-right:16upx;font-size:40upx;color:#fff;font-weight: bold;display: inline-block;" @click="setNum(index,0)"> - </span>
 									<span style="display:inline-block;#99999;background:#280617;font-size:24upx;color:#fff;height:40upx;line-height: 40upx;text-align: center;padding:0upx 16upx;border-radius: 6upx;">{{item.num}}</span>
-									<span style="margin-left:16upx;font-size:30upx;color:#fff;font-weight: bold;display: inline-block;" @click="setNum(index,1)"> + </span>
+									<span style="margin-left:16upx;font-size:40upx;color:#fff;font-weight: bold;display: inline-block;" @click="setNum(index,1)"> + </span>
 								</span>
 							</span>
 						</view>

@@ -60,15 +60,15 @@
 					</view>
 					<view class="text">
 						<span style="color:#fff;font-size:26upx;width:470upx;height:66upx;line-height: 34upx;display: block;">{{item.title.length>40?item.title.substring(0,40)+' ...':item.title}}</span>
-						<scroll-view scroll-x="true" style="white-space: nowrap;width:470upx;height:44upx;display: flex;align-items: center;">
+						<view style="overflow-x:auto;white-space: nowrap;width:470upx;display: flex;align-items: center;padding-top:14upx;">
 							<span style="color: #999999;font-size:24upx;margin-right:20upx;">数量：{{item.number}}</span>
 							<span style="color: #999999;font-size:24upx;margin-right:20upx;">{{item.p1}}：{{item.s1}}</span>
 							<span style="color: #999999;font-size:24upx;" v-if="item.p2">{{item.p2}}：{{item.s2}}</span>
-						</scroll-view>
-						<span>
+						</view>
+						<view style="white-space: nowrap;width:470upx;display: flex;align-items: center;padding-top:8upx;">
 							<span style="color:#fff;font-size:28upx;font-weight: bold;font-family: Montserrat-Bold;">{{item.price}}</span>
 							<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
-						</span>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -208,6 +208,10 @@
 						currStatus = '已取消';
 						currImg = '../../static/bg/orders/img_right.png';
 						break;
+					case 9:
+						currStatus = '已关闭';
+						currImg = '../../static/bg/orders/img_right.png';
+						break;
 				}
 				return {
 					status:currStatus,
@@ -274,6 +278,9 @@
 						break;
 					case 8:
 						currContent = '订单已取消';
+						break;
+					case 9:
+						currContent = '商家关闭订单';
 						break;
 				}
 				return currContent;

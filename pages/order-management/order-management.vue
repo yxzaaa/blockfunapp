@@ -185,14 +185,8 @@
 						},
 						success:res=>{
 							if(res.code == 200){
-								uni.setStorage({
-									key:'submit_order_result',
-									data:res.data,
-									success:res=>{
-										uni.navigateTo({
-											url:'../pay-order/pay-order' 
-										})
-									}
+								uni.navigateTo({
+									url:'../pay-order/pay-order?id='+res.data.id+'&amount='+res.data.amount
 								})
 							}else{
 								uni.showToast({

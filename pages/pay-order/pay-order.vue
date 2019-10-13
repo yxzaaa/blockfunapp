@@ -92,13 +92,21 @@
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
-		onLoad(){
-			uni.getStorage({
-				key:'submit_order_result',
+		onLoad(option){
+			this.amountCount = option.amount;
+			this.orderId = option.id;
+			//获取币种和汇率
+			this.$http({
+				url:'/v1/main/users/accounts-info',
 				success:res=>{
-					this.orderId = res.data.id;
-					this.amountCount = res.data.amount;
-					this.walletList = res.data.wallet;
+					if(res.code == 200){
+						res.data.mall.map(item=>{
+							this.walletList.push({
+								coin:item.coin,
+								amount:parseFloat(this.amountCount/item.unit_price).toFixed(4)
+							})
+						})
+					}
 				}
 			})
 		},

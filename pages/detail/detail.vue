@@ -242,13 +242,21 @@
 						scene:'WXSenceTimeline',
 					}
 				],
-				imgQrCode:''
+				imgQrCode:'',
+				friendCode:''
 			};
 		},
 		onPageScroll(val){
 			this.scroll = val.scrollTop;
 		},
 		onLoad(option){
+			//获取邀请码
+			uni.getStorage({
+				key:'userInfo',
+				success:res=>{
+					this.friendCode = res.data.invite_code;
+				}
+			})
 			this.$http({
 				url:'/mall/show?itemid='+option.id,
 				success:res=>{
@@ -292,8 +300,8 @@
 		},
 		methods:{ 
 			qrcode () {
-			  this.imgQrCode = QRCode.createQrCodeImg('https://blockfuntest.dm1.in/h5/html/index.html', {  
-			       size: parseInt(100)//二维码大小  
+			  this.imgQrCode = QRCode.createQrCodeImg('https://blockfuntest.dm1.in/h5/html/index.html?conn='+this.friendCode, {  
+			       size: parseInt(200)//二维码大小  
 			  })
 			},
 			openModal(type){

@@ -70,7 +70,7 @@
 		methods:{
 			copy(){
 				uni.setClipboardData({
-					data:'https://blockfuntest.dm1.in/h5/html/index.html',
+					data:'https://blockfuntest.dm1.in/h5/html/index.html?conn='+this.friendCode,
 					success:()=>{
 						uni.showToast({
 							title:'邀请卡链接已复制到剪贴板',

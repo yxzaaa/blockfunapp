@@ -27,10 +27,20 @@
 		},
 		methods:{
 			saveImage(){
-				uni.saveImageToPhotosAlbum({
-					filePath:this.tempFilePath,
-					success : (res) =>{
-						uni.showToast({title : '图片已保存',icon:'none'})
+				uni.canvasToTempFilePath({
+					canvasId:'shareElem',
+					success:res=>{
+						console.log(res);
+						this.tempFilePath = res.tempFilePath;
+						uni.saveImageToPhotosAlbum({
+							filePath:this.tempFilePath,
+							success:res=>{
+								uni.showToast({title:'图片已保存',icon:'none'})
+							},
+							fail:res=>{
+								uni.showToast({title:'图片保存失败',icon:'none'})
+							}
+						})
 					}
 				})
 			},
@@ -38,55 +48,44 @@
 				uni.getImageInfo({
 					src:data.img,
 					success:res=>{
-						let ctx = uni.createCanvasContext('shareElem');
+						let ctx = uni.createCanvasContext('shareElem',this);
 						this.showModal = true;
-						uni.showLoading({
-							title:'生成分享图片 ...'
-						})
-						setTimeout(()=>{
-							uni.hideLoading();
-							ctx.drawImage(res.path, 0, 0, 250,180);
-							ctx.font = "16px Montserrat-Bold";
-							ctx.fillStyle = "#DA53A2";
-							ctx.fillText(data.price, 48, 210);
-							ctx.font = "12px PingFang";
-							ctx.fillStyle = "rgba(255,255,255,0.5)";
-							ctx.fillText('USDT', 10, 210);
-							ctx.fillStyle = "rgba(255,255,255,0.5)";
-							// ctx.fillText('消耗积分', 10, 234);
-							// ctx.fillStyle = "rgba(255,255,255,1)";
-							// ctx.fillText(data.credit, 64, 234);
-							ctx.fillStyle = "#DA53A2";
-							ctx.fillRect(10,220,30,16);
-							ctx.fillStyle = "rgba(255,255,255,1)";
-							ctx.fillText(data.catname, 13, 232);
-							ctx.font = "14px PingFang";
-							ctx.fillStyle = "rgba(255,255,255,1)";
-							ctx.fillText(data.title.substring(0,24), 10, 255);
-							ctx.font = "14px PingFang";
-							ctx.fillStyle = "rgba(255,255,255,1)";
-							ctx.fillText(data.title.substring(24,40)+'...',10, 275);
-							ctx.font = "12px PingFang";
-							ctx.fillStyle = "rgba(255,255,255,0.5)";
-							ctx.fillText(data.content.substring(0,20)+'...',10, 300);
-							ctx.fillStyle = "#95195C";
-							ctx.fillRect(0,340,250,110);
-							ctx.drawImage(data.qrcode, 8, 346, 40,40);
-							ctx.font = "16px 'Montserrat-Bold'";
-							ctx.fillStyle = "rgba(255,255,255,1)";
-							ctx.fillText('BlockFun',60, 362);
-							ctx.font = "14px 'Montserrat-Bold'";
-							ctx.fillStyle = "rgba(255,255,255,0.5)";
-							ctx.fillText('Unblock Grace',60, 382);
-							ctx.draw(false,()=>{
-								uni.canvasToTempFilePath({
-									canvasId:'shareElem',
-									success: (res) =>{
-										this.tempFilePath = res.tempFilePath;
-									}
-								})
-							})
-						},500)
+						ctx.drawImage(res.path, 0, 0, 280,180);
+						ctx.font = "16px Montserrat-Bold";
+						ctx.fillStyle = "#DA53A2";
+						ctx.fillText(data.price, 48, 210);
+						ctx.font = "12px PingFang";
+						ctx.fillStyle = "rgba(255,255,255,0.5)";
+						ctx.fillText('USDT', 10, 210);
+						ctx.fillStyle = "rgba(255,255,255,0.5)";
+						// ctx.fillText('消耗积分', 10, 234);
+						// ctx.fillStyle = "rgba(255,255,255,1)";
+						// ctx.fillText(data.credit, 64, 234);
+						ctx.fillStyle = "#DA53A2";
+						ctx.fillRect(10,220,30,16);
+						ctx.fillStyle = "rgba(255,255,255,1)";
+						ctx.fillText(data.catname, 13, 232);
+						ctx.font = "14px PingFang";
+						ctx.fillStyle = "rgba(255,255,255,1)";
+						ctx.fillText(data.title.substring(0,24), 10, 260);
+						ctx.font = "14px PingFang";
+						ctx.fillStyle = "rgba(255,255,255,1)";
+						if(data.title.length>24){
+							ctx.fillText(data.title.substring(24,42)+'...',10, 280);
+						}
+						ctx.font = "12px PingFang";
+						ctx.fillStyle = "rgba(255,255,255,0.5)";
+						ctx.fillText(data.content.substring(0,24)+'...',10, 310);
+						ctx.fillStyle = "#95195C";
+						ctx.fillRect(0,390,280,80);
+						ctx.drawImage(data.qrcode, 8, 396, 50,50);
+						ctx.font = "16px 'Montserrat-Bold'";
+						ctx.fillStyle = "rgba(255,255,255,1)";
+						ctx.fillText('BlockFun',70, 415);
+						ctx.font = "14px 'Montserrat-Bold'";
+						ctx.fillStyle = "rgba(255,255,255,0.5)";
+						ctx.fillText('Unblock Grace',70, 440);
+						ctx.draw();
 					}
 				})
 			}
@@ -97,15 +96,15 @@
 <style lang="scss">
 	.modal-box{
 		.canvas-box{
-			width:240px;
-			height:400px;
+			width:280px;
+			height:460px;
 			background: #15030B;
 			border-radius: 8px;
 			border:8upx solid #fff;
 			overflow:hidden;
 			canvas{
-				width:240px;
-				height:400px;
+				width:280px;
+				height:460px;
 			}
 		}
 	}

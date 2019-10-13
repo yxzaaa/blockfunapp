@@ -254,7 +254,7 @@
 		width:670upx;
 		height:180upx;
 		margin:64upx 40upx 0;
-		background-image:url(../../static/bg3.jpg);
+		background-image:url('/static/bg3.jpg');
 		background-size:100% 100%;
 		border-radius: 12upx;
 		padding:28upx 64upx 22upx;

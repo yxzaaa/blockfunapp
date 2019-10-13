@@ -139,7 +139,7 @@
 		},
 		watch:{
 			opacity(val){
-				this.priviteOpacity = (val/120).toFixed(2);
+				this.priviteOpacity = (val/60).toFixed(2);
 			}
 		},
 		mounted(){

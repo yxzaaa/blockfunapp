@@ -104,12 +104,12 @@
 			},
 			end(e){
 			    const subX=e.changedTouches[0].clientX-this.startData.clientX;
-			    if(subX<-100){
+			    if(subX<-50){
 					if(this.currStatus<this.navTabs.length-1){
 						this.currStatus++;
 						this.updateList(this.currStatus);
 					}
-				}else if(subX>100){
+				}else if(subX>50){
 					if(this.currStatus>0){
 						this.currStatus--;
 						this.updateList(this.currStatus);

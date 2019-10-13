@@ -26,14 +26,16 @@
 								<image :src="val1.img" style="width:160upx;height:160upx;display: block;"></image>
 							</view>
 							<view class="text">
-								<span style="color:#fff;font-size:26upx;width:470upx;height:66upx;line-height: 34upx;display: block;">{{val1.title.length>40?val1.title.substring(0,40)+' ...':val1.title}}</span>
-								<scroll-view scroll-x="true" style="white-space: nowrap;width:470upx;height:44upx;display: flex;align-items: center;">
+								<view style="color:#fff;font-size:26upx;width:470upx;height:66upx;line-height: 34upx;display: block;">{{val1.title.length>40?val1.title.substring(0,40)+' ...':val1.title}}</view>
+								<view style="overflow-x:auto;white-space: nowrap;width:470upx;display: flex;align-items: center;padding-top:14upx;">
 									<span style="color: #999999;font-size:24upx;margin-right:24upx;">数量：{{val1.number}}</span>
 									<span style="color: #999999;font-size:24upx;">{{val1.p1}}：{{val1.s1}}</span>
 									<span style="color: #999999;font-size:24upx;margin-left:24upx;" v-if="val1.p2">{{val1.p2}}：{{val1.s2}}</span>
-								</scroll-view>
-								<span style="color:#fff;font-size:28upx;font-weight: bold;font-family: Montserrat-Bold;">{{setPrice(val1.price,val1.number)}}</span>
-								<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
+								</view>
+								<view style="white-space: nowrap;width:470upx;display: flex;align-items: center;padding-top:8upx;">
+									<span style="color:#fff;font-size:28upx;font-family: Montserrat-Bold;">{{setPrice(val1.price,val1.number)}}</span>
+									<span style="font-size:24upx;display: inline-block;font-family:'Montserrat-Bold';color:rgba(255,255,255,0.5);margin-left:10upx;">USDT</span>
+								</view>
 							</view>
 						</view>
 					</view>
@@ -90,6 +92,7 @@
 					{id:3,text:'待收货',color:'#56CCF2'},
 					{id:4,text:'已完成',color:'#999999'},
 					{id:8,text:'已取消',color:'#999999'},
+					{id:9,text:'已关闭',color:'#999999'},
 				],
 				orderList:[],
 				currStatus:0,
@@ -148,12 +151,12 @@
 			},
 			end(e){
 			    const subX=e.changedTouches[0].clientX-this.startData.clientX;
-			    if(subX<-100){
+			    if(subX<-50){
 					if(this.currStatus<this.statusTabs.length-1){
 						this.currStatus++;
 						this.toggleStatus(this.currStatus);
 					}
-				}else if(subX>100){
+				}else if(subX>50){
 					if(this.currStatus>0){
 						this.currStatus--;
 						this.toggleStatus(this.currStatus);

@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<uni-background src="../../static/bg1.jpg"/>
-		<uni-nav-bar :title="infos.type==1?'我要借款':'我要投资'" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
+		<uni-nav-bar :title="infos.type==2?'我要借款':'我要投资'" textColor="#fff" :opacity="scroll" layout="center" :buttons="navButtons"></uni-nav-bar>
 		<div class="app-container full fixbutton">
 			<view class="modal-box" v-if="showPwdModal" @touchmove.stop.prevent="showPwdModal">
 				<view class="modal">
@@ -20,7 +20,7 @@
 			<view class="fixed-buttons">
 				<view class="button-group">
 					<fun-button 
-						:value="infos.type == 1?'确定抵押':'确认投资'" 
+						:value="infos.type == 2?'确定抵押':'确认投资'" 
 						width="670upx"  
 						large 
 						@handle="showPwdModal = true"
@@ -50,7 +50,7 @@
 						</view>
 						<view class="horizon-list-item">
 							<view class="left-item">
-								<text class="left-item-label">投资总量</text>
+								<text class="left-item-label">{{infos.type == 2?'抵押':'投资'}}总量</text>
 							</view>
 							<view class="right-item">
 								<text class="left-item-name">{{infos.total}} USDT</text>
@@ -58,7 +58,7 @@
 						</view>
 						<view class="horizon-list-item">
 							<view class="left-item">
-								<text class="left-item-label">投资周期</text>
+								<text class="left-item-label">{{infos.type == 2?'抵押':'投资'}}周期</text>
 							</view>
 							<view class="right-item">
 								<text class="left-item-name">{{infos.month}} 个月</text>
@@ -170,7 +170,7 @@
 						this.showPwdModal = false;
 						if(res.code == 200){
 							uni.showToast({
-								title:this.infos.type == 1?'抵押成功':'投资成功',
+								title:this.infos.type == 2?'抵押成功':'投资成功',
 								icon:'none'
 							})
 							setTimeout(()=>{

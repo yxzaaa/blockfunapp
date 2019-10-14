@@ -277,8 +277,10 @@
 					font-size:24upx;
 					color: #DA53A2;
 				}
+				
 			}
 		}
+		
 	}
 	.managebox{
 		width:670upx;

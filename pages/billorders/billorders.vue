@@ -19,12 +19,12 @@
 			<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom">
 				<view class="totalBox">
 					<view class="borrow">
-						<span class="content">投资总额（USDT）</span>
-						<span class="number">{{getNum(investMent)}}</span>
+						<span class="content">{{activeTab == 1?'投资总额':'借款总额'}}（USDT）</span>
+						<span class="number">{{activeTab == 1?getNum(investMent):getNum(debit)}}</span>
 					</view>
 					<view class="pledge">
-						<span class="content">我的收益（USTD）</span>
-						<span class="number">{{getNum(interest)}}</span>
+						<span class="content">{{activeTab == 1?'我的收益':'抵押总量'}}（USDT）</span>
+						<span class="number">{{activeTab == 1?getNum(interest):getNum(mortgage)}}</span>
 					</view>
 				</view>
 				<view class="selected">
@@ -44,7 +44,7 @@
 						<view class="debitbox" @click="goPayBack(item)">
 							<view class="horizon-list-item">
 								<text style="font-size: 28upx;color:#fff;">{{getStatus(item.status)}}</text>
-								<text style="color:#DA53A2;">距离还款日还有{{getTimeDelay(item.expired_on)}}天</text>
+								<text style="color:#DA53A2;">距离{{activeTab == 1?'收':'还'}}款日还有{{getTimeDelay(item.expired_on)}}天</text>
 							</view>
 							<view class="order-info">
 								<span>{{getDate(item.created_on)}}</span>
@@ -54,12 +54,12 @@
 							</view>
 							<view class="debit-info">
 								<view class="borrow">
-									<span class="content">投资金额（USDT）</span>
+									<span class="content">{{activeTab == 1?'投资金额':'借款金额'}}（USDT）</span>
 									<span class="number">{{getNum(item.total)}}</span>
 								</view>
 								<view class="pledge">
-									<span class="content">到期收益（USDT）</span>
-									<span class="number">{{getNum(item.interest)}}</span>
+									<span class="content">{{activeTab == 1?'到期收益':'抵押数量'}}（USDT）</span>
+									<span class="number">{{activeTab == 1?getNum(item.interest):getNum(item.amount)}}</span>
 								</view>
 							</view>
 							<view class="debit-btn">
@@ -69,10 +69,10 @@
 								</view>
 								<view>
 									<span class="content">周期</span>
-									<span class="number">{{item.month}}月</span>
+									<span class="number">{{item.month}}个月</span>
 								</view>
 								<view>
-									<span class="content">投资结束日</span>
+									<span class="content">{{activeTab == 1?'投资结束日':'最后还款日'}}</span>
 									<span class="number">{{getDate(item.expired_on)}}</span>
 								</view>
 							</view>
@@ -118,6 +118,8 @@
 				},
 				investMent:0,
 				interest:0,
+				debit:0,
+				mortgage:0,
 				borrowList:[],
 				loadStatus:'noMore',
 				currClass:0,
@@ -183,16 +185,18 @@
 						if(res.code == 200){
 							uni.hideLoading();
 							this.investMent = res.data.investment;
+							this.debit = res.data.debit;
 							this.interest = res.data.interest;
 							this.borrowList = res.data.item;
 							this.totalPage = res.data.max;
+							this.mortgage = res.data.mortgage;
 						}
 					}
 				})
 			},
 			//去还款
 			goPayBack(info){
-				if(info.status == 1){
+				if(info.status == 1 && this.activeTab == 2){
 					uni.setStorage({
 						key:"pay_back_info",
 						data:info,

@@ -8,9 +8,9 @@
 					<view class="modal-top-item">
 						<view class="modal-title">预计放款金额</view>
 						<view class="modal-content">
-							<view style="font-size: 24upx;padding-top:10upx;text-align: left;">1.质押率：Forest 的质押率为 50%，即放款比例为本金的50%；</view>
-							<view style="font-size: 24upx;padding-top:10upx;text-align: left;">2.补仓线：Forest 的补仓线为 75%，抵押市值到达 75% 后，会通知借款方补仓；</view>
-							<view style="font-size: 24upx;padding-top:10upx;text-align: left;">3.平仓线：Forest 的平仓线为 60%，抵押市值到达 60% 后，投资人有权进行平仓；</view>
+							<view style="font-size: 24upx;padding-top:10upx;text-align: left;">1.质押率：USDT 的质押率为 50%，即放款比例为本金的50%；</view>
+							<view style="font-size: 24upx;padding-top:10upx;text-align: left;">2.补仓线：USDT 的补仓线为 75%，抵押市值到达 75% 后，会通知借款方补仓；</view>
+							<view style="font-size: 24upx;padding-top:10upx;text-align: left;">3.平仓线：USDT 的平仓线为 60%，抵押市值到达 60% 后，投资人有权进行平仓；</view>
 						</view>
 					</view>
 					<view class="modal-btns">

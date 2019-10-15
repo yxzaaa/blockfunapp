@@ -31,11 +31,11 @@
 									</view>
 									<view class="debit">
 										<span class="text">抵押总量</span>
-										<span class="number">{{getNum(item.amount)}}</span>
+										<span class="number">{{getNum(item.total)}}</span>
 									</view>
 									<view class="debit">
 										<span class="text">放款总量</span>
-										<span class="number">{{getNum(item.total)}}</span>
+										<span class="number">{{getNum(item.out_total)}}</span>
 									</view>
 									<view class="debit">
 										<span class="text">周期(月)</span>

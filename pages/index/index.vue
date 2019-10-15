@@ -46,9 +46,12 @@
 									<text style="font-size:32upx;color:#fff;font-family:'Montserrat-Bold';">{{item.coin}}</text>
 									<text style="font-size:24upx;color:#999;font-family:'Montserrat-Bold';overflow: hidden;width:300upx;text-overflow: ellipsis;white-space: nowrap;">{{item.address}}</text>
 								</view>
-								<view>
-									<image class="button-image" :src="imageLib.union"/>
-								</view>
+								<navigator v-if="currType == 3" :url="'../shoptrans/shoptrans?coin='+item.coin">
+									<image class="button-image" :src="imageLib.union" />
+								</navigator>
+								<navigator v-if="currType == 1" :url="'../xdogwallet/xdogwallet?coin='+item.coin">
+									<image class="button-image" :src="imageLib.union" />
+								</navigator>
 							</view>
 							<view class="item-horizen count-box">
 								<span class="label-box"><span>$</span><text style="font-size: 42upx;font-family:'Montserrat-Bold';">{{getNum(item.total_price)}}</text></span>

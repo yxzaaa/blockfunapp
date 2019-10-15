@@ -100,7 +100,7 @@
 					if(res.code == 200){
 						this.payStatus = res.data.status;
 						this.createTime = res.data.create;
-						this.payment = res.data.payment;
+						this.payment = res.data.unit;
 						this.amount = res.data.amount;
 						this.order = res.data.order;
 					}

@@ -32,10 +32,10 @@
 			</view>
 			<view class="fix-tabs-box">
 				<!-- <view class="fix-tabs-item">
-					<text :class="{active:activeTab == 2}" @click="toggleTab(2)">我要借款</text>
+					<text :class="{active:activeTab == 1}" @click="toggleTab(1)">我要借款</text>
 				</view> -->
 				<view class="fix-tabs-item">
-					<text :class="{active:activeTab == 1}" @click="toggleTab(1)">我要投资</text>
+					<text :class="{active:activeTab == 2}" @click="toggleTab(2)">我要投资</text>
 				</view>
 			</view>
 			<scroll-view scroll-y='true' style="width:100%;height:calc(100vh - 274upx);" @scrolltolower="reachBottom">
@@ -48,14 +48,12 @@
 									<span class="number">{{getNum(item.price)}}</span>
 								</view>
 								<view class="debit">
-									<span class="text">{{item.type == 2?'借款':'投资'}}总量</span>
+									<span class="text">{{item.type == 1?'借款':'投资'}}总量</span>
 									<span class="number">{{getNum(item.total)}}</span>
 								</view>
 								<view class="debit">
 									<span class="text">月利率</span>
-									<span class="number">{{item.rate*100}}
-										<span>%</span>
-									</span>
+									<span class="number">{{item.rate*100}}<span>%</span></span>
 								</view>
 								<view class="debit">
 									<span class="text">周期</span>
@@ -65,7 +63,7 @@
 								</view>
 							</view>
 							<view class="debit-btn">
-								<view @click="acceptBill(item)">{{item.type == 2?'借款':'投资'}}</view>
+								<view @click="acceptBill(item)">{{item.type == 1?'借款':'投资'}}</view>
 							</view>
 						</view>
 					</block>
@@ -90,7 +88,7 @@
 		data() {
 			return {
 				scroll:0,
-				activeTab:1,
+				activeTab:2,
 				currPage:1,
 				totalPage:1,
 				navButtons:{
@@ -263,7 +261,7 @@
 					span{
 						font-size: 22upx;					
 						color: #FFFFFF;
-						margin-left:8upx;
+						// margin-left:8upx;
 					}
 				}
 			}

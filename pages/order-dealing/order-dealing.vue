@@ -87,7 +87,7 @@
 				</view>
 				<view class="paystyle">
 					<span class="content">支付方式</span>
-					<span class="paynow">{{orderInfo.payment}}</span>
+					<span class="paynow">{{orderInfo.unit}}</span>
 				</view>
 			</view>
 			<view class="money" v-if="!loading">

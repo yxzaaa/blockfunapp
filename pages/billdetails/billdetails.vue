@@ -68,7 +68,7 @@
 								<text class="left-item-label">抵押总量</text>
 							</view>
 							<view class="right-item">
-								<text class="left-item-name">{{details.amount}}</text>
+								<text class="left-item-name">{{details.locked}}</text>
 							</view>
 						</view>
 						<!-- <view style="width:100%;height:3upx;background:rgba(255,255,255,0.2);margin:20upx 0upx;"></view> -->
@@ -93,7 +93,7 @@
 								<text class="left-item-label">预计利息</text>
 							</view>
 							<view class="right-item">
-								<text class="left-item-name">{{details.income}} {{details.unit}}</text>
+								<text class="left-item-name">{{details.interest}} {{details.unit}}</text>
 							</view>
 						</view>
 						<view class="horizon-list-item">

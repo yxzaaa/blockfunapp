@@ -53,7 +53,7 @@
 								<text class="left-item-label">抵押数量</text>
 							</view>
 							<view class="right-item">
-								<text class="left-item-name">{{getNum(infos.amount)}} USDT</text>
+								<text class="left-item-name">{{getNum(infos.locked)}} {{infos.unit}}</text>
 							</view>
 						</view>
 						<view class="horizon-list-item">
@@ -69,7 +69,7 @@
 								<text class="left-item-label">手续费</text>
 							</view>
 							<view class="right-item">
-								<text class="left-item-name">{{infos.fee}} USDT</text>
+								<text class="left-item-name">{{infos.fee}} {{infos.unit}}</text>
 							</view>
 						</view>
 						<view class="horizon-list-item">
@@ -77,7 +77,7 @@
 								<text class="left-item-label">总利息</text>
 							</view>
 							<view class="right-item">
-								<text class="left-item-name">{{infos.interest}} USDT</text>
+								<text class="left-item-name">{{infos.interest}} {{infos.unit}}</text>
 							</view>
 						</view>
 						<view class="horizon-list-item">

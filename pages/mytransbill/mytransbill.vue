@@ -31,11 +31,11 @@
 									</view>
 									<view class="debit">
 										<span class="text">抵押总量</span>
-										<span class="number">{{getNum(item.total)}}</span>
+										<span class="number">{{getNum(item.locked)}}</span>
 									</view>
 									<view class="debit">
 										<span class="text">放款总量</span>
-										<span class="number">{{getNum(item.out_total)}}</span>
+										<span class="number">{{getNum(item.total)}}</span>
 									</view>
 									<view class="debit">
 										<span class="text">周期(月)</span>
@@ -47,9 +47,9 @@
 								<view class="debit-btn">
 									<text v-if="getTimeDelay(item.expired_on)=='已过期'" style="color:#999;">{{getTimeDelay(item.expired_on)}}</text>
 									<text v-else>{{getTimeDelay(item.expired_on)}}</text>
-									<view class="button-group">
+									<view class="button-group" style="justify-content: flex-end;">
 										<fun-button type="light" @handle="setDetail(index)" value="详情" width="150upx"></fun-button>
-										<fun-button width="150upx" @handle="billUpOrDown(item.id,item.status)" :value="item.status == 2?'上架':'下架'"></fun-button>
+										<fun-button style="margin-left:20upx;" width="150upx" @handle="billUpOrDown(item.id,item.status)" v-if="item.status == 1 || item.status == 2" :value="item.status == 2?'上架':'下架'"></fun-button>
 									</view>
 								</view>
 							</view>

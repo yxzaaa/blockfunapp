@@ -49,7 +49,7 @@
 							<view class="order-info">
 								<span>{{getDate(item.created_on)}}</span>
 								<span>订单号：
-									<span>{{item.id}}</span>
+									<span>{{item.order_no}}</span>
 								</span>
 							</view>
 							<view class="debit-info">
@@ -58,8 +58,8 @@
 									<span class="number">{{getNum(item.total)}}</span>
 								</view>
 								<view class="pledge">
-									<span class="content">{{activeTab == 1?'到期收益':'抵押数量'}}（USDT）</span>
-									<span class="number">{{activeTab == 1?getNum(item.interest):getNum(item.amount)}}</span>
+									<span class="content">{{activeTab == 1?'到期收益':'抵押数量'}}（{{item.unit}}）</span>
+									<span class="number">{{activeTab == 1?getNum(item.interest):getNum(item.locked)}}</span>
 								</view>
 							</view>
 							<view class="debit-btn">

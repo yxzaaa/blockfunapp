@@ -30,10 +30,8 @@
 				uni.canvasToTempFilePath({
 					canvasId:'shareElem',
 					success:res=>{
-						console.log(res);
-						this.tempFilePath = res.tempFilePath;
 						uni.saveImageToPhotosAlbum({
-							filePath:this.tempFilePath,
+							filePath:res.tempFilePath,
 							success:res=>{
 								uni.showToast({title:'图片已保存',icon:'none'})
 							},

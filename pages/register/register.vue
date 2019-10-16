@@ -23,11 +23,11 @@
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.password"></image>
-					<input type="password" class="login-form-input" style="width:520upx;" maxlength="8" placeholder="登录密码 (请填写8~16位数字或字母)" password v-model="password"/>
+					<input type="password" class="login-form-input" style="width:520upx;" maxlength="16" placeholder="登录密码 (请填写8~16位数字或字母)" password v-model="password"/>
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.password"></image>
-					<input type="password" class="login-form-input" style="width:520upx;" maxlength="8" placeholder="确认密码 (请填写8~16位数字或字母)" password v-model="confirmPassword"/>
+					<input type="password" class="login-form-input" style="width:520upx;" maxlength="16" placeholder="确认密码 (请填写8~16位数字或字母)" password v-model="confirmPassword"/>
 				</view>
 				<view class="login-form-item">
 					<image class="login-form-label" :src="imageLib.cert"></image>

@@ -79,7 +79,7 @@
 				</view>
 				<view class="timeinfo" v-if="orderInfo.send_no !== ''">
 					<span class="content">物流信息</span>
-					<span class="date">{{orderInfo.send_type}} {{orderInfo.send_no}}</span>
+					<span class="date">{{orderInfo.send_type}}:{{orderInfo.send_no}}</span>
 				</view>
 				<view class="timeinfo">
 					<span class="content">下单时间</span>

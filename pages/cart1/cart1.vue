@@ -177,7 +177,7 @@
 				})
 			},
 			getPrice(price,num,type){
-				var totalPrice = parseFloat(price)*parseInt(num);
+				var totalPrice = parseFloat(price);
 				totalPrice = totalPrice.toFixed(4);
 				return totalPrice.split('.')[type];
 			},

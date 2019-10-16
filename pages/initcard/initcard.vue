@@ -2,7 +2,7 @@
 	<view class="container">
 		<uni-background :src="imageLib.bg"/>
 		<uni-nav-bar 
-			title="" 
+			title="邀请卡" 
 			textColor="#fff" 
 			:opacity="scroll"
 			:buttons="navButtons"

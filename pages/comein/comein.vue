@@ -141,7 +141,7 @@
 						data:{
 							type:parseInt(this.currType),
 							coin:this.coin,
-							amount:this.amount,
+							amount:parseFloat(this.amount).toFixed(4),
 							pay_password:this.password
 						},
 						success:res=>{

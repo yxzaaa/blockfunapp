@@ -29,7 +29,7 @@
 				:key="index"
 			>
 				<view class="symbolNumber">
-					<span class="symbol">USDT</span>
+					<span class="symbol">{{payment}}</span>
 					<span class="price">{{amount}}</span>
 				</view>
 			</view>
@@ -72,10 +72,10 @@
 			return {
 				scroll:0,
 				navButtons:{
-					back:{
-						type:'normal',
-						text:'取消'
-					},
+					// back:{
+					// 	type:'normal',
+					// 	text:'取消'
+					// },
 				},				
 				paynumber:[
 					{

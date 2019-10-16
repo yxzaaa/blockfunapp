@@ -274,10 +274,18 @@
 						this.skuNames = res.data.sku.name;
 						this.skuCodes = res.data.sku.code;
 						this.skuNames.forEach(elem=>{
-							this.skuActive.push({
-								title:elem.title,
-								active:null
-							})
+							console.log(elem);
+							if(elem.item[2] == ''){
+								this.skuActive.push({
+									title:elem.title,
+									active:1
+								})
+							}else{
+								this.skuActive.push({
+									title:elem.title,
+									active:null
+								})
+							}
 						})
 						if(this.skuActive.length == 1){
 							this.skuActive.push({
@@ -430,20 +438,47 @@
 							}
 						})
 					}else{
-						uni.navigateTo({
-							url: '../favorite/favorite',
-						});
+						// uni.navigateTo({
+						// 	url: '../favorite/favorite',
+						// });
+						this.$http({
+							url:'/member/favorite',
+							type:'application/x-www-form-urlencoded',
+							data:{
+								action:'delete',
+								id:this.productId,
+							},
+							success:res=>{
+								if(res.code == 200){
+									uni.showToast({
+										title:'商品取消收藏~',
+										icon:'none'
+									})
+									this.navButtons.love.active = false;
+								}
+							}
+						})
 					}
 				}else if(type == 'share'){
-					this.$refs.share.share({
-						img:this.imgList[0],
-						qrcode:this.imgQrCode,
-						price:this.price,
-						credit:this.credit,
-						catname:this.catname,
-						title:this.title,
-						content:this.content
-					});
+					// this.$refs.share.share({
+					// 	img:this.imgList[0],
+					// 	qrcode:this.imgQrCode,
+					// 	price:this.price,
+					// 	credit:this.credit,
+					// 	catname:this.catname,
+					// 	title:this.title,
+					// 	content:this.content
+					// });
+					var url = this.friendCode == ''?'https://blockfuntest.dm1.in/h5/html/index.html?conn='+this.friendCode:'https://blockfuntest.dm1.in/h5/html/index.html';
+					uni.setClipboardData({
+						data:url,
+						success:()=>{
+							uni.showToast({
+								title:'已复制链接，快分享给好友吧~',
+								icon:'none'
+							})
+						}
+					})
 				}
 			}
 		},

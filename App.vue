@@ -7,9 +7,9 @@
 			//判断登录状态
 			let userInfo = uni.getStorageSync('userInfo');
 			if(!userInfo || !userInfo.uid){
-				uni.reLaunch({
-					url:'/pages/login/login'
-				})
+				// uni.reLaunch({
+				// 	url:'/pages/login/login'
+				// })
 			}
 		},
 		onShow: function() {
@@ -19,9 +19,9 @@
 				success:res=>{
 					console.log(res);
 					if(res.code !== 200){
-						uni.reLaunch({
-							url:'/pages/login/login'
-						})
+						// uni.reLaunch({
+						// 	url:'/pages/login/login'
+						// })
 					}
 				}
 			})

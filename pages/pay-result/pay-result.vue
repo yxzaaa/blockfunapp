@@ -20,7 +20,7 @@
 				style="width:750upx;height:200upx;text-align: center;border-bottom:2upx solid rgba(255,255,255,0.2)"
 				v-if="payStatus === '1'"
 			>
-				<image src="../../static/bg/img_right.png" style="width:280upx;height:104upx;position:relative;left:-8upx;"></image>
+				<!-- <image src="../../static/bg/img_right.png" style="width:280upx;height:104upx;position:relative;left:-8upx;"></image> -->
 				<span style="display: block;font-size: 28upx;color:#fff;line-height: 48upx;">支付失败</span>
 			</view>
 			<view
